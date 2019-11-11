@@ -33,7 +33,7 @@
           <label>Search Options</label>
         </div>
         <div class="input-field ">
-          <input placeholder="Placeholder" id="first_name" type="text" />
+          <input placeholder="" id="first_name" type="text" />
           <label for="first_name">First Name</label>
         </div>
       </div>
@@ -50,9 +50,8 @@
                 
               </div>
               <div class="card-content">
-                  <p><b>Charlie, 12</b></p>
-                 
-                <p>Addis Ababa, Ethiopia</p>
+                  <p><b><span class="uname">Eyosi</span>, <span class="age">12</span></b></p>
+                <p><span class="city">Addis Ababa</span>, <span class="country">Ethiopia</span> </p>
               </div>
               <div class="card-action">
                 <a class="on firstLink bothLink"></a>
@@ -69,8 +68,8 @@
                 />
               </div>
               <div class="card-content">
-                <p><b>Charlie, 12</b></p>
-                <p>Addis Ababa, Ethiopia</p>
+                  <p><b><span class="uname">Charlie</span>, <span class="age">12</span></b></p>
+                  <p><span class="city">Addis Ababa</span>, <span class="country">Ethiopia</span> </p>
               </div>
               <div class="card-action">
                 <a class="on firstLink bothLink"></a>
@@ -88,8 +87,8 @@
                   />
                 </div>
                 <div class="card-content">
-                  <p><b>Charlie, 12</b></p>
-                  <p>Addis Ababa, Ethiopia</p>
+                  <p><b><span class="uname">Charlie</span>, <span class="age">12</span></b></p>
+                  <p><span class="city">Addis Ababa</span>, <span class="country">Ethiopia</span> </p>
                 </div>
                 <div class="card-action">
                   <a class="on firstLink bothLink"></a>
@@ -106,8 +105,8 @@
                     />
                   </div>
                   <div class="card-content">
-                    <p><b>Charlie, 12</b></p>
-                    <p>Addis Ababa, Ethiopia</p>
+                      <p><b><span class="uname">Charlie</span>, <span class="age">12</span></b></p>
+                      <p><span class="city">Addis Ababa</span>, <span class="country">USA</span> </p>
                   </div>
                   <div class="card-action">
                     <a class="on firstLink bothLink"></a>
@@ -125,8 +124,8 @@
                       />
                     </div>
                     <div class="card-content">
-                      <p><b>Charlie, 12</b></p>
-                      <p>Addis Ababa, Ethiopia</p>
+                        <p><b><span class="uname">Charlie</span>, <span class="age">12</span></b></p>
+                        <p><span class="city">Addis Ababa</span>, <span class="country">Ethiopia</span> </p>
                     </div>
                     <div class="card-action">
                       <a class="on firstLink bothLink"></a>
@@ -143,8 +142,8 @@
                         />
                       </div>
                       <div class="card-content">
-                        <p><b>Charlie, 12</b></p>
-                        <p>Addis Ababa, Ethiopia</p>
+                          <p><b><span class="uname">Charlie</span>, <span class="age">12</span></b></p>
+                          <p><span class="city">Addis Ababa</span>, <span class="country">Ethiopia</span> </p>
                       </div>
                       <div class="card-action">
                         <a class="on firstLink bothLink"></a>
@@ -170,13 +169,21 @@
 
         $("select").on("change", function() {
           selectedValue = $(this).val();
+          switch (selectedValue){
+            case "1":
+               document.getElementById("first_name").setAttribute("placeholder","User Name");               
+               break;
+              case "2":
+               document.getElementById("first_name").setAttribute("placeholder","Country Name");
+                break;
+          }
           if (input != null) {
             search(selectedValue, input);
           }
         });
 
         $("#first_name").on("input", function(e) {
-          input = e.target.value;
+          input = e.target.value.toLowerCase();
           search(selectedValue, input);
         });
       });
