@@ -1,0 +1,32 @@
+.modal { 
+    max-height: 100%; 
+    overflow: visible;
+}
+.circle{
+    width: 5rem;
+    height: 5rem;
+    font-size: 2rem;
+    padding: 15px 6px ;
+    margin-left: 1.5rem;
+    
+}
+.vertical{
+    border-left: 6px solid #e57373 ;
+    height: 15rem;
+    /* display: inline; */
+}
+.collection-item{
+    margin: 20px 3px ;
+}
+.choice a{
+    display: block;
+    margin: 1rem .1rem;
+}
+
+.modal { 
+     max-height: 100% !important ; 
+     max-width: 75% !important;
+
+     /* overflow-y: hidden !important ; */
+    }
+  
