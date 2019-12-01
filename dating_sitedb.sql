@@ -3,7 +3,10 @@ CREATE TABLE users(
     username VARCHAR(20),
     password VARCHAR(20),
     email VARCHAR(50),
-    confirmation_token VARCHAR(80)
+    confirmation_token VARCHAR(80),
+    varified INT DEFAULT 0,
+    created_date DATE
+
 );
 
 CREATE TABLE relationship(
