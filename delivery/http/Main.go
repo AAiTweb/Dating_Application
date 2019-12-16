@@ -2,11 +2,13 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
-	"github.com/Eyosi-G/Dating_Application/message/repository"
-	"github.com/Eyosi-G/Dating_Application/message/service"
+	"github.com/gorilla/websocket"
 	_ "github.com/lib/pq"
+	"net/http"
 )
+
+var upgrader websocket.Upgrader
+var users  = make(map[int]*websocket.Conn)
 
 func main() {
 	//templ := template.Must(template.ParseGlob("../../ui/templates/*.html"))
@@ -19,11 +21,27 @@ func main() {
 		panic(err)
 	}
 
-	//sampleMessage := entity.Message{-1,1,4,"hello",time.Now(),2}
-	repositoryMessage := repository.RepositoryMessage{db}
-	serviceMessage := service.MessageService{repositoryMessage}
 
-	fmt.Println(serviceMessage.Messages(1,5))
+
+	upgrader.CheckOrigin = func(r *http.Request) bool{
+		return true
+	}
+
+	//sampleMessage := entity.Message{-1,1,4,"hello",time.Now(),2}
+
+	//repositoryMessage := repository.RepositoryMessage{db}
+	//serviceMessage := service.MessageService{repositoryMessage}
+	//socketHandler := Socket.SocketHandler{upgrader,users,serviceMessage}
+	//
+
+	//api
+	//Handler := APIHandler{db}
+	//http.HandleFunc("/friends",Handler.friends)
+	//http.ListenAndServe("localhost:8081",nil)
+	//
+
+
+	//fmt.Println(serviceMessage.Messages(1,5))
 
 
 	//userrepoInstance := repository.UserRepositoryInstance{db}
@@ -32,7 +50,7 @@ func main() {
 	//	Templ:    templ,
 	//	Uservice: userserviceInstance,
 	//}
-	//mux := http.NewServeMux()
+	// := http.NewServeMux()
 	//fs := http.FileServer(http.Dir("../../ui/assets"))
 	//mux.Handle("/assets/",http.StripPrefix("/assets/",fs))
 	//mux.HandleFunc("/login",handler.Login)
@@ -48,3 +66,7 @@ func main() {
 	//
 
 }
+
+
+
+

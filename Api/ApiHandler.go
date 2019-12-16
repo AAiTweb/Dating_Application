@@ -13,6 +13,7 @@ type APIHandler struct {
 }
 
 func (ap *APIHandler)friends (w http.ResponseWriter, r *http.Request){
+	// /chat/friends
 	id, _ := strconv.ParseInt(r.URL.Query().Get("id"),0,0)
 	if r.Method == http.MethodGet{
 		row ,err := ap.Db.Query(`select login_details.login_user_id,users.username,login_details.last_activity,
@@ -57,29 +58,21 @@ func (ap *APIHandler)friends (w http.ResponseWriter, r *http.Request){
 
 
 }
-
 func (ap *APIHandler) timeDefference(t time.Duration) int{
 	tHour:= t.Hours()
 	tMin := t.Minutes()
 	tSec := t.Seconds()
-
-	if tHour<=0{
-		if tMin<=0{
-			if tSec<=0{
-				return 1
-			}else{
-				//offline
-				return 0
-			}
-		}else{
-			//offline
-			return 0
-		}
-	}else{
-		//offline
-		return 0
+	if tHour<=0 && tMin<=0 && tSec<=0{
+		return 1
 	}
-
-
-
+	return 0
+}
+func (ap APIHandler)LastSeenUpdater(w http.ResponseWriter, r *http.Request){
+	// /lastseen
+	id, _ := strconv.ParseInt(r.URL.Query().Get("id"),0,0)
+	now := time.Now()
+	_,err := ap.Db.Exec("update login_details set last_activity=$1 where login_user_id=$2",now,id)
+	if err!=nil{
+		return
+	}
 }
