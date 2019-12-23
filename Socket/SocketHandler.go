@@ -27,9 +27,12 @@ func (sh *SocketHandler) Handler(w http.ResponseWriter, r *http.Request){
 	}
 	id ,_ := strconv.ParseInt(r.FormValue("id"),0,0)
 	sh.Conncetions[int(id)] = conn
+	for{
+
+	}
 
 	//log.Print(sh.Conncetions)
-	sh.readMessage(conn)
+	//sh.readMessage(conn)
 }
 func (sh *SocketHandler) readMessage(c *websocket.Conn){
 	for{
