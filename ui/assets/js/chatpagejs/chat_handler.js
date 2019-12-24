@@ -3,7 +3,7 @@ let user1Handler =  function (message,sendtime,user_profile){
     let user_container = $("<div class=\"user-container\"></div>");
     let send_time = `<p  class=\"user1-send-time\">${sendtime}</p>`;
     let image_container = $("<div class=\"user1-image\"></div>");
-    let profile_image = `<img src=\"../assets/images/${user_profile}\">`;
+    let profile_image = `<img src="../assets/images/${user_profile}" class="circle-responsive-img">`;
     let message_container = $("<div class=\"chat chat_left message-container\"></div>");
     let message_paragraph =$("<p style=\"flex: 80%\"></p>");
     message_paragraph.text(message);
@@ -20,8 +20,8 @@ let user2Handler = function(message,sendtime,user_profile){
     let user2 = $("<div class=\"user2\"></div>");
     let user_container = $("<div class=\"user-container\"></div>");
     let send_time = `<p  class="user2-send-time">${sendtime}</p>`;
-    let image_container = $("<div  class=\"user2-image circle-responsive-img\"></div>");
-    let profile_image = `<img src="../assets/images/${user_profile}" >`;
+    let image_container = $("<div  class=\"user2-image \"></div>");
+    let profile_image = `<img src="../assets/images/${user_profile}" class="circle-responsive-img" >`;
     // console.log(profile_image)
     let message_container = $("<div class=\"chat chat_right message-container\"></div>");
     let message_paragraph = $("<p style='flex:80%'></p>");
@@ -33,7 +33,6 @@ let user2Handler = function(message,sendtime,user_profile){
     user2.append(user_container)
     user2.append(send_time)
 
-    console.log(user2.toString())
     return user2;
 }
    //  <div class="user2">

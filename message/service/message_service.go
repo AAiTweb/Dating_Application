@@ -9,6 +9,9 @@ import (
 type MessageService struct {
 	RepoMessage repository.RepositoryMessage
 }
+func NewMessageService(repomessage repository.RepositoryMessage)MessageService{
+	return  MessageService{repomessage}
+}
 
 func (ms *MessageService)SaveMessage(message entity.Message)error{
 	err := ms.RepoMessage.SaveMessage(message)

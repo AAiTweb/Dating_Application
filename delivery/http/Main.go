@@ -3,6 +3,10 @@ package main
 import (
 	"database/sql"
 	"github.com/Eyosi-G/Dating_Application/Api"
+	repository2 "github.com/Eyosi-G/Dating_Application/Api/repository"
+	service2 "github.com/Eyosi-G/Dating_Application/Api/service"
+	"github.com/Eyosi-G/Dating_Application/message/repository"
+	"github.com/Eyosi-G/Dating_Application/message/service"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
 	_ "github.com/lib/pq"
@@ -32,19 +36,25 @@ func main() {
 
 	//repositoryMessage := repository.RepositoryMessage{db}
 	//serviceMessage := service.MessageService{repositoryMessage}
-	//socketHandler := Socket.SocketHandler{upgrader,users,nil}
-	//
+	//socketHandler := Socket.SocketHandler{upgrader,users}
+
 
 	//api
-	Handler := Api.APIHandler{Db:db}
+	//Handler := Api.APIHandler{Db:db}
 
 	router := mux.NewRouter()
 	fs := http.FileServer(http.Dir("../../ui/assets"))
+	messageReppo := repository.NewRepositoryMessage(db)
+	msgService := service.NewMessageService(messageReppo)
+	apirepo := repository2.NewApiRepository(db)
+	apiservice := service2.NewApiService(apirepo)
+	handler := Api.NewApiHandler(msgService,apiservice)
+
 	router.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/",fs))
 	router.HandleFunc("/",index)
-	router.HandleFunc("/user/{id}/friends",Handler.Friends)
-	router.HandleFunc("/chats/user/{uid}/friends/{fid}",Handler.Messages)
-	router.HandleFunc("/ws",socketHandler)
+	router.HandleFunc("/user/{id}/friends",handler.GetFriends)
+	router.HandleFunc("/chats/user/{uid}/friends/{fid}",handler.GetMessages)
+	router.HandleFunc("/ws",Socket)
 	http.ListenAndServe("localhost:8081",router)
 
 	//fmt.Println(time.Now())
@@ -81,7 +91,7 @@ func main() {
 func index(w http.ResponseWriter, r *http.Request){
 	templ.ExecuteTemplate(w,"index.html",nil)
 }
-func socketHandler(w http.ResponseWriter, r *http.Request)  {
+func Socket(w http.ResponseWriter, r *http.Request)  {
 	upgrader.CheckOrigin  = func(r *http.Request) bool {
 		return true;
 	}
@@ -89,9 +99,12 @@ func socketHandler(w http.ResponseWriter, r *http.Request)  {
 	if err!=nil{
 		return
 	}
-	//templ.ExecuteTemplate(w,"index.html",nil)
 	for{
-		messageType,message,_:= conn.ReadMessage()
+		messageType, message,_ := conn.ReadMessage()
 		conn.WriteMessage(messageType,message)
 	}
+
+
+	//sh.Conncetions[int(id)]= conn;
+	//sh.readMessage(conn)
 }

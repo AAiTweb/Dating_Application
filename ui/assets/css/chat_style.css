@@ -75,13 +75,13 @@ body  {
     margin:4px 2px 2px 50%;
 }
 .user1 img{
-    width: 100%;
-    border-radius: 50%;
+    /*width: 100%;*/
+    /*border-radius: 50%;*/
 }
 .user2 img{
     margin-right:0;
-    width: 100%;
-    border-radius: 50%;
+    /*width: 100%;*/
+    /*border-radius: 50%;*/
 }
 .input-field{
     margin-top: 20px;
@@ -158,9 +158,10 @@ body  {
 }
 .user2-image{
     flex:10%;
+
     align-self: flex-end;
-    /*margin-bottom: 15px;*/
-    /*margin-left: 10px;*/
+    margin-bottom: 15px;
+    margin-left: 10px;
 }
 .user2-send-time{
     text-align: left;
@@ -177,9 +178,9 @@ body  {
 .user-container{
     display: flex;
 }
-.selected-user{
-    background-color: #ececec;
-}
+/*.selected-user{*/
+/*    background-color: #ececec;*/
+/*}*/
 
 .send::after{
     constent:"send";

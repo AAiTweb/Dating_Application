@@ -11,6 +11,5 @@ socket.addEventListener('message', function (event) {
     $(".users").append(messageBox);
     let height = $(".users")[0].scrollHeight;
     $("#message_field").val("");
-
     $(".users").animate({scrollTop: height}, 500);
 });

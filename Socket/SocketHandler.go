@@ -2,9 +2,8 @@ package Socket
 
 import (
 	"fmt"
-	"github.com/Eyosi-G/Dating_Application/message/service"
+	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
-	"log"
 	"net/http"
 	"strconv"
 	"time"
@@ -13,27 +12,25 @@ import (
 type SocketHandler struct {
 	Upgrader websocket.Upgrader
 	Conncetions map[int]*websocket.Conn // id and conn
-	MService service.MessageService
+	//MService service.MessageService
 }
 
 //type of requests --- delete,add,messages
+func (sh *SocketHandler)Socket(w http.ResponseWriter, r *http.Request)  {
+	sh.Upgrader.CheckOrigin  = func(r *http.Request) bool {
+		return true;
+	}
+	path := mux.Vars(r)
+	id,_  := strconv.ParseInt(path["id"],0,0)
 
-
-func (sh *SocketHandler) Handler(w http.ResponseWriter, r *http.Request){
 	conn,err := sh.Upgrader.Upgrade(w,r,nil)
 	if err!=nil{
-		log.Println(err)
 		return
 	}
-	id ,_ := strconv.ParseInt(r.FormValue("id"),0,0)
-	sh.Conncetions[int(id)] = conn
-	for{
-
-	}
-
-	//log.Print(sh.Conncetions)
+	sh.Conncetions[int(id)]= conn;
 	//sh.readMessage(conn)
 }
+
 func (sh *SocketHandler) readMessage(c *websocket.Conn){
 	for{
 		message := &UserRequest{}
@@ -46,7 +43,7 @@ func (sh *SocketHandler) readMessage(c *websocket.Conn){
 		switch message.Type {
 		case "ADD":
 			message.Message.SendTime = time.Now()
-			err = sh.MService.SaveMessage(message.Message)
+		//	err = sh.MService.SaveMessage(message.Message)
 			if err!=nil{
 				return
 			}
@@ -68,11 +65,11 @@ func (sh *SocketHandler) readMessage(c *websocket.Conn){
 		//	}
 		case "MESSAGES":
 			fmt.Println(message.Limit)
-			msgs,err := sh.MService.Messages(message.Message.FromId,message.Message.ToId)
+			//msgs,err := sh.MService.Messages(message.Message.FromId,message.Message.ToId)
 			if err!=nil{
 				return
 			}
-			err  = sh.Conncetions[message.Message.FromId].WriteJSON(msgs)
+			//err  = sh.Conncetions[message.Message.FromId].WriteJSON(msgs)
 			if err != nil{
 				return
 			}

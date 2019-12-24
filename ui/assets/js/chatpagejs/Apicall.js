@@ -6,13 +6,16 @@ let listFriends = function (currentUserId,currentUserProfilePicture){
         success: function (data, status) {
             let profile = $(".profile");
             profile.empty();
-            let list = data.friends;
-            list.forEach(function(item,index){
+            // console.log("hello")
+            // let list = data
+
+            // console.log(data)
+            data.forEach(function(item,index){
                 friendBox(item.FriendId,item.Username,item.ProfilePicture,item.UserStatus,currentUserId,currentUserProfilePicture);
             });
         },
         error: function (jqXhr, textStatus, errorMessage) {
-            console.log(errorMessage);
+            // console.log("hello");
         }
     });
 
