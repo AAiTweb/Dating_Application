@@ -1,0 +1,27 @@
+{{define "main_questionnarie.layout"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../assets/css/materialize.min.css">
+    <link rel="stylesheet" href="../assets/css/questionnarie.css">
+</head>
+<body>
+    
+   
+    <a href="#user_form_modal" class="btn waves-effect waves-red modal-trigger red lighten-2">Display form</a>
+    {{template "questionnarie" .}}
+    {{template "user_form" .}}
+
+
+
+    <script src="../assets/js/jquery-3.4.1.js"></script>
+    <script src="../assets/js/questionnarie.js"></script>
+
+    <script src="../assets/js/materialize.min2.js"></script>
+</body>
+</html>
+{{end}}
