@@ -7,7 +7,9 @@ socket.addEventListener('open', function (event) {
 
 // Listen for messages
 socket.addEventListener('message', function (event) {
-    messageBox = user1Handler(event.data, "12:00", "profil.png");
+    console.log(event.data)
+    let msg = JSON.parse(event.data)
+    messageBox = user1Handler(msg.Message, msg.Time, "profil.png");
     $(".users").append(messageBox);
     let height = $(".users")[0].scrollHeight;
     $("#message_field").val("");

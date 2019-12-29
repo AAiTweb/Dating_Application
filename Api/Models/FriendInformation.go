@@ -3,9 +3,9 @@ package Models
 import "time"
 
 type FriendLoadInformation struct {
-	FriendId int
-	Username string
-	LastActivity time.Time
-	ProfilePicture string
-	UserStatus string
+	FriendId int 				`json:FriendId`
+	Username string 			`json:Username`
+	LastActivity time.Time		`json:LastActivity`
+	ProfilePicture string		`json:ProfilePicture`
+	UserStatus string			`json:UserStatus`
 }

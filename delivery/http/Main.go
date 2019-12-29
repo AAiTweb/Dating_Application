@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"encoding/json"
 	"github.com/Eyosi-G/Dating_Application/Api"
 	repository2 "github.com/Eyosi-G/Dating_Application/Api/repository"
 	service2 "github.com/Eyosi-G/Dating_Application/Api/service"
@@ -11,7 +12,9 @@ import (
 	"github.com/gorilla/websocket"
 	_ "github.com/lib/pq"
 	"html/template"
+	"log"
 	"net/http"
+	"time"
 )
 
 var upgrader websocket.Upgrader
@@ -52,6 +55,8 @@ func main() {
 
 	router.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/",fs))
 	router.HandleFunc("/",index)
+
+	log.Println(time.Parse(time.Kitchen,time.Now().String()))
 	router.HandleFunc("/user/{id}/friends",handler.GetFriends)
 	router.HandleFunc("/chats/user/{uid}/friends/{fid}",handler.GetMessages)
 	router.HandleFunc("/ws",Socket)
@@ -100,8 +105,17 @@ func Socket(w http.ResponseWriter, r *http.Request)  {
 		return
 	}
 	for{
+
 		messageType, message,_ := conn.ReadMessage()
-		conn.WriteMessage(messageType,message)
+
+		msg := struct {
+			Message string
+			Time string
+		}{}
+		msg.Message = string(message)
+		msg.Time = Api.MessageSendTimeChanger(time.Now())
+		messageByte,_ := json.Marshal(msg)
+		conn.WriteMessage(messageType,messageByte)
 	}
 
 

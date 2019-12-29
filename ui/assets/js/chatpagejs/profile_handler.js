@@ -22,13 +22,13 @@ let friendBox = function(id,uname,profile_picture,status,currentUserId,currentUs
     let image = `<img class=\"circle-responsive-img\" src=\"../assets/images/${profile_picture}\"/>`;
     let username =  `<p>${uname}</p>`;
     let right_section = $("<div class=\"section_right\"></div>");
-    let status_image = "<img src=''/>";
+    let status_image = `<img src="#"/>`;
     switch(status){
         case "offline":
-            status_image = "<img src=''/>"
+            status_image = `<img src=""/>`
             break;
         case "online":
-            status_image = "<img src=\"../assets/images/iconfinder_status_46254.ico\"/>"
+            status_image = `<img src=\"../assets/images/iconfinder_status_46254.ico\"/>`
             break;
     }
     left_section.append(image,username)

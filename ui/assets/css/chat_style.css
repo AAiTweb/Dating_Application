@@ -5,8 +5,14 @@
 
 .navigation{
     background-color: #800020!important;
-    height: 106px;
+    color: white;
+    height: 50px;
 }
+.navigation > a > i{
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
 nav .brand-logo {
     left: 5%;
     margin: 0.5em 0 0 0;

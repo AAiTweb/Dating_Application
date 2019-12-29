@@ -7,6 +7,7 @@ import (
 	"github.com/gorilla/mux"
 	"net/http"
 	"strconv"
+	"strings"
 )
 
 //
@@ -40,13 +41,48 @@ func (Apihandler *APIHandler)GetMessages(w http.ResponseWriter, r *http.Request)
 			userId,_ := strconv.ParseInt(path["uid"],0,0)
 			friendId,_ := strconv.ParseInt(path["fid"],0,0)
 			messages,_ := Apihandler.msgService.Messages(int(userId),int(friendId))
+			type json_message struct {
+				MessageId,
+				FromId,
+				ToId int
+				Message string
+				SendTime string
+				Status int
+			}
+			json_messages := []json_message{}
+			for _,msg:= range messages{
+				jmessage := json_message{}
+				jmessage.MessageId = msg.MessageId
+				jmessage.FromId = msg.FromId
+				jmessage.ToId = msg.ToId
+				jmessage.Message = strings.TrimSuffix(strings.TrimPrefix(msg.Message,"'"),"'")
+				jmessage.SendTime = MessageSendTimeChanger(msg.SendTime)
+				json_messages = append(json_messages,jmessage)
+			}
+
 			w.Header().Set("Content-Type", "application/json; charset=utf-8")
-			json.NewEncoder(w).Encode(messages)
+			json.NewEncoder(w).Encode(json_messages)
 		}
 
 
 }
 
+//time := ""
+//yearDifference := sendTime.Year() - rightNowTime.Year()
+//monthDifference :=  sendTime.Month() - rightNowTime.Month()
+//dayDifference := sendTime.Day() - rightNowTime.Day()
+//month := MonthConverter(int(sendTime.Month()))
+//day  := sendTime.Day()
+//year := sendTime.Year()
+//hour,min,_ := sendTime.Clock()
+//formattedClock := ClockFormatter(hour,min)
+//if yearDifference>0{
+//time = fmt.Sprintf("%s %s %s %s, %s",month,day,year,formattedClock)
+////include the year year-month-day time january 12  2017, 9:20 am
+//}else{
+//time = fmt.Sprintf("%s %s, %s",month,day,formattedClock)
+//
+//}
 
 //func (ap *APIHandler)Messages( w http.ResponseWriter , r *http.Request){
 //	path := mux.Vars(r)

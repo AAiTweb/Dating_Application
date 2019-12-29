@@ -6,10 +6,6 @@ let listFriends = function (currentUserId,currentUserProfilePicture){
         success: function (data, status) {
             let profile = $(".profile");
             profile.empty();
-            // console.log("hello")
-            // let list = data
-
-            // console.log(data)
             data.forEach(function(item,index){
                 friendBox(item.FriendId,item.Username,item.ProfilePicture,item.UserStatus,currentUserId,currentUserProfilePicture);
             });

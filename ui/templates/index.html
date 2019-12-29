@@ -12,25 +12,7 @@
 
 </head>
 
-<body>
-
-<nav class="nav-wraper   navigation">
-    <div class="container">
-        <a href="#" class="brand-logo "><img class="logo" src="d2.png"> </a>
-        <ul class="centre  ">
-            <li class="list-1"><a href="#">Home</a></li>
-            <li class="list-1"><a href="#">About</a></li>
-            <li class="list-1"><a href="#">Chat</a></li>
-            <li class="list-1"><a href="#">Profile</a></li>
-        </ul>
-        <ul class="right">
-            <li class=" list-2"><a href="#"><i class="material-icons ">notifications</i></a></li>
-            <li class=" list-2"><a href="#"><i class="material-icons ">settings</i></a></li>
-
-        </ul>
-    </div>
-</nav>
-
+{{ template "navbar"}}
 
 <dive class="container">
 
@@ -190,7 +172,7 @@
                 <i class="material-icons prefix">mode_edit</i>
                 <textarea id="message_field" class="materialize-textarea"></textarea>
                 <label for="message_field">Message</label>
-                <button id="submit" class=" right waves-effect waves-light btn red darken-4 ">
+                <button id="submit" class=" right waves-effect waves-light btn" style="background-color: #800020">
                     <i class="material-icons right">send</i>send</button>
             </div>
         </div>
@@ -208,7 +190,8 @@
 
 <script>
     $(document).ready(function () {
-
+        $('.sidenav').sidenav();
+        var navbarFixed = $('.navbar-fixed nav');
         let currentUserId = 1;
         let currentUserProfilePicture = "profil.png";
         listFriends(currentUserId,currentUserProfilePicture);
