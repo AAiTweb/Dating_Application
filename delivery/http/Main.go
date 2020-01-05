@@ -6,6 +6,7 @@ import (
 	"github.com/Eyosi-G/Dating_Application/Api"
 	repository2 "github.com/Eyosi-G/Dating_Application/Api/repository"
 	service2 "github.com/Eyosi-G/Dating_Application/Api/service"
+	Socket2 "github.com/Eyosi-G/Dating_Application/Socket"
 	"github.com/Eyosi-G/Dating_Application/message/repository"
 	"github.com/Eyosi-G/Dating_Application/message/service"
 	"github.com/gorilla/mux"
@@ -39,7 +40,7 @@ func main() {
 
 	//repositoryMessage := repository.RepositoryMessage{db}
 	//serviceMessage := service.MessageService{repositoryMessage}
-	//socketHandler := Socket.SocketHandler{upgrader,users}
+	socketHandler := Socket2.NewSocketHandler(upgrader,users)
 
 
 	//api
@@ -59,7 +60,7 @@ func main() {
 	log.Println(time.Parse(time.Kitchen,time.Now().String()))
 	router.HandleFunc("/user/{id}/friends",handler.GetFriends)
 	router.HandleFunc("/chats/user/{uid}/friends/{fid}",handler.GetMessages)
-	router.HandleFunc("/ws",Socket)
+	router.HandleFunc("/ws",socketHandler.Socket)
 	http.ListenAndServe("localhost:8081",router)
 
 	//fmt.Println(time.Now())
@@ -107,14 +108,22 @@ func Socket(w http.ResponseWriter, r *http.Request)  {
 	for{
 
 		messageType, message,_ := conn.ReadMessage()
-
-		msg := struct {
-			Message string
+		jmessage := struct {
+			SenderId int
+			ReceiverId int
+			MessageText string
 			Time string
 		}{}
-		msg.Message = string(message)
-		msg.Time = Api.MessageSendTimeChanger(time.Now())
-		messageByte,_ := json.Marshal(msg)
+		json.Unmarshal(message,&jmessage)
+		log.Println(jmessage)
+
+		//msg := struct {
+		//	Message string
+		//	Time string
+		//}{}
+		//msg.Message = string(message)
+		jmessage.Time = Api.MessageSendTimeChanger(time.Now())
+		messageByte,_ := json.Marshal(jmessage)
 		conn.WriteMessage(messageType,messageByte)
 	}
 

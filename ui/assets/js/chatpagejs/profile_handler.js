@@ -1,17 +1,27 @@
-let sendMessage = function() {
+let sendMessage = function(senderId,reciverId,currentUserProfilePicture) {
     let messagefield = $("#message_field");
     messagefield.keypress(function(event){
         let keycode = (event.keyCode ? event.keyCode : event.which);
         if(keycode == '13'){
-            let message = messagefield.val()
-            socket.send(message)
+            let messageText = messagefield.val()
+            let jmessage = {
+                SenderId:senderId,
+                ReceiverId:reciverId,
+                MessageText:messageText
+            }
+            socket.send(JSON.stringify(jmessage))
         }
     });
     let messageSubmitButton = $("#submit");
-    // let height = users.height();
     messageSubmitButton.on("click", function () {
-        let message = messagefield.val()
-        socket.send(message)
+        let messageText = messagefield.val()
+        let jmessage = {
+            SenderId:senderId,
+            ReceiverId:reciverId,
+            MessageText:messageText
+        }
+        socket.send(JSON.stringify(jmessage))
+        // socket.send(message)
     });
 }
 
@@ -21,6 +31,7 @@ let friendBox = function(id,uname,profile_picture,status,currentUserId,currentUs
     let left_section = $("<div class=\"section_left\"></div>");
     let image = `<img class=\"circle-responsive-img\" src=\"../assets/images/${profile_picture}\"/>`;
     let username =  `<p>${uname}</p>`;
+   // let messageNotification  = $(`<div><span class="message_notification">12</span></div>`);
     let right_section = $("<div class=\"section_right\"></div>");
     let status_image = `<img src="#"/>`;
     switch(status){
@@ -33,24 +44,31 @@ let friendBox = function(id,uname,profile_picture,status,currentUserId,currentUs
     }
     left_section.append(image,username)
     right_section.append(status_image)
+    // right_section.append(messageNotification)
     section.append(left_section,right_section)
+
+
     section.on("click",function(){
         // console.log(profile_picture)
         let sections = $(".section");
         for(let i=0;i<sections.length;i++){
-            $(sections[i]).css({"background-color":"rgb(250, 248, 248)"})
-        }
-        // sections.forEach(function(item,index){
-        //     item.css({"background-color":"blue"})
-        // })
-        // let sections = document.getElementsByClassName("section");
-        // console.log(sections)
-        // sections.forEach(function(item,index){
-        //     item.style.backgroundColor = "red"
-        // });
+            $(sections[i]).css({"background-color":"rgb(250, 248, 248)"}).attr({"class":"section"})
+            // $(section[i]).attr({"select":""})
+            // $(sections[i]).attr({"class":"selected"})
+            // sections[i].className = "selected_friend"
+            let messageSubmitButton = $("#submit");
+            let messagefield = $("#message_field");
+            messageSubmitButton.unbind()
+            messagefield.unbind()
 
-        $(this).css({"background-color":"#ececec"})
+        }
+        $(this).css({"background-color":"#ececec"}).attr({"class":"section selected"})
+        let div = $(".selected > .section_right > div");
+        div.remove();
+        sendMessage(currentUserId,id,currentUserProfilePicture)
+        // sendMessage(currentUserId,id)
         listMessage(currentUserId,id,currentUserProfilePicture,profile_picture);
+
     })
     profile.append(section)
 }

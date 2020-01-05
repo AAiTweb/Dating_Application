@@ -20,10 +20,6 @@ const(
 	November
 	December
 )
-
-func YearConverter(year int) string{
-	return string(year)
-}
 func MonthConverter(month int)string{
 	switch month {
 	case int(January):

@@ -104,6 +104,10 @@ body  {
     border: 1px solid #dedede;
     border-radius: 5px;
     padding: 5px;
+
+}
+.section:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .section_left{
     flex: 80%;
@@ -190,4 +194,14 @@ body  {
 
 .send::after{
     constent:"send";
+}
+
+
+.message_notification{
+    color:white;
+    background-color:#800020 ;
+    border-radius: 5px;
+    padding: 2px 10px;
+    /*padding-right: 7px;*/
+    /*margin: 5px;*/
 }

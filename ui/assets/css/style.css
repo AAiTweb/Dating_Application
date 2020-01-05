@@ -33,6 +33,7 @@ button::after{
 .bothLink:hover{
     box-shadow: 2px 2px 5px;
 }
+
 .bothLink{
     border: 1px solid rgb(189, 40, 40);
     border-radius: 50%;
@@ -71,3 +72,4 @@ button::after{
 .card-title{
     padding-bottom: 10px !important;
 }
+
