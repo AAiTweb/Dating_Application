@@ -72,15 +72,17 @@ var getUserForm=function(){
   var dob=$("#dob").val();
   var sex=$("#sex").val();
   var bio=$("#bio").val();
+  // var timeZone = dob.getTimezoneOffset();
+  // console.log(timeZone);
   fromValue={
     firstName:fName,
     lastName:lName,
     country:country,
     city:city,
-    dob:dob,
+    // dob:dob,
     bio:bio,
     sex:sex,
-    // dob:dob
+    dob:dob
   }
 
 

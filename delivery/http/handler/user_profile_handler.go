@@ -3,6 +3,7 @@ package handler
 import (
 	"encoding/json"
 	"net/http"
+
 	"time"
 
 	"log"
@@ -39,11 +40,10 @@ func (uph *UserProfileHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 		return
 
 	}
-
 	// w.Header().Set("Content-type", "application/json")
 	// w.Write(userProfile)
 	log.Println(user[0].FirstName)
-	uph.tmpl.ExecuteTemplate(w, "user_profile.layout", user[0])
+	uph.tmpl.ExecuteTemplate(w, "user_profile.layout", user)
 	// w.Write(userProfile)
 	return
 
@@ -71,7 +71,7 @@ func (uph *UserProfileHandler) GetUsers(w http.ResponseWriter, r *http.Request) 
 }
 
 func (uph *UserProfileHandler) PostUser(w http.ResponseWriter, r *http.Request) {
-
+	log.Println("post")
 	// if r.Method != "POST" {
 	// 	w.Header().Set("Content-type", "application/json")
 	// 	http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
@@ -93,8 +93,6 @@ func (uph *UserProfileHandler) PostUser(w http.ResponseWriter, r *http.Request) 
 	// 	return
 
 	// }
-	var j = v2.ConfigWithCustomTimeFormat
-	v2.SetDefaultTimeFormat(time.RFC3339, time.Local)
 	user := &entity.User{}
 	length := r.ContentLength
 	body := make([]byte, length)
@@ -102,16 +100,19 @@ func (uph *UserProfileHandler) PostUser(w http.ResponseWriter, r *http.Request) 
 	user.UserId = 1
 	user.ProfPic = 1
 	// user.Dob = dob
+	layoutISO := "2006-01-02"
+	v2.SetDefaultTimeFormat(layoutISO, time.Local)
+	var js = v2.ConfigWithCustomTimeFormat
 	if r.Header.Get("Content-type") != " " {
 
-		err := j.Unmarshal(body, &user)
+		err := js.Unmarshal(body, &user)
 		if err != nil {
+			log.Println(err)
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
 	}
-	log.Println(user.Dob)
 
 	// user := &entity.User{1, 1, fName, lName, country, city, bio, sex, dob}
 

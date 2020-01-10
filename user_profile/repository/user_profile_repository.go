@@ -85,16 +85,17 @@ func (pfl *UserProfileRepositoryImpl) UpdateProfile(user *entity.User) (*entity.
 }
 func (pfl *UserProfileRepositoryImpl) AddProfile(user *entity.User) (*entity.User, error) {
 	default_picture_path := "placeholder.png"
-
+	log.Println("add user")
 	_, err := pfl.conn.Exec("INSERT INTO dating_app.gallery(picture_owner_id,picture_path) values($1,$2)", user.UserId, default_picture_path)
 
 	if err != nil {
 		log.Println(err)
 		return nil, err
 	}
+	log.Println("added")
 
 	_, err = pfl.conn.Exec("INSERT INTO dating_app.user_profile(profile_user_id,first_name,second_name,country,city,bio,dof,profile_picture,sex) values($1,$2,$3,$4,$5,$6,$7,$8,$9)", user.UserId, user.FirstName, user.LastName, user.Country, user.City, user.Bio, user.Dob, user.ProfPic, user.Sex)
-
+	log.Println("added")
 	if err != nil {
 		log.Println(err)
 		return nil, err

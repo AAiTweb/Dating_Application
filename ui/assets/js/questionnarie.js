@@ -16,7 +16,7 @@ $(document).ready(function(){
         // setDefaultDate: new Date(2000,01,31),
         maxDate: new Date(currYear,12,31),
         yearRange: [1928, currYear],
-        format: "yyyy/mm/dd"    
+        format: "yyyy-mm-dd"    
       });
    
     

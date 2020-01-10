@@ -16,12 +16,14 @@
         <div class="">
             <div class="header">
                 <div class="row">
+                    {{range   .}}
                     <div class="col s3 pic center-align ">
-                        <img src="../assets/images/placeholder.png" alt="" class="circle right ">
+                        <img src="../assets/images/{{.ProfPicPath}}" alt="" class="circle right ">
                     </div>
                     <div class="col s5 about">
+                        
                         <div class="section name grey-text darken-3">
-                            <h2>{{.FirstName}},{{.LastName}}</h2>
+                            <h2>{{.FirstName}}  {{.LastName}}</h2>
                         </div>
                         <div class="row status section">
                             <div class="col s2">
@@ -36,6 +38,7 @@
                             
                             
                         </div>
+                        
                         <div class="section update">
                              <!-- Modal Trigger -->
   
@@ -92,58 +95,7 @@
                                             <div class="col s12">
                                                 <form action="#" method="POST">
                                                     {{template "form" .}}
-                                                    <!-- <div class="row">
-                                                        <div class="col s5">
-                                                            <div class="input-field">
-                                                                <label for="fName">First Name</label>
-                                                                <input type="text" id="fName">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col s5 offset-s2">
-                                                            <div class="input-field">
-                                                                <label for="lName">Last Name</label>
-                                                                <input type="text" id="lName">
-                                                            </div>
-                                                        </div>
-                                                       
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col s5">
-                                                            <div class="input-field">
-                                                                <label for="email">Email</label>
-                                                                <input type="email" id="email">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col s5 offset-s2">
-                                                            <div class="input-field">
-                                                                <label for="phone">Phone</label>
-                                                                <input type="text" id="phone">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col s5">
-                                                            <div class="input-field">
-                                                                <label for="addres">Address</label>
-                                                                <input type="text" id="Address">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col s5 offset-s2">
-                                                            <div class="input-field">
-                                                                <label for="profession">Profession</label>
-                                                                <input type="text" id="profession">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col s12">
-                                                            <div class="input-field">
-                                                                <label for="about2">About Me</label>
-                                                                <textarea name="about2" class="materialize-textarea" id="about2" cols="30" rows="20"></textarea>
-                                                            </div>
-                                                        </div>
-                                                    </div>-->
-
+                                                   
                                                     <div class="modal-footer">
                                                         <div class="row">
                                                             <div class="col s3 right ">
@@ -178,7 +130,7 @@
             
            
             {{template "user_profile_body.layout" .}}
-            
+            {{end}}
         </div>
         <!-- <a href="#" class="btn" data-activates="side-out" ><i class="material-icon">Menu</i></a> -->
         
