@@ -1,0 +1,144 @@
+[
+ 	{
+ 		"questionId": 1,
+ 		"UserQuestion": "'What is your marital status ?'",
+ 		"wishQuestion": "'What do you prefer your future partner marital status be ?'",
+ 		"answers": [
+ 			{
+ 				"answerId": 1,
+ 				"questionId": 1,
+ 				"answer": "'Single'"
+ 			},
+ 			{
+ 				"answerId": 2,
+ 				"questionId": 1,
+ 				"answer": "'Divorced'"
+ 			},
+ 			{
+ 				"answerId": 3,
+ 				"questionId": 1,
+ 				"answer": "'Married'"
+ 			}
+ 		]
+ 	},
+ 	{
+ 		"questionId": 2,
+ 		"UserQuestion": "'What is addiction do u have ?'",
+ 		"wishQuestion": "'What do you prefer your future partner be addicted to ?'",
+ 		"answers": [
+ 			{
+ 				"answerId": 4,
+ 				"questionId": 2,
+ 				"answer": "'Smoker'"
+ 			},
+ 			{
+ 				"answerId": 5,
+ 				"questionId": 2,
+ 				"answer": "'Drinker'"
+ 			},
+ 			{
+ 				"answerId": 6,
+ 				"questionId": 2,
+ 				"answer": "'None'"
+ 			}
+ 		]
+ 	},
+ 	{
+ 		"questionId": 3,
+ 		"UserQuestion": "'What is your religion ?'",
+ 		"wishQuestion": "'What do you prefer your future partner relegion be ?'",
+ 		"answers": [
+ 			{
+ 				"answerId": 7,
+ 				"questionId": 3,
+ 				"answer": "'Christian'"
+ 			},
+ 			{
+ 				"answerId": 8,
+ 				"questionId": 3,
+ 				"answer": "'Muslim'"
+ 			},
+ 			{
+ 				"answerId": 9,
+ 				"questionId": 3,
+ 				"answer": "'Aethiest'"
+ 			}
+ 		]
+ 	},
+ 	{
+ 		"questionId": 4,
+ 		"UserQuestion": "'What is your profession?'",
+ 		"wishQuestion": "'What do you prefer your future partner profession be ?'",
+ 		"answers": [
+ 			{
+ 				"answerId": 10,
+ 				"questionId": 4,
+ 				"answer": "'Student'"
+ 			},
+ 			{
+ 				"answerId": 11,
+ 				"questionId": 4,
+ 				"answer": "'Worker'"
+ 			},
+ 			{
+ 				"answerId": 12,
+ 				"questionId": 4,
+ 				"answer": "'None'"
+ 			}
+ 		]
+ 	},
+ 	{
+ 		"questionId": 5,
+ 		"UserQuestion": "'What is your education level ?'",
+ 		"wishQuestion": "'What do you prefer your future partner education level be ?'",
+ 		"answers": [
+ 			{
+ 				"answerId": 13,
+ 				"questionId": 5,
+ 				"answer": "'High School'"
+ 			},
+ 			{
+ 				"answerId": 14,
+ 				"questionId": 5,
+ 				"answer": "'College'"
+ 			},
+ 			{
+ 				"answerId": 15,
+ 				"questionId": 5,
+ 				"answer": "'Graduated'"
+ 			},
+ 			{
+ 				"answerId": 16,
+ 				"questionId": 5,
+ 				"answer": "'Uneducated'"
+ 			},
+ 			{
+ 				"answerId": 17,
+ 				"questionId": 5,
+ 				"answer": "'None'"
+ 			}
+ 		]
+ 	},
+ 	{
+ 		"questionId": 6,
+ 		"UserQuestion": "'What type of relationship term are u looking for ?'",
+ 		"wishQuestion": "'What do you prefer your future partner relationship term be ?'",
+ 		"answers": [
+ 			{
+ 				"answerId": 18,
+ 				"questionId": 6,
+ 				"answer": "'Long term'"
+ 			},
+ 			{
+ 				"answerId": 19,
+ 				"questionId": 6,
+ 				"answer": "'Short term'"
+ 			},
+ 			{
+ 				"answerId": 20,
+ 				"questionId": 6,
+ 				"answer": "'One night stand'"
+ 			}
+ 		]
+ 	}
+ ]

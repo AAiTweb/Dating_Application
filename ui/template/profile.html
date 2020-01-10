@@ -1,15 +1,13 @@
-<!DOCTYPE html>
+{{define "user_profile.layout"}}
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    
     <link rel="stylesheet" href="../assets/css/materialize.min.css">
     <link rel="stylesheet" href="../assets/css/profile.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"> -->
 </head>
 <body>
     <div>
@@ -19,11 +17,11 @@
             <div class="header">
                 <div class="row">
                     <div class="col s3 pic center-align ">
-                        <img src="../images/girl.jpg" alt="" class="circle right ">
+                        <img src="../assets/images/placeholder.png" alt="" class="circle right ">
                     </div>
                     <div class="col s5 about">
                         <div class="section name grey-text darken-3">
-                            <h2>user name</h2>
+                            <h2>{{.FirstName}},{{.LastName}}</h2>
                         </div>
                         <div class="row status section">
                             <div class="col s2">
@@ -57,7 +55,7 @@
                                         <div class="row">
                                             <div class="col  s5  ">
                                                 <div class=" profile-pic row">
-                                                    <img src="../images/girl.jpg" class="circle" alt="">
+                                                    <img src="../assets/images/placeholder.png" class="circle" alt="">
                                                     <div class="file-field input-field row">
                                                         <div class="btn-flat red lighten-2 ">
                                                             <span>upload photo</span>
@@ -144,17 +142,17 @@
                                                                 <textarea name="about2" class="materialize-textarea" id="about2" cols="30" rows="20"></textarea>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div>-->
 
                                                     <div class="modal-footer">
                                                         <div class="row">
-                                                            <div class="col s3 right">
+                                                            <div class="col s3 right ">
                                                                 <div class="input-field">
-                                                                    <input type="submit" class="red  lighten-2 btn-flat waves-effect waves-red white-text" value="save changes">
+                                                                    <input type="submit" id="update-submit" class="red  lighten-2 btn-flat waves-effect waves-red white-text right" value="save changes">
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>  -->
+                                                    </div>  
                                                     
                                                 </form>
                                             </div>
@@ -179,159 +177,8 @@
             </div>
             
            
-            <div class="row body ">
-                <div class="col s12">
-                    <ul class="tabs">
-                        <li class="tab col s6"><a href="#about">ABOUT</a></li>
-                        <li class="tab col s6"><a href="#photos">PHOTOS</a></li>
-                        <!-- <li class="tab col s4"><a href="#questions">QUESTIONS</a></li> -->
-                    </ul> 
-                </div>
-               
-
-                <div id="about" class="col s12 ">
-                    <div class="row tab-content">
-                        <!-- <div class="col s5">
-                            <div class="row">
-                                <div>
-                                    <h5>My self-summary</h5>
-                                    <div>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus et mollitia, voluptate accusantium exercitationem quod enim optio consequatur magnam recusandae laudantium ullam nostrum facilis non, molestias blanditiis sunt consequuntur corrupti.
-                                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae illum aspernatur accusamus impedit optio libero, dolores voluptates consequuntur expedita repudiandae minus accusantium nobis distinctio aliquam perspiciatis illo autem ad! Alias!
-                                            
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div>
-                                    <h5>What i'm doing with my life</h5>
-                                    <div>
-                                        <p>
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, culpa nobis cum explicabo, id tenetur blanditiis voluptates corrupti vero eius beatae, natus voluptatibus ut consequatur laudantium praesentium mollitia. Velit, adipisci.
-                                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident id doloribus quos amet quisquam alias, autem, mollitia, corporis nam aspernatur voluptatum et deleniti delectus facere harum? Dolorem voluptate nisi repudiandae.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div>
-                                    <h5>I'm really good at</h5>
-                                    <div>
-                                        <p>
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis sunt asperiores delectus illo. Laudantium quae veniam quos temporibus asperiores officiis et. Fugit culpa minima quibusdam voluptates optio laudantium dolores quae!
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat sequi nisi eligendi molestiae ea, repellendus nihil necessitatibus dolor tempore beatae voluptas consectetur fuga provident quo officia unde exercitationem illo explicabo.
-                                        </p>
-                                    </div>
-                                </div>
-                
-                            </div>
-                        </div> -->
-
-                        <div class="col s5 detail ">
-                            <div class="detail-header">
-                                <h5>My details</h5>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="row ">
-                                <div class="col s4 grey-text text-darken-2">
-                                    <p class="">Last online</p>
-                                </div>
-                                <div class="col s4">
-                                    <p>Jan 15</p>
-                                </div>
-
-                            </div>
-                            <div class="divider"></div>
-                            <div class="row  ">
-                                <div class="col s4 grey-text text-darken-2 ">
-                                    <p class="">Orientation</p>
-                                </div>
-                                <div class="col s4">
-                                    <p>Straight</p>
-                                </div>
-                            </div>
-
-                            <div class="divider"></div>
-                            <div class="row">
-                                <div class="col s4 grey-text text-darken-2">
-                                    <p>Ethnicity</p>
-                                </div>
-                                <div class="col s4">
-                                    <p>Black</p>
-                                </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="row">
-                                <div class="col s4 grey-text text-darken-2">
-                                    <p>Height</p>
-                                </div>
-                                <div class="col s4">
-                                    <p>1.53</p>
-                                </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="row">
-                                <div class="col s4 grey-text text-darken-2">
-                                    <p>Body type</p>
-                                </div>
-                                <div class="col s4">
-                                    <p>Size zero</p>
-                                </div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="row">
-                                <div class="col s4 grey-text text-darken-2">
-                                    <p>Diet</p>
-                                </div>
-                                <div class="col s4">
-                                    <p>Vegetarian</p>
-                                </div>
-                            </div>
-                            <div class="divider"></div>
-                            
-                            <div class="row">
-                                <div class="col s4 grey-text text-darken-2">
-                                    <p>Smoke</p>
-                                </div>
-                                <div class="col s4">
-                                    <p>No</p>
-                                </div>
-                            </div>
-                            <div class="divider"></div>
-
-
-                        </div>
-                    </div>
-                   
-                </div>
-                <div id="photos" class="col s12 gallery">
-                    <div class="row">
-                        <div class="col s4">
-                            <img src="../images/back.jpg" alt="">
-                        </div>
-                        <div class="col s4">
-                            <img src="../images/cover.jpg" alt="">
-                        </div>
-                        <div class="col s4">
-                            <img src="../images/five.jpg" alt="">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s4">
-                            <img src="../images/gFour.jpg" alt="">
-                        </div>
-                        <div class="col s4">
-                            <img src="../images/one.jpg" alt="">
-                        </div>
-                        <div class="col s4">
-                            <img src="../images/three.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-               
-            </div>
+            {{template "user_profile_body.layout" .}}
+            
         </div>
         <!-- <a href="#" class="btn" data-activates="side-out" ><i class="material-icon">Menu</i></a> -->
         
@@ -341,6 +188,7 @@
     <script src="../assets/js/jquery-3.4.1.js"></script>
    <script src="../assets/js/profile.js"></script>
     
-    <script src="../assets/js/materialize.min2.js"></script>
+    <script src="../assets/js/materialize.min.js"></script>
 </body>
 </html>
+{{end}}

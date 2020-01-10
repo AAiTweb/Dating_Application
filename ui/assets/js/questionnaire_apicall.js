@@ -54,7 +54,20 @@
             },
         });
 
-    };  
+    }; 
+    var ajaxGetUser=function(){
+        $.ajax({
+            url:"/user/profile",
+
+        
+            success:function(data,status){
+                // console.log(id);
+                // getQuestion(data,id);
+                // id++;
+            },
+        });
+
+    } 
     $(".prev").click(function(){
         
         // alert("prev clicked");
@@ -64,8 +77,9 @@
             ajaxGetCall();
         }
         else if(id == -1){
-            $('#user_form_modal').openModal();
-            $("#questionnarie-modal").closeModal();
+            $(".modal").modal();
+            $('#user_form_modal').modal("open");
+            $("#questionnarie-modal").modal("close");
         }
         else{
             alert("no turning back");
@@ -94,8 +108,11 @@
         }
         else if(id==5){
             ajaxPost();
-            console.log("ajax post call");
-        }
+            getUserForm();
+            ajaxFormPost();
+            
+            
+        }   
         else{
             alert("done");
         }
@@ -131,9 +148,12 @@
 
     });
     $(".questionnarie-trigger").click(function(){
-        
+       
+        // $("#user_form").submit();
         ajaxGetCall();
+       
         id++;
+        
         // $.ajax({
         //     url:api_url,
         //     contentType:"application/json",

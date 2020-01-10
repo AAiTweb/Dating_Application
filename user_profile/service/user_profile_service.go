@@ -15,7 +15,7 @@ func NewUserProfileServiceImpl(usrRepo user_profile.ProfileRepository) user_prof
 	return &UserProfileServiceImpl{userRepo: usrRepo}
 }
 
-func (ups *UserProfileServiceImpl) UserProfile(id uint) (*entity.User, error) {
+func (ups *UserProfileServiceImpl) UserProfile(id uint) ([]entity.User, error) {
 	user, err := ups.userRepo.UserProfile(id)
 	if err != nil {
 		return nil, err

@@ -2,71 +2,78 @@ package main
 
 import (
 	"database/sql"
-	"github.com/gorilla/websocket"
-	_ "github.com/lib/pq"
+	"html/template"
+	"log"
 	"net/http"
+
+	"github.com/gorilla/mux"
+
+	_ "github.com/lib/pq"
+
+	"github.com/betse/Dating_Application-master/delivery/http/handler"
+	// "github.com/betse/Dating_Application-master/entity"
+	"github.com/betse/Dating_Application-master/questionnarie/repository"
+	"github.com/betse/Dating_Application-master/questionnarie/service"
+	usrRepo "github.com/betse/Dating_Application-master/user_profile/repository"
+	usrServ "github.com/betse/Dating_Application-master/user_profile/service"
 )
 
-var upgrader websocket.Upgrader
-var users  = make(map[int]*websocket.Conn)
-
 func main() {
-	//templ := template.Must(template.ParseGlob("../../ui/templates/*.html"))
-	db,err := sql.Open("postgres","postgres://postgres:password@localhost/project?sslmode=disable")
+	dbConne, err := sql.Open("postgres", "postgres://betse:26300001@localhost/dating_app")
 	if err != nil {
 		panic(err)
 	}
-	defer db.Close()
-	if err = db.Ping(); err != nil {
+	defer dbConne.Close()
+
+	if err := dbConne.Ping(); err != nil {
 		panic(err)
 	}
+	// query2 := "SELECT * FROM dating_app.questionnaires; "
+	// rows, err := dbConne.Query(query2)
+	// defer rows.Close()
 
+	// questions := []test{}j
+	// for rows.Next() {
+	// 	question := test{}
+	// 	err := rows.Scan(&question.Id, &question.Question1, &question.Question2)
 
+	// 	if err != nil {
+	// 		log.Println("err")
+	// 	}
+	// 	questions = append(questions, question)
+	// }
+	// log.Println(len(questions), "LENGTH")
 
-	upgrader.CheckOrigin = func(r *http.Request) bool{
-		return true
+	log.Println("database connected")
+
+	tmpl := template.Must(template.ParseGlob("../../ui/template/*"))
+
+	fs := http.FileServer(http.Dir("../../ui/assets"))
+	mux := mux.NewRouter()
+	// mux.Handle("/assets/", http.StripPrefix("/assets/", fs))
+	mux.PathPrefix("/assets/").Handler(http.StripPrefix("/assets", fs))
+	//Questionnaire
+	questionRespo := repository.NewQuestionnarieRepoImpl(dbConne)
+	questionService := service.NewQuestionnaireServiceImpl(questionRespo)
+	questionnarieHandler := handler.NewUserQuestionnarieHandler(tmpl, questionService)
+
+	userProfileRepo := usrRepo.NewUserProfileRepoImpl(dbConne)
+	userProfileServ := usrServ.NewUserProfileServiceImpl(userProfileRepo)
+	userProfHandler := handler.NewUserProfileHandler(tmpl, userProfileServ)
+
+	// questionnarieHandler := handler.NewUserQuestionnarieHandler(tmpl)
+
+	mux.HandleFunc("/user/questionnarie/answers/{user_id}/{index}", questionnarieHandler.PostAnswers)
+	mux.HandleFunc("/user/profile", userProfHandler.GetUser)
+	mux.HandleFunc("/user/questionnarie", questionnarieHandler.MainQuestionnarie)
+	mux.HandleFunc("/user/questionnarie/questions", questionnarieHandler.Questionnaire)
+	mux.HandleFunc("/user/profile/addUser", userProfHandler.PostUser)
+
+	serv := http.Server{
+		Addr:    ":8080",
+		Handler: mux,
 	}
-
-	//sampleMessage := entity.Message{-1,1,4,"hello",time.Now(),2}
-
-	//repositoryMessage := repository.RepositoryMessage{db}
-	//serviceMessage := service.MessageService{repositoryMessage}
-	//socketHandler := Socket.SocketHandler{upgrader,users,serviceMessage}
-	//
-
-	//api
-	//Handler := APIHandler{db}
-	//http.HandleFunc("/friends",Handler.friends)
-	//http.ListenAndServe("localhost:8081",nil)
-	//
-
-
-	//fmt.Println(serviceMessage.Messages(1,5))
-
-
-	//userrepoInstance := repository.UserRepositoryInstance{db}
-	//userserviceInstance:=service.UserServiceInstance{RepositoryInstance:userrepoInstance}
-	//handlerInstance := handler.MainHandler{
-	//	Templ:    templ,
-	//	Uservice: userserviceInstance,
-	//}
-	// := http.NewServeMux()
-	//fs := http.FileServer(http.Dir("../../ui/assets"))
-	//mux.Handle("/assets/",http.StripPrefix("/assets/",fs))
-	//mux.HandleFunc("/login",handler.Login)
-	//mux.HandleFunc("/signup",handler.Signup)
-	//mux.HandleFunc("/notification",handler.Notification)
-	//mux.HandleFunc("/message",handler.Message)
-	//mux.HandleFunc("/profile",handler.Profile)
-	//mux.HandleFunc("/home",handlerInstance.Home)
-	//mux.HandleFunc("/questionnaire",handler.Questionnaire)
-	//mux.HandleFunc("/",handlerInstance.Home)
-	//
-	//http.ListenAndServe("localhost:8082",mux)
-	//
+	log.Println("litsening on :8080")
+	serv.ListenAndServe()
 
 }
-
-
-
-

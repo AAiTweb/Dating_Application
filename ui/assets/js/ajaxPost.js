@@ -1,12 +1,29 @@
 var user_id=1;
 // var questionId=id+1;
+var ajaxFormPost=function(){
+    console.log(fromValue);
+    var api_form_post="/user/profile/addUser"
+    $.ajax({
+        url:api_form_post,
+        contentType:"application/json",
+        data:JSON.stringify(fromValue),
+        type:"POST",
+        success:function(data,status){
+            console.log("ajax data posted");
+            console.log(data);
+
+        }
+
+    });
+
+}
 
 var ajaxPost=function(){
     console.log(answers);
     
     $.each(answers,function(index,value){
         var x= JSON.stringify(value);
-        
+
         console.log(x);
         console.log("strigify the data");
         // console.log("value of")
@@ -26,8 +43,11 @@ var ajaxPost=function(){
             data:JSON.stringify(value),
             type:"POST",
             success:function(data,status){
-                console.log("ajax data posted");
-                console.log(data);
+                // ajaxGetUser();
+                window.location.replace("/user/profile");
+
+                // console.log("ajax data posted");
+                // console.log(data);
     
             }
         

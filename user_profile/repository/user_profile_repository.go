@@ -35,12 +35,41 @@ func (pfl *UserProfileRepositoryImpl) UsersProfile() ([]entity.User, error) {
 	return users, nil
 
 }
-func (pfl *UserProfileRepositoryImpl) UserProfile(id uint) (*entity.User, error) {
+func (pfl *UserProfileRepositoryImpl) UserProfile(id uint) ([]entity.User, error) {
+	query := `
+	SELECT  dating_app.user_profile.profile_user_id,
+			dating_app.user_profile.first_name,
+			dating_app.user_profile.second_name,
+			dating_app.user_profile.country,
+			dating_app.user_profile.city,
+			dating_app.user_profile.bio,
+			dating_app.user_profile.dof,
+			dating_app.user_profile.sex,
+			dating_app.gallery.picture_path
+	
+	FROM dating_app.gallery
+	INNER JOIN dating_app.user_profile ON dating_app.gallery.picture_owner_id=$1;
+`
+	rows, err := pfl.conn.Query(query, id)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
 
-	row := pfl.conn.QueryRow("SELECT * FROM dating_app.user_profile WHERE profile_user_id=$1", id)
+	user := []entity.User{}
 
-	user := &entity.User{}
-	err := row.Scan(&user.UserId, &user.FirstName, &user.LastName, &user.Country, &user.City, &user.Bio, &user.Dob, &user.ProfPic, &user.Sex)
+	for rows.Next() {
+		userProfile := entity.User{}
+		err = rows.Scan(&userProfile.UserId, &userProfile.FirstName, &userProfile.LastName, &userProfile.Country, &userProfile.City, &userProfile.Bio, &userProfile.Dob, &userProfile.Sex, &userProfile.ProfPicPath)
+		if err != nil {
+			return nil, err
+		}
+		user = append(user, userProfile)
+	}
+	// log.Println(user)
+
+	// user := &entity.User{}
+
 	if err != nil {
 		return user, err
 	}
@@ -55,7 +84,16 @@ func (pfl *UserProfileRepositoryImpl) UpdateProfile(user *entity.User) (*entity.
 	return user, nil
 }
 func (pfl *UserProfileRepositoryImpl) AddProfile(user *entity.User) (*entity.User, error) {
-	_, err := pfl.conn.Exec("INSERT INTO dating_app.user_profile(profile_user_id,first_name,second_name,country,city,bio,dof,profile_picture,sex) values($1,$2,$3,$4,$5,$6,$7,$8,$9)", user.UserId, user.FirstName, user.LastName, user.Country, user.City, user.Bio, user.Dob, user.ProfPic, user.Sex)
+	default_picture_path := "placeholder.png"
+
+	_, err := pfl.conn.Exec("INSERT INTO dating_app.gallery(picture_owner_id,picture_path) values($1,$2)", user.UserId, default_picture_path)
+
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
+
+	_, err = pfl.conn.Exec("INSERT INTO dating_app.user_profile(profile_user_id,first_name,second_name,country,city,bio,dof,profile_picture,sex) values($1,$2,$3,$4,$5,$6,$7,$8,$9)", user.UserId, user.FirstName, user.LastName, user.Country, user.City, user.Bio, user.Dob, user.ProfPic, user.Sex)
 
 	if err != nil {
 		log.Println(err)
