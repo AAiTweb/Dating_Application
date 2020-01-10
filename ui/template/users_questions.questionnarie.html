@@ -1,0 +1,90 @@
+{{define "questionnarie"}}
+
+<div class="modal" id="questionnarie-modal">
+    
+    <div class="modal-header">
+        <div class="row">
+            <div class="col s4">
+                <div class="left">
+                    <a href="#"  class="btn waves-effect waves-red red lighten-2 prev">prev</a>
+                </div>
+                
+            </div>
+            <div class="col s4">
+                <div class="center-align">
+                    <p class="flow-text"><span class="question_number">1</span>/6</p>
+                </div>
+            </div>
+            <div class="col s4">
+                 
+            </div>
+        </div>
+    </div>
+    <div class="modal-content">
+        <div class="row user_question">
+            
+            <div class="col s6 offset-s1">
+                <div class="question flow-text ">
+                    <p class="userQuestion">question for you?</p>
+                </div>
+                <div class="answers">
+                    <div class="input-field">
+                        <select class="user-select" id="own_choice">
+                          <option value="" disabled selected>Choose your option</option>
+                          <option value="1">Option 1</option>
+                          <option value="2">Option 2</option>
+                          <option value="3">Option 3</option>
+                        </select>
+                       
+                      </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row partner_question">
+            <div class="col s6 offset-s1">
+                <div class="question flow-text ">
+                    <p class="wishQuestion">what do you prefer ..?</p>
+                </div>
+                <div class="answers">
+                    <div class="input-field">
+                        <select class="user-select" id="wish_choice">
+                          <option value="" disabled selected>Choose your option</option>
+                          <option value="1">Option 1</option>
+                          <option value="2">Option 2</option>
+                          <option value="3">Option 3</option>
+                        </select>
+                       
+                      </div>
+
+                </div>
+            </div>
+
+        </div>
+       
+
+
+        
+    </div>
+    <div class="modal-footer">
+        <div class="row">
+            <div class="col s4 ">
+                <div class="left">
+                    <a href="#" class="btn waves-effect waves-red red lighten-2 modal-close">
+                        cancel
+                    </a>
+                </div>
+            </div>
+            <div class="col s4 offset-s4">
+                <div class="right">
+                    <a href="#" class="btn waves-effect waves-red red lighten-2  next-question" >
+                        Next
+                    </a>
+                </div>
+                <!-- <a href="" class="btn btn-waves red red-lighten"></a> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+{{end}}

@@ -1,0 +1,170 @@
+
+
+
+.page-title{
+    height: 8rem;
+    
+   
+}
+.user-name img{
+    width: 80%;
+
+}
+.user-name{
+    height: 6rem;
+    
+}
+.row{
+    margin: 0;
+  
+    /* border: 1px solid white; */
+}
+.profile-pic .add-pic{
+    font-size: 50px;
+    margin-left: -3rem;
+   
+
+}
+
+.modal-content .profile-pic{
+    margin-left: 4.5rem;
+}
+.modal-content .exit{
+    font-size: 30px;
+}
+.modal-content .name{
+
+    margin-top: 4.5rem;
+    margin-left: -12.5rem;
+    /* background: black; */
+}
+.modal-content .file-field .btn-flat{
+    position: absolute;
+    margin-left: 12rem ;
+    margin-top: -4rem;
+
+}
+.modal-content .divider{
+    margin: 2rem 5rem;
+}
+form{
+    margin:0 5rem ;
+}
+.input-field input:focus + label {
+    color: #e57373 !important;
+  }
+  /* label underline focus color */
+  .row .input-field input:focus, textarea:focus  {
+    border-bottom: 1px solid #e57373 !important;
+    box-shadow: 0 1px 0 0 #e57373 !important
+  }
+.update-user-name{
+    margin-top: 3rem;
+}
+
+.user-name .col.img{
+    /* border: 1px solid black; */
+    margin-left: 0 !important;
+    padding-right: 0;
+
+}
+.user-name .col.name{
+    /* border: 1px solid black; */
+    margin-left: 0 !important;
+    padding-bottom: .5rem;
+    padding-left: 0;
+    
+}
+.recent img{
+    width: 90%;
+
+}
+:focus{
+    
+}
+.cover{
+    
+    padding: 0 .5rem;
+    border-radius: 5px;
+    margin-left: -.6rem !important;
+}
+.container .header .row .col.s3 {
+    /* border: 1px solid black; */
+
+}
+.header .row .col img{
+    width: 40%;
+    
+
+}
+.pic{
+    
+    margin-left: 2rem !important;
+}
+.header{
+    margin:3rem 1rem;
+    /* border: 2px solid black; */
+}
+
+
+
+.about{
+    /* border: 1px solid black; */
+    margin: 0 2rem !important ;
+}
+.about .section{
+    /* border: 1px solid black; */
+    padding-top: -2rem;
+
+}
+.about .section h2{
+    /* border: 1px solid black; */
+    margin-top: -1.7rem;
+   
+}
+.about .section  a{
+    width: 40%;
+    margin-top: -1.7rem;
+}
+.about .section  p{
+    margin-top: -2.5rem;
+
+}
+.match{
+   
+    margin-left: 5rem !important;
+}
+.match h2{
+    margin-top: -.3rem;
+}
+.match p{
+    margin-top: -.9rem;
+}
+.body{
+    margin-left: 20rem !important;
+}
+.contents{
+    background: rgb(94, 93, 93);
+   
+}
+.tab-content{
+    margin-left: 2rem !important;
+}
+.detail{
+    margin-left: 10rem !important;
+}
+.detail-header{
+    margin-bottom: 2rem;
+}
+.detail .row{
+    height: 4rem;
+    padding-top: .3rem;
+}
+.gallery img{
+    width: 80%;
+    height: 20rem;
+    margin: 2rem 1rem 0 3rem;
+}
+#update-submit{
+    
+}

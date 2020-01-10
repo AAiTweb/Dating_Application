@@ -1,0 +1,194 @@
+{{define "user_profile.layout"}}
+
+<html lang="en">
+<head>
+    
+    <link rel="stylesheet" href="../assets/css/materialize.min.css">
+    <link rel="stylesheet" href="../assets/css/profile.css">
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"> -->
+</head>
+<body>
+    <div>
+        
+     
+        <div class="">
+            <div class="header">
+                <div class="row">
+                    <div class="col s3 pic center-align ">
+                        <img src="../assets/images/placeholder.png" alt="" class="circle right ">
+                    </div>
+                    <div class="col s5 about">
+                        <div class="section name grey-text darken-3">
+                            <h2>{{.FirstName}},{{.LastName}}</h2>
+                        </div>
+                        <div class="row status section">
+                            <div class="col s2">
+                                <p class="flow-text grey-text darken-3">25</p>
+                            </div>
+                            <div class="col s3">
+                                <p class="flow-text grey-text darken-3 ">Female</p>
+                            </div>
+                            <div class="col s7">
+                                <p class="flow-text grey-text darken-3">Addis Ababa ,Ethiopia</p>
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="section update">
+                             <!-- Modal Trigger -->
+  
+          
+                            <a href="#update-modal" class="btn modal-trigger waves-effect waves-red red lighten-2">Update info</a>
+                           
+                            <div id="update-modal" class="modal" >
+                                
+                                    <div class="modal-content">
+                                        <div class="row">
+                                            <div class="col s2">
+                                                <i class="material-icons exit ">  arrow_back</i>
+                                                  
+                              
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col  s5  ">
+                                                <div class=" profile-pic row">
+                                                    <img src="../assets/images/placeholder.png" class="circle" alt="">
+                                                    <div class="file-field input-field row">
+                                                        <div class="btn-flat red lighten-2 ">
+                                                            <span>upload photo</span>
+                                                            <input type="file">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                               
+                                            </div>
+                                            <div class="col s2 center-align valign-wrapper">
+                                                <div class="name">
+                                                    <p class="flow-text grey-text text-darken-2">
+                                                        user name
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="row">
+                                            <div class="col s12">
+                                                <div class="divider red-text darken-1"></div>
+                                            </div>
+                                        </div> -->
+                                        <!-- <div class="row update-user-name">
+                                            <div class="col s4 offset-s4 center-align">
+                                                <div class="name">
+                                                    <p class="flow-text grey-text text-darken-2">
+                                                        User Name
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                      
+                                        <div class="row">
+                                            <div class="col s12">
+                                                <form action="#" method="POST">
+                                                    {{template "form" .}}
+                                                    <!-- <div class="row">
+                                                        <div class="col s5">
+                                                            <div class="input-field">
+                                                                <label for="fName">First Name</label>
+                                                                <input type="text" id="fName">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col s5 offset-s2">
+                                                            <div class="input-field">
+                                                                <label for="lName">Last Name</label>
+                                                                <input type="text" id="lName">
+                                                            </div>
+                                                        </div>
+                                                       
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col s5">
+                                                            <div class="input-field">
+                                                                <label for="email">Email</label>
+                                                                <input type="email" id="email">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col s5 offset-s2">
+                                                            <div class="input-field">
+                                                                <label for="phone">Phone</label>
+                                                                <input type="text" id="phone">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col s5">
+                                                            <div class="input-field">
+                                                                <label for="addres">Address</label>
+                                                                <input type="text" id="Address">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col s5 offset-s2">
+                                                            <div class="input-field">
+                                                                <label for="profession">Profession</label>
+                                                                <input type="text" id="profession">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col s12">
+                                                            <div class="input-field">
+                                                                <label for="about2">About Me</label>
+                                                                <textarea name="about2" class="materialize-textarea" id="about2" cols="30" rows="20"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>-->
+
+                                                    <div class="modal-footer">
+                                                        <div class="row">
+                                                            <div class="col s3 right ">
+                                                                <div class="input-field">
+                                                                    <input type="submit" id="update-submit" class="red  lighten-2 btn-flat waves-effect waves-red white-text right" value="save changes">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>  
+                                                    
+                                                </form>
+                                            </div>
+                                           
+                                        </div>
+                                      
+                                    </div>
+                                    
+                                  
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s2 right match red-text text-lighten-2">
+                        <div class="match-percentage">
+                            <h2>90%</h2>
+                            <p class="flow-text grey-text darken-2">MATCH</p>
+                        </div>
+                    </div>
+                 
+                    
+                </div>
+            </div>
+            
+           
+            {{template "user_profile_body.layout" .}}
+            
+        </div>
+        <!-- <a href="#" class="btn" data-activates="side-out" ><i class="material-icon">Menu</i></a> -->
+        
+      
+    </div>
+    
+    <script src="../assets/js/jquery-3.4.1.js"></script>
+   <script src="../assets/js/profile.js"></script>
+    
+    <script src="../assets/js/materialize.min.js"></script>
+</body>
+</html>
+{{end}}
