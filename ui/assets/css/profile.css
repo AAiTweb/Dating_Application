@@ -165,6 +165,7 @@ form{
     height: 20rem;
     margin: 2rem 1rem 0 3rem;
 }
-#update-submit{
-    
+form .save-change{
+    padding:1rem 0 2rem 0 ;
+    /* border: 2px solid black !important; */
 }

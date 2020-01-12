@@ -5,9 +5,9 @@ import (
 )
 
 type User struct {
-	UserId      uint
+	UserId      uint64
 	ProfPic     uint
-	ProfPicPath string
+	ProfPicPath []string
 	FirstName   string
 	LastName    string
 	Country     string

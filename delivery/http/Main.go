@@ -49,7 +49,7 @@ func main() {
 	tmpl := template.Must(template.ParseGlob("../../ui/template/*"))
 
 	fs := http.FileServer(http.Dir("../../ui/assets"))
-	mux := mux.NewRouter()
+	mux := mux.NewRouter()j
 	// mux.Handle("/assets/", http.StripPrefix("/assets/", fs))
 	mux.PathPrefix("/assets/").Handler(http.StripPrefix("/assets", fs))
 	//Questionnaire
@@ -68,6 +68,7 @@ func main() {
 	mux.HandleFunc("/user/questionnarie", questionnarieHandler.MainQuestionnarie)
 	mux.HandleFunc("/user/questionnarie/questions", questionnarieHandler.Questionnaire)
 	mux.HandleFunc("/user/profile/addUser", userProfHandler.PostUser)
+	mux.HandleFunc("/user/profile/update", userProfHandler.PutUser)
 
 	serv := http.Server{
 		Addr:    ":8080",
