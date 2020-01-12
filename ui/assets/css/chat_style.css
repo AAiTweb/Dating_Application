@@ -98,17 +98,28 @@ body  {
     /*position:fixed;*/
 }
 
+
 .section{
     display: flex;
     margin:5px;
     border: 1px solid #dedede;
     border-radius: 5px;
-    padding: 5px;
+    padding: 0px;
 
 }
-.section:hover{
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.section-right-div{
+    width:3px;
+    background-color:#800020;
+    height:inherit;
+    margin-right:2px;
+    margin-left:0px;
+    border-radius: inherit;
 }
+/*.section:hover{*/
+/*    !*background-color: rgb(250, 248, 248);*!*/
+/*    background-color:#800020;*/
+
+/*}*/
 .section_left{
     flex: 80%;
     padding: 5px;
@@ -116,8 +127,17 @@ body  {
 .section_right{
     flex: 20%;
     align-self: center;
+    display: flex;
 }
-
+.section_right img{
+    margin-top: 5px;
+    width: 31px!important;
+    height: 16px!important;
+    padding-right: 15px;
+}
+.section_right div{
+    padding-right: 15px;
+}
 .chat {
     width: 50%;
     /*height: 75px;*/

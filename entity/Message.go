@@ -8,6 +8,4 @@ type Message struct {
 	ToId int
 	Message string
 	SendTime time.Time
-	Status int
-
 }

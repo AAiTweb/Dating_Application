@@ -1,26 +1,40 @@
 let sendMessage = function(senderId,reciverId,currentUserProfilePicture) {
-    let messagefield = $("#message_field");
+    // console.log('fdfd'+currentUserProfilePicture)
+
+   let messagefield = $("#message_field")
+    // console.log()
     messagefield.keypress(function(event){
+
         let keycode = (event.keyCode ? event.keyCode : event.which);
         if(keycode == '13'){
-            let messageText = messagefield.val()
-            let jmessage = {
-                SenderId:senderId,
-                ReceiverId:reciverId,
-                MessageText:messageText
-            }
-            socket.send(JSON.stringify(jmessage))
+            let messageText = messagefield.val();
+                let jmessage = {
+                    SenderId:senderId,
+                    ReceiverId:reciverId,
+                    MessageText:messageText,
+                    SenderPicture:currentUserProfilePicture
+                }
+                socket.send(JSON.stringify(jmessage))
+
+
+
         }
     });
     let messageSubmitButton = $("#submit");
     messageSubmitButton.on("click", function () {
-        let messageText = messagefield.val()
-        let jmessage = {
-            SenderId:senderId,
-            ReceiverId:reciverId,
-            MessageText:messageText
-        }
-        socket.send(JSON.stringify(jmessage))
+       let messageText = messagefield.val();
+           let jmessage = {
+               SenderId:senderId,
+               ReceiverId:reciverId,
+               MessageText:messageText,
+               SenderPicture:currentUserProfilePicture
+           }
+
+           socket.send(JSON.stringify(jmessage))
+
+
+
+
         // socket.send(message)
     });
 }
@@ -52,10 +66,11 @@ let friendBox = function(id,uname,profile_picture,status,currentUserId,currentUs
         // console.log(profile_picture)
         let sections = $(".section");
         for(let i=0;i<sections.length;i++){
+            if ($(sections[i]).children().hasClass("section-right-div")){
+                $(sections[i]).children().removeClass("section-right-div")
+            }
             $(sections[i]).css({"background-color":"rgb(250, 248, 248)"}).attr({"class":"section"})
-            // $(section[i]).attr({"select":""})
-            // $(sections[i]).attr({"class":"selected"})
-            // sections[i].className = "selected_friend"
+
             let messageSubmitButton = $("#submit");
             let messagefield = $("#message_field");
             messageSubmitButton.unbind()
@@ -63,8 +78,11 @@ let friendBox = function(id,uname,profile_picture,status,currentUserId,currentUs
 
         }
         $(this).css({"background-color":"#ececec"}).attr({"class":"section selected"})
+        let rightSelectedDiv = $('<div class="section-right-div"></div>');
+        $(this).prepend(rightSelectedDiv);
         let div = $(".selected > .section_right > div");
         div.remove();
+
         sendMessage(currentUserId,id,currentUserProfilePicture)
         // sendMessage(currentUserId,id)
         listMessage(currentUserId,id,currentUserProfilePicture,profile_picture);
@@ -80,6 +98,8 @@ let changeSelected = function () {
     })
 
 }
+
+
 
 
 

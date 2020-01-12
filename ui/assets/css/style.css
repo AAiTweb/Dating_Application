@@ -1,27 +1,8 @@
-/* .card{
-    margin:10px;
-} */
-
-
-/* 
-button::after{
-    font-family: "Font Awesome 5 Free";
-    content:"\f111";
-    font-size: 40px;
-    
-} */
-/*.search_dashboard{*/
-/*    position: relative;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*}*/
-/*.search{*/
-/*    position: fixed;*/
-/*}*/
-/*.dashboard_container{*/
-/*    position: relative;*/
-/*    overflow: scroll;*/
-/*}*/
+.search{
+    display: inline-block !important;
+    float: right !important;
+    margin-right: 20px !important;
+}
 .card{
     overflow: hidden;
     border-radius: 10px;

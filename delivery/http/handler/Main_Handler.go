@@ -8,6 +8,5 @@ import (
 type MainHandler struct {
 	Templ *template.Template
 	Uservice user.UserService
-
 }
 

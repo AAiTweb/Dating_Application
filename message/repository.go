@@ -8,3 +8,9 @@ type MessageRepository interface {
 	DeleteMessage(message entity.Message) error
 	Messages(user1 int, user2 int)[]entity.Message
 }
+
+//type FakeMessageRepository interface {
+//	SaveMessage(message entity.Message) error
+//	DeleteMessage(message entity.Message) error
+//	Messages(user1 int, user2 int)[]entity.Message
+//}

@@ -4,6 +4,7 @@ let listFriends = function (currentUserId,currentUserProfilePicture){
         type: 'GET',
         dataType: 'json',
         success: function (data, status) {
+            console.log(data)
             let profile = $(".profile");
             profile.empty();
             data.forEach(function(item,index){
@@ -56,4 +57,40 @@ let listMessage = function(user1_id,user2_id,profile_picture1,profile_picture2){
             console.log(errorMessage);
         }
     });
+}
+
+
+let updateTime =function (id) {
+    $.ajax({
+        url:"/user/"+id+"/updatelogin",
+        type:"GET",
+        success : function (data) {
+            console.log("success");
+        }
+    })
+}
+
+let updateStatus = function (id) {
+    $.ajax({
+        url: `/user/${id}/friends`,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data, status) {
+            data.forEach(function(item,index){
+               let user =  $("#"+item.FriendId+" .section_right img")
+                switch(item.UserStatus){
+                    case "offline":
+                        user.attr("src","")
+                        break;
+                    case "online":
+                        user.attr("src",`../assets/images/iconfinder_status_46254.ico`)
+                        break;
+                }
+            });
+        },
+        error: function (jqXhr, textStatus, errorMessage) {
+            // console.log("hello");
+        }
+    });
+
 }
