@@ -1,0 +1,160 @@
+{{define "user_profile_body.layout"}}
+
+
+<div class="row body ">
+    <div class="col s12">
+        <ul class="tabs">
+            <li class="tab col s6"><a href="#about">ABOUT</a></li>
+            <li class="tab col s6"><a href="#photos">PHOTOS</a></li>
+            <!-- <li class="tab col s4"><a href="#questions">QUESTIONS</a></li> -->
+        </ul> 
+    </div>
+   
+
+    <div id="about" class="col s12 ">
+        <div class="row tab-content">
+            <!-- <div class="col s5">
+                <div class="row">
+                    <div>
+                        <h5>My self-summary</h5>
+                        <div>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus et mollitia, voluptate accusantium exercitationem quod enim optio consequatur magnam recusandae laudantium ullam nostrum facilis non, molestias blanditiis sunt consequuntur corrupti.
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae illum aspernatur accusamus impedit optio libero, dolores voluptates consequuntur expedita repudiandae minus accusantium nobis distinctio aliquam perspiciatis illo autem ad! Alias!
+                                
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <h5>What i'm doing with my life</h5>
+                        <div>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, culpa nobis cum explicabo, id tenetur blanditiis voluptates corrupti vero eius beatae, natus voluptatibus ut consequatur laudantium praesentium mollitia. Velit, adipisci.
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident id doloribus quos amet quisquam alias, autem, mollitia, corporis nam aspernatur voluptatum et deleniti delectus facere harum? Dolorem voluptate nisi repudiandae.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div>
+                        <h5>I'm really good at</h5>
+                        <div>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis sunt asperiores delectus illo. Laudantium quae veniam quos temporibus asperiores officiis et. Fugit culpa minima quibusdam voluptates optio laudantium dolores quae!
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat sequi nisi eligendi molestiae ea, repellendus nihil necessitatibus dolor tempore beatae voluptas consectetur fuga provident quo officia unde exercitationem illo explicabo.
+                            </p>
+                        </div>
+                    </div>
+    
+                </div>
+            </div> -->
+
+            <div class="col s5 detail ">
+                <div class="detail-header">
+                    <h5>My details</h5>
+                </div>
+                <div class="divider"></div>
+                <div class="row ">
+                    <div class="col s4 grey-text text-darken-2">
+                        <p class="">Full Name</p>
+                    </div>
+                    <div class="col s4">
+                        <p>{{.FirstName}}   {{.LastName}}</p>
+                    </div>
+
+                </div>
+                <div class="divider"></div>
+                <div class="row  ">
+                    <div class="col s4 grey-text text-darken-2 ">
+                        <p class="">Country</p>
+                    </div>
+                    <div class="col s4">
+                        <p>{{.Country}}</p>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+                <div class="row">
+                    <div class="col s4 grey-text text-darken-2">
+                        <p>City</p>
+                    </div>
+                    <div class="col s4">
+                        <p>{{.City}}</p>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="row">
+                    <div class="col s4 grey-text text-darken-2">
+                        <p>Age</p>
+                    </div>
+                    <div class="col s4">
+                        <p>{{.Age}}</p>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="row">
+                    <div class="col s4 grey-text text-darken-2">
+                        <p>Sex</p>
+                    </div>
+                    <div class="col s4">
+                        <p>{{.Sex}}</p>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="row">
+                    <div class="col s4 grey-text text-darken-2">
+                        <p>Bio</p>
+                    </div>
+                    <div class="col s4">
+                        <p>{{.Bio}}</p>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                
+                <!-- <div class="row">
+                    <div class="col s4 grey-text text-darken-2">
+                        <p>Smoke</p>
+                    </div>
+                    <div class="col s4">
+                        <p>No</p>
+                    </div>
+                </div>
+                <div class="divider"></div> -->
+
+
+            </div>
+        </div>
+       
+    </div>
+    <div id="photos" class="col s12 gallery">
+        {{range .ProfPicPath}}
+        <div class="row">
+            <div class="col s4">
+                <img src="../assets/images/{{.}}" alt="">
+            </div>
+            <div class="col s4">
+                <img src="../assets/images/{{.}}" alt="">
+            </div>
+            <div class="col s4">
+                <img src="../assets/images/{{.}}" alt="">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s4">
+                <img src="../assets/images/{{.}}" alt="">
+            </div>
+            <div class="col s4">
+                <img src="../assets/images/{{.}}" alt="">
+            </div>
+            <div class="col s4">
+                <img src="../assets/images/{{.}}" alt="">
+            </div>
+        </div>
+        {{end}}
+    </div>
+   
+</div>
+
+{{end}}

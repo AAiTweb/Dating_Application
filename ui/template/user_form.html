@@ -1,0 +1,57 @@
+{{define "form"}}
+<div class="row">
+    <div class="col s5">
+        <dic class="input-field">
+            <label for="fName">First Name</label>
+            <input type="hidden" name="id" value="{{ .UserId}}" />
+            <input type="text" name="fName" id="fName">
+        </dic>
+    </div>
+
+    <div class="col s5 offset-s2">
+        <dic class="input-field">
+            <label for="lName">Last Name</label>
+            <input type="text" name="lName" id="lName">
+        </dic>
+    </div>
+</div>
+<div class="row">
+    <div class="col s5">
+        <dic class="input-field">
+            <label for="country">Country</label>
+            <input type="text" name="country" id="country">
+        </dic>
+    </div>
+
+    <div class="col s5 offset-s2">
+        <dic class="input-field">
+            <label for="city">City</label>
+            <input type="text" name="city" id="city">
+        </dic>
+    </div>
+</div>
+<div class="row">
+    <div class="col s5">
+        <dic class="input-field">
+            <label for="dob">Date of birth</label>
+            <input type="text" name="dob" id="dob" class="datepicker">
+        </dic>
+    </div>
+
+    <div class="col s5 offset-s2">
+        <dic class="input-field">
+            <label for="sex">Sex</label>
+            <input type="text" name="sex" id="sex">
+        </dic>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12 s5 ">
+        <div class="input-field">
+            <label for="bio">Your Bio</label>
+           <textarea name="bio" id="bio" cols="30" rows="10" class="materialize-textarea"></textarea>
+        </div>
+    </div>
+</div>
+
+{{end}}
