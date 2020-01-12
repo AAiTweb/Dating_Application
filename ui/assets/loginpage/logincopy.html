@@ -1,0 +1,190 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="This group collects informations considering the dark web seriously">
+    <link rel="stylesheet" type="text/css" href="./assets/css/login_copy_style.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="./assets/css/materialize.min.css" media="screen,projection" />
+
+    <title>Signin
+    </title>
+</head>
+
+<body>
+
+<!-- Login form -->
+<div class="contianer" id="container">
+    <div class=" form_container Signin_area">
+        <div class="form">
+            <h3 class="Signin_text">Sign in</h3>
+            <p>Enter your username and password</p>
+            <form action="/validate" method="POST" name="sign_in" enctype="multipart/form-data">
+                <div class="textbox_field">
+                    <input required class="validate" name="Lusername" type="text" id="username" placeholder="Username">
+                </div>
+                <div class="textbox_field">
+                    <input required type="password" class="password_field" id="password_R" name="Lpassword"
+                           placeholder="Password">
+                </div>
+                <p class="error">{{.}}</p>
+                <div class="btn-container">
+                    <button name="signin" class="waves-effect btn">Sign in</button>
+                </div>
+            </form>
+            <p><a href="#" class="forget_password">forgot password?</a></p>
+        </div>
+    </div>
+    <!-- signup form -->
+    <div class="form_container login_area">
+        <div class="form">
+            <h3 class="login_text">Create Account</h3>
+            <form action="signup" id="signup_form" method="POST">
+                <div class="textbox_field">
+                    <input required name="f_username" class="name_field" type="text" id="name_R" placeholder="Username">
+                    <input required name="f_email" class="name_field" type="email" id="email" placeholder="email">
+                </div>
+                <div class="textbox_field">
+                    <input required type="password" class="password_field" id="password_R" name="f_password"
+                           placeholder="Password">
+                    <input required type="password" class="confirm_password_field" id="confirm_password_R"
+                           name="confirm_f_password" placeholder="Confirm password">
+                </div>
+                <p class="error">{{.}}</p>
+                <div class="btn-container">
+                    <button class="waves-effect btn">Sign up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h3>Welcome Back!</h3>
+                <p>
+                    To keep connected with us please login with your personal info
+                </p>
+                <button class="ghost" id="signIn">Sign up</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h3>Hello, Friend!</h3>
+                <p>Enter your personal details and start journey with us</p>
+                <button class="ghost" id="signUp">Sign in</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="content">
+    <div class="row details">
+        <div class="col s4">
+            <img src="./assets/icons/time.png" class="img-circle" alt="Fast">
+            <p>
+            <h5>Faster browsing experiance</h5> We do care for the time you waste.
+            Here chat into the wee hours of the night if you'd like.
+            </p>
+        </div>
+        <div class="col s4">
+            <img src="./assets/icons/heart.png" class="img-circle" alt="Fun">
+            <p>
+            <h5>Dating has never been so fun</h5>
+            Here we make it easy to meet folks and feel things out before you try.
+            </p>
+        </div>
+        <div class="col s4">
+            <img src="./assets/icons/secured.png" class="img-circle" alt="secure">
+            <p>
+            <h5> side to side encripted service</h5> and your privacy is protected to the limit.
+            It can be rough out there in the wild.
+            </p>
+        </div>
+    </div>
+    <div class="slider">
+        <ul class="slides">
+            <li>
+                <img src="./assets/images/online love 2.jpg" alt="Online dating">
+                <p>Find your lover here!</p>
+            </li>
+
+            <li>
+                <img src="./assets/images/matching.jpg" alt="First date">
+                <h4>Lorem Ipsum</h4>
+                <p style="color: #ffffff;">Best matching algorithm</p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<footer id="footer" class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col s4">
+                <!-- <img height="150px" src="./icons/ManCrunch-App-Icon.png"> -->
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est assumenda quaerat provident, velit
+                    perferendis maxime ea dolore vero. Inventore nam aspernatur voluptatem, fugit repellat ad non
+                    obcaecati cum laboriosam iure!</p>
+                <!-- <p><a id="terms" class="modal-trigger" href="#popup">Terms and conditions</a></p> -->
+                <div id="popup" class="modal">
+                    <div class="modal-content">
+                        <h4>Terms and conditions</h4>
+                        <p>Help protect your website and its users with clear and fair website terms and conditions.
+                            These terms and conditions for a website set out key issues such as acceptable use,
+                            privacy,
+                            cookies, registration and passwords, intellectual property, links to other sites,
+                            termination and disclaimers of responsibility. Terms and conditions are used and
+                            necessary
+                            to protect a website owner from liability of a user relying on the information or the
+                            goods
+                            provided from the site then suffering a loss</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Disagree</a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col l7 s12 grid">
+                <ul>
+                    <li><a href="#"><img src="./assets/icons/emails/png/001-user.png"></a></li>
+                    <li><a href="#"> <img src="./assets/icons/emails/png/002-mail-4.png"></a></li>
+                    <li><a href="#"> <img src="./assets/icons/emails/png/010-paper-plane.png"></a></li>
+                </ul>
+                <ul>
+                    <li><a href="#"><img src="./assets/icons/emails/png/001-user.png"></a></li>
+                    <li><a href="#"> <img src="./assets/icons/emails/png/002-mail-4.png"></a></li>
+                    <li><a href="#"> <img src="./assets/icons/emails/png/010-paper-plane.png"></a></li>
+                </ul>
+                <ul>
+                    <li>
+                        <p><a href="#">Privacy policy</a></p>
+                    </li>
+                    <li>
+                        <p><a id="terms" class="modal-trigger" href="#popup">Terms and conditions</a></p>
+                    </li>
+                    <li>
+                        <p><a href="#">Help</a></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="./assets/js/login_slide.js"></script>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+
+<!--JavaScript at end of body for optimized loading-->
+<script type="text/javascript" src="./assets/js/materialize.min.js"></script>
+<script type="text/javascript" src="./assets/js/javascript.js"></script>
+
+</body>
+
+</html>
