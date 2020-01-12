@@ -7,3 +7,4 @@ type MessageService interface {
 	DeleteMessage(message entity.Message) error
 	Messages(user1 int, user2 int)[]entity.Message
 }
+

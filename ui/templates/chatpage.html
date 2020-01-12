@@ -8,41 +8,24 @@
     <link rel="stylesheet" href="../assets/css/materialize.min.css">
     <link rel="stylesheet" href="../assets/iconfont/material-icons.css">
     <link rel="stylesheet" href="../assets/css/chat_style.css">
+    <link rel="stylesheet" href="../assets/emojionearea-master/dist/emojionearea.min.css"/>
+
     <title>Chating Page</title>
 
 </head>
 
-<body>
-
-<nav class="nav-wraper   navigation">
-    <div class="container">
-        <a href="#" class="brand-logo "><img class="logo" src="d2.png"> </a>
-        <ul class="centre  ">
-            <li class="list-1"><a href="#">Home</a></li>
-            <li class="list-1"><a href="#">About</a></li>
-            <li class="list-1"><a href="#">Chat</a></li>
-            <li class="list-1"><a href="#">Profile</a></li>
-        </ul>
-        <ul class="right">
-            <li class=" list-2"><a href="#"><i class="material-icons ">notifications</i></a></li>
-            <li class=" list-2"><a href="#"><i class="material-icons ">settings</i></a></li>
-
-        </ul>
-    </div>
-</nav>
-
+{{ template "navbar"}}
 
 <dive class="container">
 
     <div class="row">
         <div class="col s12 m12 l3  ">
-            <form>
                 <div class="input-field">
                     <input id="search" type="search" required>
                     <label for="search"><i class="material-icons">search</i></label>
                 </div>
-            </form>
             <div class="profile">
+
                 <div class="section selected-user">
                     <div class="section_left">
                         <img class="circle-responsive-img" src="../assets/images/profil.png">
@@ -187,12 +170,21 @@
 
             </div>
             <div class="input-field col s12 ">
-                <i class="material-icons prefix">mode_edit</i>
-                <textarea id="message_field" class="materialize-textarea"></textarea>
-                <label for="message_field">Message</label>
-                <button id="submit" class=" right waves-effect waves-light btn red darken-4 ">
-                    <i class="material-icons right">send</i>send</button>
+
+                    <div>
+                        <i class="material-icons prefix">mode_edit</i>
+                        <!--class="materialize-textarea"-->
+                        <textarea id="message_field" class="materialize-textarea" ></textarea>
+                        <label for="message_field">Message</label></div>
+
+
+
+
+
+
             </div>
+                <button id="submit" class=" right waves-effect waves-light btn" style="background-color: #800020; margin: 5px 2px 0px 2px">
+                    <i class="material-icons right">send</i>send</button>
         </div>
     </div>
 </dive>
@@ -201,19 +193,20 @@
 <!-- Compiled and minified JavaScript -->
 <script src="../assets/js/jquery-3.4.1.js"></script>
 <script src="../assets/js/materialize.min.js"></script>
+
 <script src="../assets/js/chatpagejs/chat_handler.js"></script>
 <script src="../assets/js/chatpagejs/profile_handler.js"></script>
 <script src="../assets/js/chatpagejs/Apicall.js"></script>
 <script src="../assets/js/chatpagejs/socket.js"></script>
+<script src="../assets/js/chatpagejs/search.js"></script>
+<script src="../assets/emojionearea-master/dist/emojionearea.min.js"></script>
+
 
 <script>
     $(document).ready(function () {
-
-        let currentUserId = 1;
-        let currentUserProfilePicture = "profil.png";
-        listFriends(currentUserId,currentUserProfilePicture);
-        sendMessage();
-
+        $('.sidenav').sidenav();
+        var navbarFixed = $('.navbar-fixed nav');
+        // $("#message_field").emojioneArea();
     });
 
 

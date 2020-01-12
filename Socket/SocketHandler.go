@@ -1,83 +1,78 @@
 package Socket
 
 import (
-	"fmt"
-	"github.com/Eyosi-G/Dating_Application/message/service"
+	"encoding/json"
+	"github.com/Eyosi-G/Dating_Application/ChatApi"
+	_ "github.com/Eyosi-G/Dating_Application/entity"
+	"github.com/Eyosi-G/Dating_Application/message"
+	"github.com/Eyosi-G/Dating_Application/session"
 	"github.com/gorilla/websocket"
 	"log"
+	_ "log"
 	"net/http"
-	"strconv"
 	"time"
 )
 
 type SocketHandler struct {
 	Upgrader websocket.Upgrader
 	Conncetions map[int]*websocket.Conn // id and conn
-	MService service.MessageService
+	MessageService message.MessageService
+	//MService service.MessageService
 }
 
-//type of requests --- delete,add,messages
+func NewSocketHandler(upgrader websocket.Upgrader, connections map[int]*websocket.Conn, messageservice message.MessageService)SocketHandler{
+	return SocketHandler{upgrader,connections, messageservice}
+}
 
-
-func (sh *SocketHandler) Handler(w http.ResponseWriter, r *http.Request){
-	conn,err := sh.Upgrader.Upgrade(w,r,nil)
+func (s *SocketHandler)Socket(w http.ResponseWriter, r *http.Request)  {
+	s.Upgrader.CheckOrigin  = func(r *http.Request) bool {
+		return true;
+	}
+	conn,err := s.Upgrader.Upgrade(w,r,nil)
 	if err!=nil{
-		log.Println(err)
 		return
 	}
-	id ,_ := strconv.ParseInt(r.FormValue("id"),0,0)
-	sh.Conncetions[int(id)] = conn
+	claims := session.GetSessionData(w,r)
+
+	log.Println(claims.Id)
+	s.Conncetions[claims.Id] = conn
 	for{
 
-	}
+		messageType, message,_ := conn.ReadMessage()
 
-	//log.Print(sh.Conncetions)
-	//sh.readMessage(conn)
-}
-func (sh *SocketHandler) readMessage(c *websocket.Conn){
-	for{
-		message := &UserRequest{}
-
-		err := c.ReadJSON(message)
-		if err != nil{
-			return
-		}
-		//store it in database
-		switch message.Type {
-		case "ADD":
-			message.Message.SendTime = time.Now()
-			err = sh.MService.SaveMessage(message.Message)
-			if err!=nil{
-				return
-			}
-
-			err1  := sh.Conncetions[message.Message.ToId].WriteJSON(message.Message)
-			if err1 != nil{
-				sh.Conncetions[message.Message.FromId].WriteJSON(nil)
-				return
-			}
-
-			err2 := sh.Conncetions[message.Message.FromId].WriteJSON(message.Message)
-			if err2 != nil{
-				return
-			}
-		//case "DELETE":
-		//	err = sh.MService.DeleteMessage(message.Message)
-		//	if err==nil{
-		//		messages = UserResponse{1,}
+		jmessage := struct {
+			SenderId int
+			ReceiverId int
+			MessageText string
+			SenderPicture string
+			Time string
+		}{}
+		json.Unmarshal(message,&jmessage)
+		//msgs := entity.Message{
+		//	FromId: jmessage.SenderId,
+		//	ToId:jmessage.ReceiverId,
+		//	 Message:jmessage.MessageText,
+		//	SendTime:time.Now(),
 		//	}
-		case "MESSAGES":
-			fmt.Println(message.Limit)
-			msgs,err := sh.MService.Messages(message.Message.FromId,message.Message.ToId)
-			if err!=nil{
-				return
-			}
-			err  = sh.Conncetions[message.Message.FromId].WriteJSON(msgs)
-			if err != nil{
-				return
-			}
+		//	s.MessageService.SaveMessage(msgs)
+
+
+		jmessage.Time = ChatApi.MessageSendTimeChanger(time.Now())
+		messageByte,_ := json.Marshal(jmessage)
+
+		//conn.WriteMessage(messageType,messageByte)
+		log.Println(s.Conncetions)
+		if _,ok := s.Conncetions[jmessage.SenderId]; ok{
+			s.Conncetions[jmessage.SenderId].WriteMessage(messageType,messageByte)
+		}
+		if _,ok := s.Conncetions[jmessage.ReceiverId];ok{
+			s.Conncetions[jmessage.ReceiverId].WriteMessage(messageType,messageByte)
+
 		}
 
 
 	}
+
 }
+
+
