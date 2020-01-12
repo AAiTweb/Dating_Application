@@ -11,10 +11,18 @@ type FakeApiRepository struct {
 	LoginDetails *[]LoginDetail
 }
 
+func NewFakeApiRepository (fakefriends *map[int][]Models.FriendLoadInformation,logindetails *[]LoginDetail)FakeApiRepository{
+
+	return FakeApiRepository{fakefriends,logindetails}
+}
+
 func (f FakeApiRepository) LoadFriendInformation(id int) ([]Models.FriendLoadInformation, error) {
+	//log.Println(id)
 	if data,ok := (*f.FakeFriends)[id];ok{
+
 				return data,nil
 			}
+
 			return nil,errors.New("Invalid Id")
 }
 
@@ -29,9 +37,7 @@ func (f FakeApiRepository) UpdateLoginInformation(id int) error {
 		return errors.New("Invalid Id")
 }
 
-func NewFakeApiRepository (fakefriends *map[int][]Models.FriendLoadInformation,logindetails *[]LoginDetail)FakeApiRepository{
-	return FakeApiRepository{fakefriends,logindetails}
-}
+
 
 
 

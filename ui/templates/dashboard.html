@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="../assets/fontawesome/css/all.min.css">
 
     <link rel="stylesheet" href="../assets/css/style.css" />
-  </head>
-
+  </head>-->
+  {{ template "navbar"}}
   <body>
   <div style="">
     <div class="input-field search">
@@ -28,7 +28,7 @@
               <div class="card-image">
                 <img
                   height="200px"
-                  src="https://images.freeimages.com/images/large-previews/807/natal-sofia-1-1431304.jpg"
+                  src="../assets/images/default.jpg"
                 />
                 
               </div>
@@ -163,35 +163,12 @@
     <script src="../assets/js/materialize.min.js"></script>
     <script src="../assets/js/app.js"></script>
     <script src="../assets/js/homepagejs/DivCard.js"></script>
+    <script src="../assets/js/homepagejs/HomeApiCall.js"></script>
     <script>
       //wleU3qFilApndDvilF0b
       $(function() {
-        $("select").formSelect();
-        M.updateTextFields();
-
-        //declaring variables
-        let selectedValue;
-        let input;
-
-        $("select").on("change", function() {
-          selectedValue = $(this).val();
-          switch (selectedValue){
-            case "1":
-               document.getElementById("first_name").setAttribute("placeholder","User Name");               
-               break;
-              case "2":
-               document.getElementById("first_name").setAttribute("placeholder","Country Name");
-                break;
-          }
-          if (input != null) {
-            search(selectedValue, input);
-          }
-        });
-
-        $("#first_name").on("input", function(e) {
-          input = e.target.value.toLowerCase();
-          search(selectedValue, input);
-        });
+          $('.sidenav').sidenav();
+          var navbarFixed = $('.navbar-fixed nav');
       });
     </script>
   </body>

@@ -34,7 +34,10 @@ func (Apihandler *APIHandler)GetFriends(w http.ResponseWriter, r *http.Request){
 	id, _ := strconv.ParseInt(mux.Vars(r)["id"],0,0)
 	friendsInformation,_ :=Apihandler.apiService.LoadFriendInformation(int(id))
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
-	json.NewEncoder(w).Encode(friendsInformation)
+	w.WriteHeader(200)
+	js,_ := json.Marshal(friendsInformation)
+	w.Write(js)
+	//json.NewEncoder(w).Encode(friendsInformation)
 }
 func (Apihandler *APIHandler)GetMessages(w http.ResponseWriter, r *http.Request){
 	    if r.Method == http.MethodGet{
@@ -62,6 +65,7 @@ func (Apihandler *APIHandler)GetMessages(w http.ResponseWriter, r *http.Request)
 			}
 
 			w.Header().Set("Content-Type", "application/json; charset=utf-8")
+			w.WriteHeader(200)
 			json.NewEncoder(w).Encode(json_messages)
 		}
 
