@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type User struct {
+type UserPro struct {
 	UserId      uint64
 	ProfPic     uint
 	ProfPicPath []string

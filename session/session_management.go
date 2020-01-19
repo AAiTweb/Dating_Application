@@ -1,7 +1,7 @@
 package session
 
 import (
-	"github.com/Eyosi-G/Dating_Application/entity"
+	"github.com/biniyam112/TheDatingApp/Dating_Application/entity"
 	"github.com/dgrijalva/jwt-go"
 	"net/http"
 	"time"

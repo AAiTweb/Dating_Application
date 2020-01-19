@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"errors"
 
-	"github.com/betse/Dating_Application-master/entity"
+	"github.com/biniyam112/TheDatingApp/Dating_Application/entity"
 )
 
 type QuestionnarieRespositoryImpl struct {
@@ -20,8 +20,8 @@ func (qri *QuestionnarieRespositoryImpl) getAnswers(entity.Answer) {
 func (qri *QuestionnarieRespositoryImpl) PostAnswers(userChoice *entity.UserChoice) (*entity.UserChoice, error) {
 	// usrChoice := userChoice
 	
-	_, err := qri.Conn.Exec("INSERT INTO dating_app.user_own_answer(user_own_id,own_question_id,own_choice_answer_id) values($1,$2,$3) ", userChoice.UserId, userChoice.QuestionId, userChoice.OwnAnswerId)
-	_, err = qri.Conn.Exec("INSERT INTO dating_app.user_wish_answer(user_wish_id,wish_question_id,wish_choice_answer_id) values($1,$2,$3) ", userChoice.UserId, userChoice.QuestionId, userChoice.WishAnswerId)
+	_, err := qri.Conn.Exec("INSERT INTO user_own_answer(user_own_id,own_question_id,own_choice_answer_id) values($1,$2,$3) ", userChoice.UserId, userChoice.QuestionId, userChoice.OwnAnswerId)
+	_, err = qri.Conn.Exec("INSERT INTO user_wish_answer(user_wish_id,wish_question_id,wish_choice_answer_id) values($1,$2,$3) ", userChoice.UserId, userChoice.QuestionId, userChoice.WishAnswerId)
 	if err != nil {
 		return nil, err
 	}
@@ -30,18 +30,18 @@ func (qri *QuestionnarieRespositoryImpl) PostAnswers(userChoice *entity.UserChoi
 
 func (qri *QuestionnarieRespositoryImpl) Questions() ([]entity.Questionnarie, []entity.Answer, error) {
 	query := `SELECT
-	dating_app.questionnaires.questionnaire_id,
-	dating_app.questionnaires.user_own_questions,
-	dating_app.questionnaires.user_wish_questions,
-	dating_app.questionnaire_choices.choice_id,
-	dating_app.questionnaire_choices.choice_questionnaire_id,
-	dating_app.questionnaire_choices.choice
+	questionnaires.questionnaire_id,
+	questionnaires.user_own_questions,
+	questionnaires.user_wish_questions,
+	questionnaire_choices.choice_id,
+	questionnaire_choices.choice_questionnaire_id,
+	questionnaire_choices.choice
 
 	
 	
 			FROM
-			dating_app.questionnaires
-			INNER JOIN 	dating_app.questionnaire_choices ON dating_app.questionnaires.questionnaire_id=dating_app.questionnaire_choices.choice_questionnaire_id;
+			questionnaires
+			INNER JOIN 	questionnaire_choices ON questionnaires.questionnaire_id=questionnaire_choices.choice_questionnaire_id;
 		`
 	// query2 := "SELECT * FROM dating_app.questionnaires; "
 

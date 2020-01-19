@@ -1,7 +1,7 @@
 package questionnarie
 
 import (
-	"github.com/betse/Dating_Application-master/entity"
+	"github.com/biniyam112/TheDatingApp/Dating_Application/entity"
 )
 
 type QuestionnarieService interface {

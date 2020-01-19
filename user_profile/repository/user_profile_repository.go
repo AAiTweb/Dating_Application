@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/betse/Dating_Application-master/entity"
+	"github.com/biniyam112/TheDatingApp/Dating_Application/entity"
 )
 
 type UserProfileRepositoryImpl struct {
@@ -16,16 +16,16 @@ type UserProfileRepositoryImpl struct {
 func NewUserProfileRepoImpl(conn *sql.DB) *UserProfileRepositoryImpl {
 	return &UserProfileRepositoryImpl{conn: conn}
 }
-func (pfl *UserProfileRepositoryImpl) UsersProfile() ([]entity.User, error) {
-	query := `SELECT * FROM dating_app.user_profile`
+func (pfl *UserProfileRepositoryImpl) UsersProfile() ([]entity.UserPro, error) {
+	query := `SELECT * FROM user_profile`
 	rows, err := pfl.conn.Query(query)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	users := []entity.User{}
+	users := []entity.UserPro{}
 	for rows.Next() {
-		user := entity.User{}
+		user := entity.UserPro{}
 		err = rows.Scan(&user.UserId, &user.FirstName, &user.LastName, &user.Country, &user.City, &user.Bio, &user.Dob, &user.ProfPic, &user.Sex)
 		if err != nil {
 			return nil, err
@@ -36,10 +36,10 @@ func (pfl *UserProfileRepositoryImpl) UsersProfile() ([]entity.User, error) {
 	return users, nil
 
 }
-func (pfl *UserProfileRepositoryImpl) UserProfile(id uint) (*entity.User, error) {
-	query := `SELECT * FROM dating_app.user_profile WHERE profile_id=$1`
+func (pfl *UserProfileRepositoryImpl) UserProfile(id uint) (*entity.UserPro, error) {
+	query := `SELECT * FROM user_profile WHERE profile_id=$1`
 
-	galleryQuery := `SELECT picture_path FROM dating_app.gallery WHERE picture_owner_id=$1`
+	galleryQuery := `SELECT picture_path FROM gallery WHERE picture_owner_id=$1`
 	// 	query := `
 	// 	SELECT  dating_app.user_profile.profile_user_id,
 	// 			dating_app.user_profile.first_name,
@@ -79,7 +79,7 @@ func (pfl *UserProfileRepositoryImpl) UserProfile(id uint) (*entity.User, error)
 		return nil, err
 	}
 
-	// user := []entity.User{}
+	// user := []entity.UserPro{}
 	gImages := []string{}
 
 	rows, err := pfl.conn.Query(galleryQuery, id)
@@ -101,8 +101,8 @@ func (pfl *UserProfileRepositoryImpl) UserProfile(id uint) (*entity.User, error)
 
 	// log.Println(user)
 
-	// user := &entity.User{}
-	user := &entity.User{anonymousUser.UserId, anonymousUser.ProfPic, gImages, anonymousUser.FirstName, anonymousUser.LastName, anonymousUser.Country, anonymousUser.City, anonymousUser.Bio, anonymousUser.Sex, anonymousUser.Dob}
+	// user := &entity.UserPro{}
+	user := &entity.UserPro{anonymousUser.UserId, anonymousUser.ProfPic, gImages, anonymousUser.FirstName, anonymousUser.LastName, anonymousUser.Country, anonymousUser.City, anonymousUser.Bio, anonymousUser.Sex, anonymousUser.Dob}
 
 	if err != nil {
 		return user, err
@@ -110,7 +110,7 @@ func (pfl *UserProfileRepositoryImpl) UserProfile(id uint) (*entity.User, error)
 	return user, nil
 
 }
-func (pfl *UserProfileRepositoryImpl) UpdateProfile(user *entity.User) (*entity.User, error) {
+func (pfl *UserProfileRepositoryImpl) UpdateProfile(user *entity.UserPro) (*entity.UserPro, error) {
 	_, err := pfl.conn.Exec("UPDATE dating_app.gallery SET picture_owner_id=$1,picture_path=$2", user.UserId, user.ProfPicPath[0])
 
 	picId := pfl.conn.QueryRow("SELECT picture_id FROM dating_app.gallery WHERE picture_owner_id = $1", user.UserId)
@@ -127,25 +127,25 @@ func (pfl *UserProfileRepositoryImpl) UpdateProfile(user *entity.User) (*entity.
 	return user, nil
 }
 
-func (pfl *UserProfileRepositoryImpl) AddProfile(user *entity.User) (*entity.User, error) {
+func (pfl *UserProfileRepositoryImpl) AddProfile(user *entity.UserPro) (*entity.UserPro, error) {
 
 	default_picture_path := "placeholder.png"
 	// log.Println("add user")
-	_, err := pfl.conn.Exec("INSERT INTO dating_app.gallery(picture_owner_id,picture_path) values($1,$2)", user.UserId, default_picture_path)
+	_, err := pfl.conn.Exec("INSERT INTO gallery(picture_owner_id,picture_path) values($1,$2)", user.UserId, default_picture_path)
 
 	if err != nil {
 		log.Println(err)
 		return nil, err
 	}
 	// log.Println("added")
-	picId := pfl.conn.QueryRow("SELECT picture_id FROM dating_app.gallery WHERE picture_owner_id = $1", user.UserId)
+	picId := pfl.conn.QueryRow("SELECT picture_id FROM gallery WHERE picture_owner_id = $1", user.UserId)
 
 	err = picId.Scan(&user.ProfPic)
 	if err != nil {
 		return nil, err
 	}
 
-	_, err = pfl.conn.Exec("INSERT INTO dating_app.user_profile(profile_user_id,first_name,second_name,country,city,bio,dof,profile_picture,sex) values($1,$2,$3,$4,$5,$6,$7,$8,$9)", user.UserId, user.FirstName, user.LastName, user.Country, user.City, user.Bio, user.Dob, user.ProfPic, user.Sex)
+	_, err = pfl.conn.Exec("INSERT INTO user_profile(profile_user_id,first_name,second_name,country,city,bio,dof,profile_picture,sex) values($1,$2,$3,$4,$5,$6,$7,$8,$9)", user.UserId, user.FirstName, user.LastName, user.Country, user.City, user.Bio, user.Dob, user.ProfPic, user.Sex)
 	// log.Println("added")
 	if err != nil {
 		log.Println(err)
@@ -155,7 +155,7 @@ func (pfl *UserProfileRepositoryImpl) AddProfile(user *entity.User) (*entity.Use
 }
 
 func (pfl *UserProfileRepositoryImpl) DeleteProfile(id uint) (uint, error) {
-	_, err := pfl.conn.Exec("DELETE FROM dating_app.user_profile WHERE profile_user_id=$1", id)
+	_, err := pfl.conn.Exec("DELETE FROM user_profile WHERE profile_user_id=$1", id)
 	if err != nil {
 		return 0, err
 	}

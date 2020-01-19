@@ -2,7 +2,7 @@ package repository
 
 import (
 	"database/sql"
-	"github.com/Eyosi-G/Dating_Application/entity"
+	"github.com/biniyam112/TheDatingApp/Dating_Application/entity"
 )
 
 

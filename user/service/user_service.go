@@ -1,19 +1,19 @@
 package service
 
 import (
-	"github.com/Eyosi-G/Dating_Application/entity"
-	"github.com/Eyosi-G/Dating_Application/user/repository"
+	"github.com/biniyam112/TheDatingApp/Dating_Application/entity"
+	"github.com/biniyam112/TheDatingApp/Dating_Application/user/repository"
 )
 
 type UserServiceInstance struct {
 	RepositoryInstance repository.UserRepositoryInstance
 }
-func RegisterUser(user entity.User)bool{
+func RegisterUser(user entity.UserPro)bool{
 	return true
 }
-func DeleteUser(user entity.User)bool{
+func DeleteUser(user entity.UserPro)bool{
 	return true
 }
-func UpdateUser(user entity.User)bool{
+func UpdateUser(user entity.UserPro)bool{
 	return true
 }

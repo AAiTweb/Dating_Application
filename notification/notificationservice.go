@@ -1,9 +1,9 @@
 package notification
 
-import "github.com/biniyam112/Dating_Application/entity"
+import "github.com/biniyam112/TheDatingApp/Dating_Application/entity"
 
 type NotifService interface {
-	AddNotification(user entity.User) error
-	AcceptNotification(user entity.User) error
-	RejectNotification(user entity.User) error
+	AddNotification(user entity.UserPro) error
+	AcceptNotification(user entity.UserPro) error
+	RejectNotification(user entity.UserPro) error
 }

@@ -1,9 +1,9 @@
 package user
 
-import "github.com/Eyosi-G/Dating_Application/entity"
+import "github.com/biniyam112/TheDatingApp/Dating_Application/entity"
 
 type UserRepository interface {
-	RegisterUser(user entity.User)bool
-	DeleteUser(user entity.User)bool
-	UpdateUser(user entity.User)bool
+	RegisterUser(user entity.UserPro)bool
+	DeleteUser(user entity.UserPro)bool
+	UpdateUser(user entity.UserPro)bool
 }

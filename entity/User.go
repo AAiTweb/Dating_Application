@@ -1,6 +1,6 @@
 package entity
 
-type User struct {
+type User_Profile struct {
 	Id int
 	UserName,
 	Password,

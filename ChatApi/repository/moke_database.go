@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"github.com/Eyosi-G/Dating_Application/ChatApi/Models"
-	"github.com/Eyosi-G/Dating_Application/entity"
+	"github.com/biniyam112/TheDatingApp/Dating_Application/ChatApi/Models"
+	"github.com/biniyam112/TheDatingApp/Dating_Application/entity"
 	"time"
 )
 

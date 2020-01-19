@@ -17,8 +17,8 @@ import (
 
 	"html/template"
 
-	"github.com/betse/Dating_Application-master/entity"
-	"github.com/betse/Dating_Application-master/user_profile"
+	"github.com/biniyam112/TheDatingApp/Dating_Application/entity"
+	"github.com/biniyam112/TheDatingApp/Dating_Application/user_profile"
 	v2 "github.com/liamylian/jsontime/v2"
 )
 
@@ -139,7 +139,7 @@ func (uph *UserProfileHandler) PostUser(w http.ResponseWriter, r *http.Request) 
 	// 	return
 
 	// }
-	user := &entity.User{}
+	user := &entity.UserPro{}
 	length := r.ContentLength
 	body := make([]byte, length)
 	r.Body.Read(body)
@@ -160,7 +160,7 @@ func (uph *UserProfileHandler) PostUser(w http.ResponseWriter, r *http.Request) 
 
 	}
 
-	// user := &entity.User{1, 1, fName, lName, country, city, bio, sex, dob}
+	// user := &entity.UserPro{1, 1, fName, lName, country, city, bio, sex, dob}
 
 	user, err := uph.userService.AddProfile(user)
 	if err != nil {
@@ -186,7 +186,7 @@ func (uph *UserProfileHandler) PutUser(w http.ResponseWriter, r *http.Request) {
 	}
 	// r.Header.Add("Content-Type", w.FormDataContentType())
 	layoutISO := "2006-01-02"
-	user := entity.User{}
+	user := entity.UserPro{}
 	user.UserId, _ = strconv.ParseUint(r.FormValue("id"), 10, 64)
 	user.FirstName = r.FormValue("fName")
 	user.LastName = r.FormValue("lName")

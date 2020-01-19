@@ -2,22 +2,22 @@ package repository
 
 import (
 	"database/sql"
-	"github.com/Eyosi-G/Dating_Application/entity"
+	"github.com/biniyam112/TheDatingApp/Dating_Application/entity"
 )
 
 type UserRepositoryInstance struct {
 	conn *sql.DB
 }
 
-func RegisterUser(user entity.User)bool{
+func RegisterUser(user entity.UserPro)bool{
 	//actual implementation goes here
 return true
 }
-func DeleteUser(user entity.User)bool{
+func DeleteUser(user entity.UserPro)bool{
 	//actual implementation goes here
 return true
 }
-func UpdateUser(user entity.User)bool{
+func UpdateUser(user entity.UserPro)bool{
 	//actual implementation goes here
 return true
 }

@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/betse/Dating_Application-master/entity"
-	"github.com/betse/Dating_Application-master/questionnarie"
+	"github.com/biniyam112/TheDatingApp/Dating_Application/entity"
+	"github.com/biniyam112/TheDatingApp/Dating_Application/questionnarie"
 )
 
 type QuestionnaireServiceImpl struct {

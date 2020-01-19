@@ -3,8 +3,8 @@ package service
 import (
 	// "log"
 
-	"github.com/betse/Dating_Application-master/entity"
-	"github.com/betse/Dating_Application-master/user_profile"
+	"github.com/biniyam112/TheDatingApp/Dating_Application/entity"
+	"github.com/biniyam112/TheDatingApp/Dating_Application/user_profile"
 )
 
 type UserProfileServiceImpl struct {
@@ -15,14 +15,14 @@ func NewUserProfileServiceImpl(usrRepo user_profile.ProfileRepository) user_prof
 	return &UserProfileServiceImpl{userRepo: usrRepo}
 }
 
-func (ups *UserProfileServiceImpl) UserProfile(id uint) (*entity.User, error) {
+func (ups *UserProfileServiceImpl) UserProfile(id uint) (*entity.UserPro, error) {
 	user, err := ups.userRepo.UserProfile(id)
 	if err != nil {
 		return nil, err
 	}
 	return user, nil
 }
-func (ups *UserProfileServiceImpl) UsersProfile() ([]entity.User, error) {
+func (ups *UserProfileServiceImpl) UsersProfile() ([]entity.UserPro, error) {
 	users, err := ups.UsersProfile()
 	if err != nil {
 		return nil, err
@@ -30,7 +30,7 @@ func (ups *UserProfileServiceImpl) UsersProfile() ([]entity.User, error) {
 	return users, nil
 }
 
-func (ups *UserProfileServiceImpl) AddProfile(user *entity.User) (*entity.User, error) {
+func (ups *UserProfileServiceImpl) AddProfile(user *entity.UserPro) (*entity.UserPro, error) {
 	user, err := ups.userRepo.AddProfile(user)
 	if err != nil {
 		// log.Println(err)
@@ -48,7 +48,7 @@ func (ups *UserProfileServiceImpl) DeleteProfile(id uint) (uint, error) {
 	return id, nil
 
 }
-func (ups *UserProfileServiceImpl) UpdateProfile(user *entity.User) (*entity.User, error) {
+func (ups *UserProfileServiceImpl) UpdateProfile(user *entity.UserPro) (*entity.UserPro, error) {
 	user, err := ups.userRepo.UpdateProfile(user)
 	if err != nil {
 		return nil, err

@@ -1,7 +1,8 @@
 package entity
+
 type Relationship struct {
 	RelationshipId,
-	UserOneId,
-	UserTwoId,
+	SenderId,
+	RecieverId,
 	RelationShipStatus int
 }

@@ -2,10 +2,10 @@ package Socket
 
 import (
 	"encoding/json"
-	"github.com/Eyosi-G/Dating_Application/ChatApi"
-	_ "github.com/Eyosi-G/Dating_Application/entity"
-	"github.com/Eyosi-G/Dating_Application/message"
-	"github.com/Eyosi-G/Dating_Application/session"
+	"github.com/biniyam112/TheDatingApp/Dating_Application/ChatApi"
+	_ "github.com/biniyam112/TheDatingApp/Dating_Application/entity"
+	"github.com/biniyam112/TheDatingApp/Dating_Application/message"
+	"github.com/biniyam112/TheDatingApp/Dating_Application/session"
 	"github.com/gorilla/websocket"
 	"log"
 	_ "log"
