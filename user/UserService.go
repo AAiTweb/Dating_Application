@@ -3,7 +3,8 @@ package user
 import "github.com/AAiTweb/Dating_Application/entity"
 
 type UserService interface {
-	RegisterUser(user entity.UserPro) bool
-	DeleteUser(user entity.UserPro) bool
-	UpdateUser(user entity.UserPro) bool
+	RegisterUser(user entity.User) error
+	CheckLogin(user entity.User) error
+	DeleteUser(user entity.User) error
+	UpdateUser(user entity.User) error
 }
