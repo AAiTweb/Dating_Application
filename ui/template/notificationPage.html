@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <title>Notification</title>
+    <link href="../assets/materialize/css/materialize.css" type="text/css" rel="stylesheet">
+    <link href="../assets/notification/css/notificationPage.css" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+    <div>
+        <ul id="slide-out" class="sidenav">
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                        <img src="./assets/icons/emails/png/008-reply.png">
+                    </div>
+                    <a href="#userprofile"><img class="circle" src="./assets/icons/maleuser.png"></a>
+                    <a href="#username"><span class="white-text name">Biniyam112</span></a>
+                    <a href="#quote"><span class="white-text email">Here to date!</span></a>
+                </div>
+            </li>
+            <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+            <li><a href="#!">Second Link</a></li>
+            <li>
+                <div class="divider"></div>
+            </li>
+            <li><a class="subheader">Subheader</a></li>
+            <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+        </ul>
+        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+        {{range .}}
+        <div id="{{.}}">
+        <li class="divider" tabindex="-1"></li>
+        <li>
+            <a>
+                <div class="row s2 valign-wrapper">
+                    <div class="col s2">
+                        <img class="circle responsive-img" src="./assets/icons/maleuser.png">
+                    </div>
+                    <div class="col s12">
+                        <h5>{{.}}</h5>
+                        <p class="messagehighlight black-text">{{.}} has sent you request.</p><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s2">
+                        <form action="/accept">
+                            <input class="notificationField" type="text" name="sender_name" value="{{.}}"/>
+                            <button class="waves-effect waves-light btn  accept">Accept</button>
+                        </form>
+                    </div>
+                    <div class="col s2">
+                        <form action="/reject">
+                            <input class="notificationField" type="text" name="sender_name" value="{{.}}"/>
+                            <button class="waves-effect waves-light btn reject">Reject</button>
+                        </form>
+                    </div>
+                </div>
+            </a>
+        </li>
+        </div>
+        {{end}}
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="../assets/notification/js/notificationPage.js"></script>
+    <script src="../assets/materialize/js/materialize.js"></script>
+</body>
+
+</html>
