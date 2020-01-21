@@ -2,11 +2,9 @@ package repository
 
 import (
 	"database/sql"
-
+	"github.com/AAiTweb/Dating_Application/entity"
 	"log"
 	"time"
-
-	"github.com/AAiTweb/Dating_Application/entity"
 )
 
 type UserProfileRepositoryImpl struct {

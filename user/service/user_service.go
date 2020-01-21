@@ -8,12 +8,13 @@ import (
 type UserServiceInstance struct {
 	RepositoryInstance repository.UserRepositoryInstance
 }
-func RegisterUser(user entity.UserPro)bool{
+
+func RegisterUser(user entity.UserPro) bool {
 	return true
 }
-func DeleteUser(user entity.UserPro)bool{
+func DeleteUser(user entity.UserPro) bool {
 	return true
 }
-func UpdateUser(user entity.UserPro)bool{
+func UpdateUser(user entity.UserPro) bool {
 	return true
 }

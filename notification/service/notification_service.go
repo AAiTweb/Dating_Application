@@ -14,16 +14,15 @@ func NewNotifServe(repo *repository.Psqlrepo) *NotifService {
 	return &NotifService{*repo}
 }
 
-
-func (ns NotifService)AddNotification()  ([]string,error){
+func (ns NotifService) AddNotification() ([]string, error) {
 	newNotif := ns.NotifInstance
-	user_array,err := newNotif.AddNotification()
+	user_array, err := newNotif.AddNotification()
 	if err != nil {
 		fmt.Print(err)
 	}
-	return user_array,err
+	return user_array, err
 }
-func (ns NotifService)AcceptNotification(relation entity.Relationship)  error{
+func (ns NotifService) AcceptNotification(relation entity.Relationship) error {
 	newNotif := ns.NotifInstance
 	err := newNotif.AcceptNotification(ns.NotifInstance.GetName(relation.SenderId))
 	if err != nil {
@@ -31,7 +30,7 @@ func (ns NotifService)AcceptNotification(relation entity.Relationship)  error{
 	}
 	return err
 }
-func (ns NotifService)RejectNotification(relation entity.Relationship)  error{
+func (ns NotifService) RejectNotification(relation entity.Relationship) error {
 	newNotif := ns.NotifInstance
 	err := newNotif.RejectNotification(ns.NotifInstance.GetName(relation.SenderId))
 	if err != nil {

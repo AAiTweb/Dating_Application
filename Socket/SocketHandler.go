@@ -14,40 +14,40 @@ import (
 )
 
 type SocketHandler struct {
-	Upgrader websocket.Upgrader
-	Conncetions map[int]*websocket.Conn // id and conn
+	Upgrader       websocket.Upgrader
+	Conncetions    map[int]*websocket.Conn // id and conn
 	MessageService message.MessageService
 	//MService service.MessageService
 }
 
-func NewSocketHandler(upgrader websocket.Upgrader, connections map[int]*websocket.Conn, messageservice message.MessageService)SocketHandler{
-	return SocketHandler{upgrader,connections, messageservice}
+func NewSocketHandler(upgrader websocket.Upgrader, connections map[int]*websocket.Conn, messageservice message.MessageService) SocketHandler {
+	return SocketHandler{upgrader, connections, messageservice}
 }
 
-func (s *SocketHandler)Socket(w http.ResponseWriter, r *http.Request)  {
-	s.Upgrader.CheckOrigin  = func(r *http.Request) bool {
-		return true;
+func (s *SocketHandler) Socket(w http.ResponseWriter, r *http.Request) {
+	s.Upgrader.CheckOrigin = func(r *http.Request) bool {
+		return true
 	}
-	conn,err := s.Upgrader.Upgrade(w,r,nil)
-	if err!=nil{
+	conn, err := s.Upgrader.Upgrade(w, r, nil)
+	if err != nil {
 		return
 	}
-	claims := session.GetSessionData(w,r)
+	claims := session.GetSessionData(w, r)
 
 	log.Println(claims.Id)
 	s.Conncetions[claims.Id] = conn
-	for{
+	for {
 
-		messageType, message,_ := conn.ReadMessage()
+		messageType, message, _ := conn.ReadMessage()
 
 		jmessage := struct {
-			SenderId int
-			ReceiverId int
-			MessageText string
+			SenderId      int
+			ReceiverId    int
+			MessageText   string
 			SenderPicture string
-			Time string
+			Time          string
 		}{}
-		json.Unmarshal(message,&jmessage)
+		json.Unmarshal(message, &jmessage)
 		//msgs := entity.Message{
 		//	FromId: jmessage.SenderId,
 		//	ToId:jmessage.ReceiverId,
@@ -56,23 +56,19 @@ func (s *SocketHandler)Socket(w http.ResponseWriter, r *http.Request)  {
 		//	}
 		//	s.MessageService.SaveMessage(msgs)
 
-
 		jmessage.Time = ChatApi.MessageSendTimeChanger(time.Now())
-		messageByte,_ := json.Marshal(jmessage)
+		messageByte, _ := json.Marshal(jmessage)
 
 		//conn.WriteMessage(messageType,messageByte)
 		log.Println(s.Conncetions)
-		if _,ok := s.Conncetions[jmessage.SenderId]; ok{
-			s.Conncetions[jmessage.SenderId].WriteMessage(messageType,messageByte)
+		if _, ok := s.Conncetions[jmessage.SenderId]; ok {
+			s.Conncetions[jmessage.SenderId].WriteMessage(messageType, messageByte)
 		}
-		if _,ok := s.Conncetions[jmessage.ReceiverId];ok{
-			s.Conncetions[jmessage.ReceiverId].WriteMessage(messageType,messageByte)
+		if _, ok := s.Conncetions[jmessage.ReceiverId]; ok {
+			s.Conncetions[jmessage.ReceiverId].WriteMessage(messageType, messageByte)
 
 		}
-
 
 	}
 
 }
-
-

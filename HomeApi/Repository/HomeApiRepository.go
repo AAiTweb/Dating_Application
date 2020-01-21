@@ -11,7 +11,7 @@ type HomeApiRepository struct {
 	Db *sql.DB
 }
 
-func NewHomeApiRepository(db *sql.DB)HomeApiRepository{
+func NewHomeApiRepository(db *sql.DB) HomeApiRepository {
 	return HomeApiRepository{db}
 }
 
@@ -23,24 +23,24 @@ func (h HomeApiRepository) GetMatches(id int) ([]Models.UserMatch, error) {
 			  on t4.user_id = t3.picture_owner_id
 			  on t3.picture_owner_id=t1.match_usertwo_id
 			  on t1.match_usertwo_id = user_profile.profile_user_id;`
-	row,err := h.Db.Query(query,id)
-	if err!=nil{
-		return nil,err
+	row, err := h.Db.Query(query, id)
+	if err != nil {
+		return nil, err
 	}
 	usermatches := []Models.UserMatch{}
-	for row.Next(){
+	for row.Next() {
 		usermatchtemp := struct {
-			UserId int
-			DateOfBirth time.Time
-			Country string
-			City string
-			PicturePath string
-			UserName string
+			UserId          int
+			DateOfBirth     time.Time
+			Country         string
+			City            string
+			PicturePath     string
+			UserName        string
 			MatchPercentage int
 		}{}
-		err = row.Scan(&usermatchtemp.UserId,&usermatchtemp.DateOfBirth,&usermatchtemp.Country,&usermatchtemp.City,&usermatchtemp.PicturePath,&usermatchtemp.UserName,&usermatchtemp.MatchPercentage)
-		if err!=nil{
-			return nil,err
+		err = row.Scan(&usermatchtemp.UserId, &usermatchtemp.DateOfBirth, &usermatchtemp.Country, &usermatchtemp.City, &usermatchtemp.PicturePath, &usermatchtemp.UserName, &usermatchtemp.MatchPercentage)
+		if err != nil {
+			return nil, err
 		}
 		dob := usermatchtemp.DateOfBirth
 		birthday := time.Date(dob.Year(), dob.Month(), dob.Day(), 0, 0, 0, 0, time.UTC)
@@ -55,7 +55,7 @@ func (h HomeApiRepository) GetMatches(id int) ([]Models.UserMatch, error) {
 			UserName:        usermatchtemp.UserName,
 			MatchPercentage: usermatchtemp.MatchPercentage,
 		}
-		usermatches = append(usermatches,usermatch)
+		usermatches = append(usermatches, usermatch)
 	}
-	return usermatches,nil
+	return usermatches, nil
 }

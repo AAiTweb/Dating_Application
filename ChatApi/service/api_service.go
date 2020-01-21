@@ -5,11 +5,11 @@ import (
 	"github.com/AAiTweb/Dating_Application/ChatApi/Models"
 )
 
-type ApiService struct{
+type ApiService struct {
 	apiRepository ChatApi.APIRepository
 }
 
-func NewApiService(apiRepository ChatApi.APIRepository)ChatApi.APIService{
+func NewApiService(apiRepository ChatApi.APIRepository) ChatApi.APIService {
 	return ApiService{apiRepository}
 }
 
@@ -20,4 +20,3 @@ func (a ApiService) LoadFriendInformation(id int) ([]Models.FriendLoadInformatio
 func (a ApiService) UpdateLoginInformation(id int) error {
 	return a.apiRepository.UpdateLoginInformation(id)
 }
-

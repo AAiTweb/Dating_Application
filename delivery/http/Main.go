@@ -3,12 +3,12 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"html/template"
-	"log"
-	"net/http"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
 	_ "github.com/lib/pq"
+	"html/template"
+	"log"
+	"net/http"
 
 	//////////////////////////////////////betse//////////////////////////////////////////
 	mainHand "github.com/AAiTweb/Dating_Application/delivery/http/handler"
@@ -37,13 +37,6 @@ import (
 	notif_serv "github.com/AAiTweb/Dating_Application/notification/service"
 	login_repo "github.com/AAiTweb/Dating_Application/user/repository"
 	login_serv "github.com/AAiTweb/Dating_Application/user/service"
-
-
-
-
-
-
-
 )
 
 func main() {
@@ -60,12 +53,11 @@ func main() {
 	log.Println("database connected")
 
 	var upgrader websocket.Upgrader
-	var users  = make(map[int]*websocket.Conn)
+	var users = make(map[int]*websocket.Conn)
 	//tmpl := template.Must(template.ParseGlob("../../../ui/template/*.html"))
-	tmpl := template.Must(template.ParseGlob("github.com/AAiTweb/Dating_Application/ui/template/*.html"))
+	tmpl := template.Must(template.ParseGlob("github.com/biniyam112/TheDatingApp/Dating_Application/ui/template/*.html"))
 
-
-	fs := http.FileServer(http.Dir("github.com/AAiTweb/Dating_Application/ui/assets"))
+	fs := http.FileServer(http.Dir("github.com/biniyam112/TheDatingApp/Dating_Application/ui/assets"))
 	mux := mux.NewRouter()
 	mux.PathPrefix("/assets/").Handler(http.StripPrefix("/assets", fs))
 	//////////////////////////////////////betse//////////////////////////////////////////
@@ -78,7 +70,6 @@ func main() {
 	userProfileServ := usrProServ.NewUserProfileServiceImpl(userProfileRepo)
 	userProfHandler := mainHand.NewUserProfileHandler(tmpl, userProfileServ)
 
-
 	mux.HandleFunc("/user/questionnarie/answers/{user_id}/{index}", questionnarieHandler.PostAnswers)
 	mux.HandleFunc("/user/profile", userProfHandler.GetUser)
 	mux.HandleFunc("/user/questionnarie", questionnarieHandler.MainQuestionnarie)
@@ -87,46 +78,40 @@ func main() {
 	mux.HandleFunc("/user/profile/update", userProfHandler.PutUser)
 	//////////////////////////////////////betse//////////////////////////////////////////
 
-
-
-
-
-
 	//fs = http.FileServer(http.Dir("../../ui/assets"))
 
 	//Chat Api
-	MessageRepository :=MeseRep.NewRepositoryMessage(dbConne)
+	MessageRepository := MeseRep.NewRepositoryMessage(dbConne)
 	MessageService := MesServe.NewMessageService(MessageRepository)
 	ChatApiRepo := repository3.NewApiRepository(dbConne)
 	ChatApiService := service3.NewApiService(ChatApiRepo)
-	handler := Handler3.NewApiHandler(MessageService,ChatApiService)
-	socketHandler := Socket.NewSocketHandler(upgrader,users,MessageService)
-
+	handler := Handler3.NewApiHandler(MessageService, ChatApiService)
+	socketHandler := Socket.NewSocketHandler(upgrader, users, MessageService)
 
 	//Home Api
 	relationshipRepo := repository2.NewRelationshipRepository(dbConne)
 	relationshipService := service2.NewRelationshipService(relationshipRepo)
 	HomeApiRepository := HomeRep.NewHomeApiRepository(dbConne)
 	HomeApiService := HomeSer.NewHomeApiService(HomeApiRepository)
-	HomeApiHandler :=Handler2.NewHomeApiHandler(HomeApiRepository,HomeApiService,relationshipService)
+	HomeApiHandler := Handler2.NewHomeApiHandler(HomeApiRepository, HomeApiService, relationshipService)
 
 	//Main Handler
-	mainHandler := handler2.NewMainHandler(tmpl,dbConne)
+	mainHandler := handler2.NewMainHandler(tmpl, dbConne)
 
-	mux.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/",fs))
-	mux.Handle("/chat",session.IsAuthenticated(http.HandlerFunc(mainHandler.Index)))
-	mux.Handle("/home",session.IsAuthenticated(http.HandlerFunc(mainHandler.Home)))
+	mux.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", fs))
+	mux.Handle("/chat", session.IsAuthenticated(http.HandlerFunc(mainHandler.Index)))
+	mux.Handle("/home", session.IsAuthenticated(http.HandlerFunc(mainHandler.Home)))
 
 	//Chat Page EndPoints
-	mux.HandleFunc("/user/{id}/friends",handler.GetFriends)
-	mux.Handle("/chats/user/{uid}/friends/{fid}",session.IsAuthenticated(http.HandlerFunc(handler.GetMessages)))
-	mux.Handle("/user/{id}/updatelogin",session.IsAuthenticated(http.HandlerFunc(handler.UpdateLoginDetails)))
-	mux.Handle("/ws",session.IsAuthenticated(http.HandlerFunc(socketHandler.Socket)))
+	mux.HandleFunc("/user/{id}/friends", handler.GetFriends)
+	mux.Handle("/chats/user/{uid}/friends/{fid}", session.IsAuthenticated(http.HandlerFunc(handler.GetMessages)))
+	mux.Handle("/user/{id}/updatelogin", session.IsAuthenticated(http.HandlerFunc(handler.UpdateLoginDetails)))
+	mux.Handle("/ws", session.IsAuthenticated(http.HandlerFunc(socketHandler.Socket)))
 
 	// Home Page EndPoint
-	mux.Handle("/matches/user/{id}",session.IsAuthenticated(http.HandlerFunc(HomeApiHandler.GetUsersMatched)))
-	mux.Handle("/matches/sendrequest",session.IsAuthenticated(http.HandlerFunc(HomeApiHandler.SendRequest)))
-	mux.Handle("/matches/acceptrequest",session.IsAuthenticated(http.HandlerFunc(HomeApiHandler.AcceptRequest)))
+	mux.Handle("/matches/user/{id}", session.IsAuthenticated(http.HandlerFunc(HomeApiHandler.GetUsersMatched)))
+	mux.Handle("/matches/sendrequest", session.IsAuthenticated(http.HandlerFunc(HomeApiHandler.SendRequest)))
+	mux.Handle("/matches/acceptrequest", session.IsAuthenticated(http.HandlerFunc(HomeApiHandler.AcceptRequest)))
 	log.Println("Server Started Listening .....")
 
 	//////////////////////////////////////Bini//////////////////////////////////////////
@@ -136,7 +121,6 @@ func main() {
 	NotifrepoInstance := notif_repo.NewUserRepo(dbConne)
 	NotifServiceInstance := notif_serv.NewNotifServe(NotifrepoInstance)
 	NotifhandlerInstance := mainHand.NewMainHandler(NotifServiceInstance, tmpl)
-
 
 	//Login server
 	fmt.Println("connection established!")
@@ -148,38 +132,11 @@ func main() {
 	mux.HandleFunc("/accept", NotifhandlerInstance.AcceptNotification)
 	mux.HandleFunc("/reject", NotifhandlerInstance.RejectNotification)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	serv := http.Server{
 		Addr:    ":8081",
 		Handler: mux,
 	}
 	log.Println("litsening on :8081")
 	serv.ListenAndServe()
-
 
 }

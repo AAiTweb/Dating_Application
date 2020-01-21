@@ -19,7 +19,7 @@ func (qri *QuestionnarieRespositoryImpl) getAnswers(entity.Answer) {
 }
 func (qri *QuestionnarieRespositoryImpl) PostAnswers(userChoice *entity.UserChoice) (*entity.UserChoice, error) {
 	// usrChoice := userChoice
-	
+
 	_, err := qri.Conn.Exec("INSERT INTO user_own_answer(user_own_id,own_question_id,own_choice_answer_id) values($1,$2,$3) ", userChoice.UserId, userChoice.QuestionId, userChoice.OwnAnswerId)
 	_, err = qri.Conn.Exec("INSERT INTO user_wish_answer(user_wish_id,wish_question_id,wish_choice_answer_id) values($1,$2,$3) ", userChoice.UserId, userChoice.QuestionId, userChoice.WishAnswerId)
 	if err != nil {
