@@ -1,6 +1,6 @@
 package service
 
-import "github.com/biniyam112/TheDatingApp/Dating_Application/relationship"
+import "github.com/AAiTweb/Dating_Application/relationship"
 
 
 type RelationshipService struct {

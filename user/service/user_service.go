@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/biniyam112/TheDatingApp/Dating_Application/entity"
-	"github.com/biniyam112/TheDatingApp/Dating_Application/user/repository"
+	"github.com/AAiTweb/Dating_Application/entity"
+	"github.com/AAiTweb/Dating_Application/user/repository"
 )
 
 type UserServiceInstance struct {

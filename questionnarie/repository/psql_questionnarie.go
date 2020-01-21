@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"errors"
 
-	"github.com/biniyam112/TheDatingApp/Dating_Application/entity"
+	"github.com/AAiTweb/Dating_Application/entity"
 )
 
 type QuestionnarieRespositoryImpl struct {

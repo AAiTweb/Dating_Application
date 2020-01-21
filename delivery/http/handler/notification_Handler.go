@@ -2,8 +2,8 @@ package handler
 
 import (
 	"fmt"
-	"github.com/biniyam112/Dating_Application/entity"
-	"github.com/biniyam112/Dating_Application/notification/service"
+	"github.com/AAiTweb/Dating_Application/entity"
+	"github.com/AAiTweb/Dating_Application/notification/service"
 	"html/template"
 	"net/http"
 )

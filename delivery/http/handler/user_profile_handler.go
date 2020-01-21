@@ -17,8 +17,8 @@ import (
 
 	"html/template"
 
-	"github.com/biniyam112/TheDatingApp/Dating_Application/entity"
-	"github.com/biniyam112/TheDatingApp/Dating_Application/user_profile"
+	"github.com/AAiTweb/Dating_Application/entity"
+	"github.com/AAiTweb/Dating_Application/user_profile"
 	v2 "github.com/liamylian/jsontime/v2"
 )
 

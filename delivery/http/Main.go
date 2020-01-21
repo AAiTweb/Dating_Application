@@ -11,32 +11,32 @@ import (
 	_ "github.com/lib/pq"
 
 	//////////////////////////////////////betse//////////////////////////////////////////
-	mainHand "github.com/biniyam112/TheDatingApp/Dating_Application/delivery/http/handler"
-	QueRep "github.com/biniyam112/TheDatingApp/Dating_Application/questionnarie/repository"
-	QueSer "github.com/biniyam112/TheDatingApp/Dating_Application/questionnarie/service"
-	usrProRepo "github.com/biniyam112/TheDatingApp/Dating_Application/user_profile/repository"
-	usrProServ "github.com/biniyam112/TheDatingApp/Dating_Application/user_profile/service"
+	mainHand "github.com/AAiTweb/Dating_Application/delivery/http/handler"
+	QueRep "github.com/AAiTweb/Dating_Application/questionnarie/repository"
+	QueSer "github.com/AAiTweb/Dating_Application/questionnarie/service"
+	usrProRepo "github.com/AAiTweb/Dating_Application/user_profile/repository"
+	usrProServ "github.com/AAiTweb/Dating_Application/user_profile/service"
 	//////////////////////////////////////Eyosi//////////////////////////////////////////
-	Handler3 "github.com/biniyam112/TheDatingApp/Dating_Application/ChatApi/Handler"
-	repository3 "github.com/biniyam112/TheDatingApp/Dating_Application/ChatApi/repository"
-	service3 "github.com/biniyam112/TheDatingApp/Dating_Application/ChatApi/service"
-	Handler2 "github.com/biniyam112/TheDatingApp/Dating_Application/HomeApi/Handler"
-	HomeRep "github.com/biniyam112/TheDatingApp/Dating_Application/HomeApi/Repository"
-	HomeSer "github.com/biniyam112/TheDatingApp/Dating_Application/HomeApi/Service"
-	Socket "github.com/biniyam112/TheDatingApp/Dating_Application/Socket"
-	handler2 "github.com/biniyam112/TheDatingApp/Dating_Application/delivery/http/handler/EyosiHand"
-	MeseRep "github.com/biniyam112/TheDatingApp/Dating_Application/message/repository"
-	MesServe "github.com/biniyam112/TheDatingApp/Dating_Application/message/service"
-	repository2 "github.com/biniyam112/TheDatingApp/Dating_Application/relationship/repository"
-	service2 "github.com/biniyam112/TheDatingApp/Dating_Application/relationship/service"
-	session "github.com/biniyam112/TheDatingApp/Dating_Application/session"
+	Handler3 "github.com/AAiTweb/Dating_Application/ChatApi/Handler"
+	repository3 "github.com/AAiTweb/Dating_Application/ChatApi/repository"
+	service3 "github.com/AAiTweb/Dating_Application/ChatApi/service"
+	Handler2 "github.com/AAiTweb/Dating_Application/HomeApi/Handler"
+	HomeRep "github.com/AAiTweb/Dating_Application/HomeApi/Repository"
+	HomeSer "github.com/AAiTweb/Dating_Application/HomeApi/Service"
+	Socket "github.com/AAiTweb/Dating_Application/Socket"
+	handler2 "github.com/AAiTweb/Dating_Application/delivery/http/handler/EyosiHand"
+	MeseRep "github.com/AAiTweb/Dating_Application/message/repository"
+	MesServe "github.com/AAiTweb/Dating_Application/message/service"
+	repository2 "github.com/AAiTweb/Dating_Application/relationship/repository"
+	service2 "github.com/AAiTweb/Dating_Application/relationship/service"
+	session "github.com/AAiTweb/Dating_Application/session"
 
 	//////////////////////////////////////Bini//////////////////////////////////////////
 	//newHand "github.com/biniyam112/TheDatingApp/Dating_Application/delivery/http/handler"
-	notif_repo "github.com/biniyam112/Dating_Application/notification/repositry"
-	notif_serv "github.com/biniyam112/Dating_Application/notification/service"
-	login_repo "github.com/biniyam112/Dating_Application/user/repository"
-	login_serv "github.com/biniyam112/Dating_Application/user/service"
+	notif_repo "github.com/AAiTweb/Dating_Application/notification/repositry"
+	notif_serv "github.com/AAiTweb/Dating_Application/notification/service"
+	login_repo "github.com/AAiTweb/Dating_Application/user/repository"
+	login_serv "github.com/AAiTweb/Dating_Application/user/service"
 
 
 
@@ -62,10 +62,10 @@ func main() {
 	var upgrader websocket.Upgrader
 	var users  = make(map[int]*websocket.Conn)
 	//tmpl := template.Must(template.ParseGlob("../../../ui/template/*.html"))
-	tmpl := template.Must(template.ParseGlob("github.com/biniyam112/TheDatingApp/Dating_Application/ui/template/*.html"))
+	tmpl := template.Must(template.ParseGlob("github.com/AAiTweb/Dating_Application/ui/template/*.html"))
 
 
-	fs := http.FileServer(http.Dir("github.com/biniyam112/TheDatingApp/Dating_Application/ui/assets"))
+	fs := http.FileServer(http.Dir("github.com/AAiTweb/Dating_Application/ui/assets"))
 	mux := mux.NewRouter()
 	mux.PathPrefix("/assets/").Handler(http.StripPrefix("/assets", fs))
 	//////////////////////////////////////betse//////////////////////////////////////////

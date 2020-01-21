@@ -2,8 +2,8 @@ package service
 
 import (
 	"fmt"
-	"github.com/biniyam112/TheDatingApp/Dating_Application/entity"
-	"github.com/biniyam112/TheDatingApp/Dating_Application/message"
+	"github.com/AAiTweb/Dating_Application/entity"
+	"github.com/AAiTweb/Dating_Application/message"
 )
 
 type MessageService struct {

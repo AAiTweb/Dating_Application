@@ -3,7 +3,7 @@ package EyosiHand
 import (
 	"database/sql"
 	"errors"
-	"github.com/biniyam112/TheDatingApp/Dating_Application/session"
+	"github.com/AAiTweb/Dating_Application/session"
 	"html/template"
 	"log"
 	"net/http"

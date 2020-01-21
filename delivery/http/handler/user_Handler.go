@@ -2,10 +2,10 @@ package handler
 
 import (
 	"fmt"
-	"github.com/biniyam112/Dating_Application/entity"
-	"github.com/biniyam112/Dating_Application/form"
-	"github.com/biniyam112/Dating_Application/user/service"
-	"github.com/biniyam112/TheDatingApp/Dating_Application/session"
+	"github.com/AAiTweb/Dating_Application/entity"
+	"github.com/AAiTweb/Dating_Application/form"
+	"github.com/AAiTweb/Dating_Application/session"
+	"github.com/AAiTweb/Dating_Application/user/service"
 	"html/template"
 	"log"
 	"net/http"

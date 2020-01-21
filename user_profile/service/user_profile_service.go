@@ -3,8 +3,8 @@ package service
 import (
 	// "log"
 
-	"github.com/biniyam112/TheDatingApp/Dating_Application/entity"
-	"github.com/biniyam112/TheDatingApp/Dating_Application/user_profile"
+	"github.com/AAiTweb/Dating_Application/entity"
+	"github.com/AAiTweb/Dating_Application/user_profile"
 )
 
 type UserProfileServiceImpl struct {

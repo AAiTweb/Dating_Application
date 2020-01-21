@@ -1,10 +1,10 @@
 package Handler
 
 import (
-	"github.com/biniyam112/TheDatingApp/Dating_Application/ChatApi/repository"
-	repository1 "github.com/biniyam112/TheDatingApp/Dating_Application/message/repository"
-	"github.com/biniyam112/TheDatingApp/Dating_Application/message/service"
-	service2 "github.com/biniyam112/TheDatingApp/Dating_Application/ChatApi/service"
+	"github.com/AAiTweb/Dating_Application/ChatApi/repository"
+	repository1 "github.com/AAiTweb/Dating_Application/message/repository"
+	"github.com/AAiTweb/Dating_Application/message/service"
+	service2 "github.com/AAiTweb/Dating_Application/ChatApi/service"
 
 	"log"
 	"net/http"

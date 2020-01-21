@@ -2,7 +2,7 @@ package Repository
 
 import (
 	"database/sql"
-	"github.com/biniyam112/TheDatingApp/Dating_Application/HomeApi/Models"
+	"github.com/AAiTweb/Dating_Application/HomeApi/Models"
 	"math"
 	"time"
 )

@@ -2,8 +2,8 @@ package Handler
 
 import (
 	"encoding/json"
-	"github.com/biniyam112/TheDatingApp/Dating_Application/HomeApi"
-	"github.com/biniyam112/TheDatingApp/Dating_Application/relationship"
+	"github.com/AAiTweb/Dating_Application/HomeApi"
+	"github.com/AAiTweb/Dating_Application/relationship"
 	"github.com/gorilla/mux"
 	"net/http"
 	"strconv"

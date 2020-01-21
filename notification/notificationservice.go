@@ -1,6 +1,6 @@
 package notification
 
-import "github.com/biniyam112/TheDatingApp/Dating_Application/entity"
+import "github.com/AAiTweb/Dating_Application/entity"
 
 type NotifService interface {
 	AddNotification(user entity.UserPro) error

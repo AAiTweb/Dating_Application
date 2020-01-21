@@ -1,6 +1,6 @@
 package repository
 
-import "github.com/biniyam112/TheDatingApp/Dating_Application/entity"
+import "github.com/AAiTweb/Dating_Application/entity"
 
 type FakeMessageRepository struct {
 	FakeMessages *[]entity.Message

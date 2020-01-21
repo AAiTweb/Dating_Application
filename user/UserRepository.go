@@ -1,6 +1,6 @@
 package user
 
-import "github.com/biniyam112/TheDatingApp/Dating_Application/entity"
+import "github.com/AAiTweb/Dating_Application/entity"
 
 type UserRepository interface {
 	RegisterUser(user entity.UserPro)bool

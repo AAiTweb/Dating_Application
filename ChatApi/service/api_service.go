@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/biniyam112/TheDatingApp/Dating_Application/ChatApi"
-	"github.com/biniyam112/TheDatingApp/Dating_Application/ChatApi/Models"
+	"github.com/AAiTweb/Dating_Application/ChatApi"
+	"github.com/AAiTweb/Dating_Application/ChatApi/Models"
 )
 
 type ApiService struct{

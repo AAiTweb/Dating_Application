@@ -1,8 +1,8 @@
 package Service
 
 import (
-	"github.com/biniyam112/TheDatingApp/Dating_Application/HomeApi"
-	"github.com/biniyam112/TheDatingApp/Dating_Application/HomeApi/Models"
+	"github.com/AAiTweb/Dating_Application/HomeApi"
+	"github.com/AAiTweb/Dating_Application/HomeApi/Models"
 )
 
 type HomeApiService struct {

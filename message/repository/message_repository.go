@@ -2,7 +2,7 @@ package repository
 
 import (
 	"database/sql"
-	"github.com/biniyam112/TheDatingApp/Dating_Application/entity"
+	"github.com/AAiTweb/Dating_Application/entity"
 )
 
 
