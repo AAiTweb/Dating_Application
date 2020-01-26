@@ -8,6 +8,6 @@ type UserProfile struct {
 	LastName,
 	ProfilePicture,
 	Sex string
-	DateOfBirth time.Time
+	DateOfBirth         time.Time
 	OnlineOfflineStatus bool
 }

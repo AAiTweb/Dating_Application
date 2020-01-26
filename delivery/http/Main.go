@@ -40,7 +40,7 @@ import (
 )
 
 func main() {
-	dbConne, err := sql.Open("postgres", "postgres://admin:kali@localhost/dating_app1?sslmode=disable")
+	dbConne, err := sql.Open("postgres", "postgres://postgres:password@localhost/dating_app1?sslmode=disable")
 	if err != nil {
 		panic(err)
 	}
@@ -54,10 +54,9 @@ func main() {
 
 	var upgrader websocket.Upgrader
 	var users = make(map[int]*websocket.Conn)
-	//tmpl := template.Must(template.ParseGlob("../../../ui/template/*.html"))
-	tmpl := template.Must(template.ParseGlob("github.com/biniyam112/TheDatingApp/Dating_Application/ui/template/*.html"))
+	tmpl := template.Must(template.ParseGlob("../../ui/template/*.html"))
 
-	fs := http.FileServer(http.Dir("github.com/biniyam112/TheDatingApp/Dating_Application/ui/assets"))
+	fs := http.FileServer(http.Dir("../../ui/assets"))
 	mux := mux.NewRouter()
 	mux.PathPrefix("/assets/").Handler(http.StripPrefix("/assets", fs))
 	//////////////////////////////////////betse//////////////////////////////////////////
@@ -133,7 +132,7 @@ func main() {
 	mux.HandleFunc("/reject", NotifhandlerInstance.RejectNotification)
 
 	serv := http.Server{
-		Addr:    ":8081",
+		Addr:    "localhost:8081",
 		Handler: mux,
 	}
 	log.Println("litsening on :8081")

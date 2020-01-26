@@ -5,8 +5,14 @@
 
 .navigation{
     background-color: #800020!important;
-    height: 106px;
+    color: white;
+    height: 50px;
 }
+.navigation > a > i{
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
 nav .brand-logo {
     left: 5%;
     margin: 0.5em 0 0 0;
@@ -75,13 +81,13 @@ body  {
     margin:4px 2px 2px 50%;
 }
 .user1 img{
-    width: 100%;
-    border-radius: 50%;
+    /*width: 100%;*/
+    /*border-radius: 50%;*/
 }
 .user2 img{
     margin-right:0;
-    width: 100%;
-    border-radius: 50%;
+    /*width: 100%;*/
+    /*border-radius: 50%;*/
 }
 .input-field{
     margin-top: 20px;
@@ -92,13 +98,28 @@ body  {
     /*position:fixed;*/
 }
 
+
 .section{
     display: flex;
     margin:5px;
     border: 1px solid #dedede;
     border-radius: 5px;
-    padding: 5px;
+    padding: 0px;
+
 }
+.section-right-div{
+    width:3px;
+    background-color:#800020;
+    height:inherit;
+    margin-right:2px;
+    margin-left:0px;
+    border-radius: inherit;
+}
+/*.section:hover{*/
+/*    !*background-color: rgb(250, 248, 248);*!*/
+/*    background-color:#800020;*/
+
+/*}*/
 .section_left{
     flex: 80%;
     padding: 5px;
@@ -106,8 +127,17 @@ body  {
 .section_right{
     flex: 20%;
     align-self: center;
+    display: flex;
 }
-
+.section_right img{
+    margin-top: 5px;
+    width: 31px!important;
+    height: 16px!important;
+    padding-right: 15px;
+}
+.section_right div{
+    padding-right: 15px;
+}
 .chat {
     width: 50%;
     /*height: 75px;*/
@@ -158,9 +188,10 @@ body  {
 }
 .user2-image{
     flex:10%;
+
     align-self: flex-end;
-    /*margin-bottom: 15px;*/
-    /*margin-left: 10px;*/
+    margin-bottom: 15px;
+    margin-left: 10px;
 }
 .user2-send-time{
     text-align: left;
@@ -177,10 +208,20 @@ body  {
 .user-container{
     display: flex;
 }
-.selected-user{
-    background-color: #ececec;
-}
+/*.selected-user{*/
+/*    background-color: #ececec;*/
+/*}*/
 
 .send::after{
     constent:"send";
+}
+
+
+.message_notification{
+    color:white;
+    background-color:#800020 ;
+    border-radius: 5px;
+    padding: 2px 10px;
+    /*padding-right: 7px;*/
+    /*margin: 5px;*/
 }
