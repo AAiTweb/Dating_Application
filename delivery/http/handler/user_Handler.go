@@ -25,7 +25,6 @@ func NewUserHandler(servc *service.UserService, temp *template.Template) *UserHa
 	}
 }
 
-
 func (mh UserHandler) Login(w http.ResponseWriter, r *http.Request) {
 	mh.Templ.ExecuteTemplate(w, "logincopy.html", nil)
 }
@@ -61,8 +60,8 @@ func (mh UserHandler) Signup(w http.ResponseWriter, r *http.Request) {
 		}
 		fmt.Println(Fusername)
 		fmt.Println(Femail, Fpassword)
-		HashedPassword,err := form.HashPassword(Fpassword)
-		if err != nil{
+		HashedPassword, err := form.HashPassword(Fpassword)
+		if err != nil {
 			log.Print("Hashing failed")
 		}
 		user := entity.User{
@@ -97,19 +96,20 @@ func (mh UserHandler) Validatelogin(w http.ResponseWriter, r *http.Request) {
 			Email:             "",
 			ConfirmationToken: "",
 		}
-		QuestionerFilled,err := mh.Uservice.QueFilled(user)
-		if err != nil{
+		QuestionerFilled, err := mh.Uservice.QueFilled(user)
+		if err != nil {
 			fmt.Println("Cant go there")
-			mh.Templ.ExecuteTemplate(w,"logincopy.html","Login failed, try again")
+			mh.Templ.ExecuteTemplate(w, "logincopy.html", "Login failed, try again")
 			return
 		}
+		userId, err := mh.Uservice.GetUserByUserName(username)
 		if !QuestionerFilled {
-			http.Redirect(w,r,"/user/questionnarie", http.StatusSeeOther)
+			mh.Templ.ExecuteTemplate(w, "user_form", userId)
 			return
 		}
 		userId, UserName, profilePic, err := mh.Uservice.CheckLogin(user)
 		if err != nil {
-			mh.Templ.ExecuteTemplate(w,"logincopy.html","incorrect username or password")
+			mh.Templ.ExecuteTemplate(w, "logincopy.html", "incorrect username or password")
 			fmt.Println("user info not filled inside")
 			return
 		} else {
@@ -124,8 +124,8 @@ func (mh UserHandler) Validatelogin(w http.ResponseWriter, r *http.Request) {
 				Name:  "token",
 				Value: tokenString,
 			})
-			path := "/preload?id="+strconv.Itoa(userId)
-			http.Redirect(w,r,path,http.StatusSeeOther)
+			path := "/preload?id=" + strconv.Itoa(userId)
+			http.Redirect(w, r, path, http.StatusSeeOther)
 		}
 
 	}
@@ -147,32 +147,37 @@ func (mh UserHandler) ValidateSignup(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		_ = mh.Templ.ExecuteTemplate(w, "logincopy.html", "Login failed, try again")
 	}
-	http.Redirect(w,r,"/user/questionnarie",http.StatusSeeOther)
+	userId, err1 := mh.Uservice.GetUserId(Vkey)
+	if err1 != nil {
+		mh.Templ.ExecuteTemplate(w, "logincopy.html", "user doesn't exist")
+	}
+	log.Println(userId, "user id")
+	mh.Templ.ExecuteTemplate(w, "user_form", userId)
 }
 
-func (mh UserHandler) ConfirmEmail(w http.ResponseWriter, r *http.Request){
-	if r.Method == http.MethodPost{
+func (mh UserHandler) ConfirmEmail(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodPost {
 		email := r.FormValue("reset_email")
 		err := mh.Uservice.Checkemail(email)
 		fmt.Println(email)
-		if err != nil{
-			if err.Error() == "1"{
-				mh.Templ.ExecuteTemplate(w,"confirm_email.html","Incorrect email address try again")
+		if err != nil {
+			if err.Error() == "1" {
+				mh.Templ.ExecuteTemplate(w, "confirm_email.html", "Incorrect email address try again")
 				return
 			}
-			if err.Error() == "2"{
-				mh.Templ.ExecuteTemplate(w,"confirm_email.html","Unstable connection try again")
+			if err.Error() == "2" {
+				mh.Templ.ExecuteTemplate(w, "confirm_email.html", "Unstable connection try again")
 				return
-			} else{
-				mh.Templ.ExecuteTemplate(w,"confirm_email.html","Unstable connection try again")
+			} else {
+				mh.Templ.ExecuteTemplate(w, "confirm_email.html", "Unstable connection try again")
 				return
 			}
 		}
-		mh.Templ.ExecuteTemplate(w,"CheckEmail.html",nil)
+		mh.Templ.ExecuteTemplate(w, "CheckEmail.html", nil)
 	}
 }
 
-func (mh UserHandler) ConfirmReset(w http.ResponseWriter,r *http.Request) {
+func (mh UserHandler) ConfirmReset(w http.ResponseWriter, r *http.Request) {
 	vKey := r.URL.Query().Get("conftok")
 	if !(len(vKey) > 0) {
 		log.Println("verification key not found")
@@ -200,7 +205,7 @@ func (mh UserHandler) ConfirmReset(w http.ResponseWriter,r *http.Request) {
 	}
 	fmt.Println(username, " ", password)
 	userId, UserName, profilePic, err1 := mh.Uservice.CheckReset(user)
-	if err1 != nil{
+	if err1 != nil {
 		_ = mh.Templ.ExecuteTemplate(w, "logincopy.html", "User doesn't exist")
 		return
 	}
@@ -215,11 +220,11 @@ func (mh UserHandler) ConfirmReset(w http.ResponseWriter,r *http.Request) {
 		Value: tokenString,
 	})
 	println("executing template...")
-	http.Redirect(w,r,"/resetpassword",http.StatusPermanentRedirect)
+	http.Redirect(w, r, "/resetpassword", http.StatusPermanentRedirect)
 }
 
-func (mh UserHandler) ResetPassword(w http.ResponseWriter,r *http.Request){
-	if r.Method == http.MethodPost{
+func (mh UserHandler) ResetPassword(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodPost {
 		newpassword := r.FormValue("new_password")
 		confPassword := r.FormValue("new_password_conf")
 
@@ -231,22 +236,24 @@ func (mh UserHandler) ResetPassword(w http.ResponseWriter,r *http.Request){
 			mh.Templ.ExecuteTemplate(w, "resetpassword.html", form.ValidatePassword(newpassword))
 			return
 		}
-		data := session.GetSessionData(w,r)
-		HashedPassword,err := form.HashPassword(newpassword)
+		data := session.GetSessionData(w, r)
+		log.Println(data)
+		HashedPassword, err := form.HashPassword(newpassword)
 		if err != nil {
-			mh.Templ.ExecuteTemplate(w,"logincopy.html","password reset failed")
+			mh.Templ.ExecuteTemplate(w, "logincopy.html", "password reset failed")
 		}
 		log.Println(HashedPassword)
-		err = mh.Uservice.ResetPassword(data.Id,HashedPassword)
+		err = mh.Uservice.ResetPassword(data.Id, HashedPassword)
+		fmt.Println(err)
 		if err != nil {
-			mh.Templ.ExecuteTemplate(w,"logincopy.html","password reset failed")
+			mh.Templ.ExecuteTemplate(w, "logincopy.html", "password reset failed")
 		}
-		http.Redirect(w,r,"/login",http.StatusPermanentRedirect)
+		http.Redirect(w, r, "/login", http.StatusSeeOther)
 	}
 }
 
 func (mh UserHandler) Logout(w http.ResponseWriter, r *http.Request) {
 	session.RemoveSession(w)
-	http.Redirect(w,r,"/login",http.StatusSeeOther)
+	http.Redirect(w, r, "/login", http.StatusSeeOther)
 
 }

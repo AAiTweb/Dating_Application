@@ -38,9 +38,11 @@ import (
 	login_repo "github.com/AAiTweb/Dating_Application/user/repository"
 	login_serv "github.com/AAiTweb/Dating_Application/user/service"
 )
-var  tmpl = template.Must(template.ParseGlob("../../ui/template/*.html"))
+
+var tmpl = template.Must(template.ParseGlob("../../ui/template/*.html"))
+
 func main() {
-	dbConne, err := sql.Open("postgres", "postgres://postgres:password@localhost/dating_app1?sslmode=disable")
+	dbConne, err := sql.Open("postgres", "postgres://admin:kali@localhost/dating_app1?sslmode=disable")
 	if err != nil {
 		panic(err)
 	}
@@ -74,21 +76,21 @@ func main() {
 	userProfHandler := mainHand.NewUserProfileHandler(tmpl, userProfileServ)
 
 	//mux.Han
-	mux.GET("/user/questionnarie/answers/:user_id/:index", questionnarieHandler.PostAnswers)
-	mux.HandlerFunc("GET","/user/profile", userProfHandler.GetUser)
-	mux.HandlerFunc("GET","/user/questionnarie", questionnarieHandler.MainQuestionnarie)
-	mux.HandlerFunc("GET","/user/questionnarie/questions", questionnarieHandler.Questionnaire)
-	mux.HandlerFunc("POST","/user/addUser", userProfHandler.PostUser)
-	mux.HandlerFunc("POST","/user/update", userProfHandler.PutUser)
-	mux.HandlerFunc("GET","/user/FriendProfile",userProfHandler.GetFriendProfile)
+	mux.POST("/user/questionnarie/answers/:user_id/:index", questionnarieHandler.PostAnswers)
+	mux.HandlerFunc("GET", "/user/profile", userProfHandler.GetUser)
+	mux.HandlerFunc("GET", "/user/questionnarie", questionnarieHandler.MainQuestionnarie)
+	mux.HandlerFunc("GET", "/user/questionnarie/questions", questionnarieHandler.Questionnaire)
+	mux.HandlerFunc("POST", "/user/addUser", userProfHandler.PostUser)
+	mux.HandlerFunc("POST", "/user/update", userProfHandler.PutUser)
+	mux.HandlerFunc("GET", "/user/FriendProfile", userProfHandler.GetFriendProfile)
+	mux.HandlerFunc("GET", "/user/delete", userProfHandler.DeleteProfile)
 	//////////////////////////////////////betse//////////////////////////////////////////
 
 	//fs = http.FileServer(http.Dir("../../ui/assets"))
-	matchRepo :=matchRepo.NewMatchRepository(dbConne)
+	matchRepo := matchRepo.NewMatchRepository(dbConne)
 	matchServ := matchServ.NewMatchService(matchRepo)
 	matchHander := MatchHandler.NewMatchHandler(matchServ)
-	mux.HandlerFunc("GET","/match",matchHander.DoMatching)
-
+	mux.HandlerFunc("GET", "/match", matchHander.DoMatching)
 
 	//Chat Api
 	MessageRepository := MeseRep.NewRepositoryMessage(dbConne)
@@ -109,24 +111,23 @@ func main() {
 	mainHandler := handler2.NewMainHandler(tmpl)
 
 	//mux.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", fs))
-	mux.HandlerFunc("GET","/chat", mainHandler.Index)
-	mux.HandlerFunc("GET","/home", mainHandler.Home)
-	mux.HandlerFunc("GET","/search/user/",mainHandler.Search)
-	mux.HandlerFunc("GET","/preload",mainHandler.Preload)
+	mux.HandlerFunc("GET", "/chat", mainHandler.Index)
+	mux.HandlerFunc("GET", "/home", mainHandler.Home)
+	mux.HandlerFunc("GET", "/search/user/", mainHandler.Search)
+	mux.HandlerFunc("GET", "/preload", mainHandler.Preload)
 
 	//Chat Page EndPoints
 	mux.GET("/user/friends/:id", handler.GetFriends)
 	mux.GET("/chats/user/:uid/friends/:fid", handler.GetMessages)
 	mux.GET("/user/updatelogin/:id", handler.UpdateLoginDetails)
-	mux.HandlerFunc("GET","/ws", socketHandler.Socket)
+	mux.HandlerFunc("GET", "/ws", socketHandler.Socket)
 
 	// Home Page EndPoint
 	mux.GET("/matches/user/:id", HomeApiHandler.GetUsersMatched)
-	mux.HandlerFunc("GET","/matches/sendrequest", HomeApiHandler.SendRequest)
-	mux.HandlerFunc("POST","/matches/acceptrequest", HomeApiHandler.AcceptRequest)
-	mux.GET("/Home/Search/:uname",HomeApiHandler.Search)
+	mux.HandlerFunc("GET", "/matches/sendrequest", HomeApiHandler.SendRequest)
+	mux.HandlerFunc("POST", "/matches/acceptrequest", HomeApiHandler.AcceptRequest)
+	mux.GET("/Home/Search/:uname", HomeApiHandler.Search)
 	// match
-
 
 	//////////////////////////////////////Bini//////////////////////////////////////////
 	UserrepoInstance := login_repo.NewUserRepo(dbConne)
@@ -138,22 +139,21 @@ func main() {
 
 	//Login server
 	fmt.Println("connection established!")
-	mux.HandlerFunc("GET","/", UserhandlerInstance.Login)
-	mux.HandlerFunc("GET","/login", UserhandlerInstance.Login)
-	mux.HandlerFunc("POST","/signup", UserhandlerInstance.Signup)
-	mux.HandlerFunc("GET","/signup/validate", UserhandlerInstance.ValidateSignup)
-	mux.HandlerFunc("POST","/validate", UserhandlerInstance.Validatelogin)
-	mux.HandlerFunc("GET","/notification", NotifhandlerInstance.SeeNotification)
-	mux.HandlerFunc("GET","/accept", NotifhandlerInstance.AcceptNotification)
-	mux.HandlerFunc("GET","/reject", NotifhandlerInstance.RejectNotification)
-	mux.HandlerFunc("GET","/Logout",UserhandlerInstance.Logout)
+	mux.HandlerFunc("GET", "/", UserhandlerInstance.Login)
+	mux.HandlerFunc("GET", "/login", UserhandlerInstance.Login)
+	mux.HandlerFunc("POST", "/signup", UserhandlerInstance.Signup)
+	mux.HandlerFunc("GET", "/signup/validate", UserhandlerInstance.ValidateSignup)
+	mux.HandlerFunc("POST", "/validate", UserhandlerInstance.Validatelogin)
+	mux.HandlerFunc("GET", "/notification", NotifhandlerInstance.SeeNotification)
+	mux.HandlerFunc("GET", "/accept", NotifhandlerInstance.AcceptNotification)
+	mux.HandlerFunc("GET", "/reject", NotifhandlerInstance.RejectNotification)
+	mux.HandlerFunc("GET", "/Logout", UserhandlerInstance.Logout)
 
-
-	mux.HandlerFunc("GET","/confirmemailpage",UserhandlerInstance.ForgotPassword)
-	mux.HandlerFunc("POST","/forgotpassword",UserhandlerInstance.ConfirmEmail)
-	mux.HandlerFunc("GET","/confirmreset",UserhandlerInstance.ConfirmReset)
-	mux.HandlerFunc("GET","/resetpassword",UserhandlerInstance.Passwordreset)
-	mux.HandlerFunc("POST","/passwordreset",UserhandlerInstance.ResetPassword)
+	mux.HandlerFunc("GET", "/confirmemailpage", UserhandlerInstance.ForgotPassword)
+	mux.HandlerFunc("POST", "/forgotpassword", UserhandlerInstance.ConfirmEmail)
+	mux.HandlerFunc("GET", "/confirmreset", UserhandlerInstance.ConfirmReset)
+	mux.HandlerFunc("GET", "/resetpassword", UserhandlerInstance.Passwordreset)
+	mux.HandlerFunc("POST", "/passwordreset", UserhandlerInstance.ResetPassword)
 
 	serv := http.Server{
 		Addr:    "localhost:8081",
@@ -163,4 +163,3 @@ func main() {
 	serv.ListenAndServe()
 
 }
-

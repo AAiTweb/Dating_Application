@@ -22,7 +22,6 @@ import (
 
 	"github.com/AAiTweb/Dating_Application/entity"
 	"github.com/AAiTweb/Dating_Application/user_profile"
-
 )
 
 type UserProfileHandler struct {
@@ -44,7 +43,7 @@ func (uph *UserProfileHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 	//	return
 	//}
 	//log.Println(id)
-	id:=session.GetSessionData(w,r).Id
+	id := session.GetSessionData(w, r).Id
 	//id := 1
 	log.Println(id, "eyosis session")
 	user, err := uph.userService.UserProfile(uint(id))
@@ -115,7 +114,7 @@ func (uph *UserProfileHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 	tempData := map[string]interface{}{
 		"HeadData":    headData,
 		"profileData": anonymousUser,
-		"profilePic":  session.GetSessionData(w,r).ProfilePicture,
+		"profilePic":  session.GetSessionData(w, r).ProfilePicture,
 	}
 	//log.Println(tempData)
 
@@ -127,9 +126,9 @@ func (uph *UserProfileHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 	// return
 
 }
-func(uph *UserProfileHandler) GetFriendProfile(w http.ResponseWriter, r *http.Request){
+func (uph *UserProfileHandler) GetFriendProfile(w http.ResponseWriter, r *http.Request) {
 
-	id,_:=strconv.Atoi(r.URL.Query().Get("id"))
+	id, _ := strconv.Atoi(r.URL.Query().Get("id"))
 	user, err := uph.userService.UserProfile(uint(id))
 	//log.Println("handler")
 	//log.Println(user)
@@ -149,14 +148,11 @@ func(uph *UserProfileHandler) GetFriendProfile(w http.ResponseWriter, r *http.Re
 
 	}
 
-
 	date := user.Dob
 	now := time.Now()
 
 	birthday := time.Date(date.Year(), date.Month(), date.Day(), 0, 0, 0, 0, time.UTC)
 	today := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.UTC)
-
-
 
 	age := math.Floor(today.Sub(birthday).Hours() / 24 / 365)
 
@@ -231,9 +227,9 @@ func (uph *UserProfileHandler) PostUser(w http.ResponseWriter, r *http.Request) 
 		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
 		return
 	}
-	if r.Method==http.MethodPost{
+	if r.Method == http.MethodPost {
 
-		err :=r.ParseForm()
+		err := r.ParseForm()
 		if err != nil {
 			//log.Println("not post2")
 			log.Fatal(err)
@@ -241,21 +237,21 @@ func (uph *UserProfileHandler) PostUser(w http.ResponseWriter, r *http.Request) 
 			return
 		}
 
-		log.Println(r.PostForm,"POST FORM")
+		log.Println(r.PostForm, "POST FORM")
 
-		profileForm:=form.Input{Values:r.PostForm,VErrors:form.ValidationErrors{}}
-		profileForm.Required("fName","lName","country","city","dob","sex","bio")
+		profileForm := form.Input{Values: r.PostForm, VErrors: form.ValidationErrors{}}
+		profileForm.Required("fName", "lName", "country", "city", "dob", "sex", "bio")
 
 		//log.Println(r.FormValue("fName"),"first name")
 
 		//data:=
-		tempData:= map[string]interface{}{
-			"Error":"you can not leave empty field",
+		tempData := map[string]interface{}{
+			"Error": "you can not leave empty field",
 		}
 
-		if !profileForm.Valid(){
+		if !profileForm.Valid() {
 			log.Println(profileForm)
-			uph.tmpl.ExecuteTemplate(w,"user_form",tempData)
+			uph.tmpl.ExecuteTemplate(w, "user_form", tempData)
 
 			return
 		}
@@ -265,8 +261,9 @@ func (uph *UserProfileHandler) PostUser(w http.ResponseWriter, r *http.Request) 
 
 	layoutISO := "2006-01-02"
 	user := &entity.UserPro{}
-	id,_ := strconv.Atoi(r.FormValue("hiddenId"))
-	user.UserId=uint64(id)
+	id, _ := strconv.Atoi(r.FormValue("hiddenId"))
+	log.Println(id, "user id")
+	user.UserId = uint64(id)
 
 	//log.Println(r.FormValue("fName"),"first name")
 	user.FirstName = r.FormValue("fName")
@@ -277,18 +274,6 @@ func (uph *UserProfileHandler) PostUser(w http.ResponseWriter, r *http.Request) 
 	user.Sex = r.FormValue("sex")
 	//log.Println(user.Sex,"user sex")
 	user.Bio = r.FormValue("bio")
-
-
-
-
-
-
-
-
-
-
-
-
 
 	user, err := uph.userService.AddProfile(user)
 	if err != nil {
@@ -303,7 +288,7 @@ func (uph *UserProfileHandler) PostUser(w http.ResponseWriter, r *http.Request) 
 	log.Println("posting user")
 	// http.Redirect(w, r, "/user/questionnarie/questions", 301)
 	w.WriteHeader(http.StatusCreated)
-	uph.tmpl.ExecuteTemplate(w,"questionnarie",user.UserId)
+	uph.tmpl.ExecuteTemplate(w, "questionnarie", user.UserId)
 	// http.Redirect(w, r, "#questionnarie-modal", 302)
 
 }
@@ -317,32 +302,28 @@ func (uph *UserProfileHandler) PutUser(w http.ResponseWriter, r *http.Request) {
 	}
 	log.Println("log passed")
 
-
-	if r.Method==http.MethodPost{
+	if r.Method == http.MethodPost {
 		log.Println("post form")
-		err :=r.ParseMultipartForm((1024 * 1024 * 16))
+		err := r.ParseMultipartForm((1024 * 1024 * 16))
 		//err:=r.ParseForm()
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
-		log.Println(r.PostForm,"POST FORM")
+		log.Println(r.PostForm, "POST FORM")
 
-		profileForm:=form.Input{Values:r.PostForm,VErrors:form.ValidationErrors{}}
-		profileForm.Required("fName","lName","country","city","dob","sex","bio")
+		profileForm := form.Input{Values: r.PostForm, VErrors: form.ValidationErrors{}}
+		profileForm.Required("fName", "lName", "country", "city", "dob", "sex", "bio")
 
-		log.Println(r.FormValue("fName"),"first name")
+		log.Println(r.FormValue("fName"), "first name")
 
-
-
-		 if !profileForm.Valid(){
-		 	log.Println(profileForm)
-			 http.Redirect(w, r, "/user/profile", http.StatusSeeOther)
+		if !profileForm.Valid() {
+			log.Println(profileForm)
+			http.Redirect(w, r, "/user/profile", http.StatusSeeOther)
 
 			return
-		 }
+		}
 	}
-
 
 	////r.Header.Add("Content-Type", w.FormDataContentType())
 	//bodyBuf := bytes.NewBufferString("")
@@ -351,7 +332,7 @@ func (uph *UserProfileHandler) PutUser(w http.ResponseWriter, r *http.Request) {
 	//r.Header.Set("Content-Type", contentType)
 	layoutISO := "2006-01-02"
 	user := entity.UserPro{}
-	user.UserId= uint64(session.GetSessionData(w,r).Id)
+	user.UserId = uint64(session.GetSessionData(w, r).Id)
 	//log.Println(r.FormValue("fName"),"first name")
 	//user.UserId=1
 	user.FirstName = r.FormValue("fName")
@@ -379,7 +360,6 @@ func (uph *UserProfileHandler) PutUser(w http.ResponseWriter, r *http.Request) {
 
 		user.ProfPicPath = append(user.ProfPicPath, fh.Filename)
 
-
 		if err != nil {
 			log.Println(err)
 			log.Println("not working 1.9")
@@ -397,20 +377,17 @@ func (uph *UserProfileHandler) PutUser(w http.ResponseWriter, r *http.Request) {
 	//log.Println(user.UserId,"user id in handler")
 	// log.Println("not working 2")
 
-
 	usr, err := uph.userService.UpdateProfile(&user)
-	log.Println(usr,"user data")
-
-
+	log.Println(usr, "user data")
 
 	if err != nil {
 		log.Fatal(err)
 	}
-	index := len(usr.ProfPicPath)-1
+	index := len(usr.ProfPicPath) - 1
 	profilePic := user.ProfPicPath[index]
-	claim := session.GetSessionData(w,r)
-	if claim!=nil{
-		session.RenewSession(claim.Username,claim.Id,profilePic,w)
+	claim := session.GetSessionData(w, r)
+	if claim != nil {
+		session.RenewSession(claim.Username, claim.Id, profilePic, w)
 	}
 	http.Redirect(w, r, "/user/profile", http.StatusSeeOther)
 
@@ -432,17 +409,16 @@ func writeFile(mf *multipart.File, fname string) {
 	defer image.Close()
 	io.Copy(image, *mf)
 }
-func (uph *UserProfileHandler) DeleteProfile(w http.ResponseWriter, r *http.Request){
+func (uph *UserProfileHandler) DeleteProfile(w http.ResponseWriter, r *http.Request) {
 	//id:=uint(session.GetSessionData(w,r).Id)
-	id:=uint(1)
-	id,err:=uph.userService.DeleteProfile(id)
+	id, _ := strconv.Atoi(r.FormValue("hiddenId"))
+	id2 := uint(id)
+	id2, err := uph.userService.DeleteProfile(id2)
 
-	if err !=nil{
+	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	uph.tmpl.ExecuteTemplate(w,"user_form",nil)
-
-
+	uph.tmpl.ExecuteTemplate(w, "user_form", nil)
 
 }

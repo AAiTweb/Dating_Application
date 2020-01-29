@@ -39,8 +39,8 @@ func (pr *Psqlrepo) RegisterUser(username string, email string, password string,
 
 func (pr *Psqlrepo) RemoveUser(username string) error {
 	query := `DELETE FROM users WHERE username=$1`
-	_,err := pr.Conn.Exec(query,username)
-	if err != nil{
+	_, err := pr.Conn.Exec(query, username)
+	if err != nil {
 		return err
 	}
 	return nil
@@ -66,10 +66,10 @@ func (pr *Psqlrepo) CheckLogin(username string, password string) (int, string, s
 	var hashedPassword string
 	fmt.Println(hashedPassword)
 	query := `SELECT password FROM users WHERE username=$1`
-	row = pr.Conn.QueryRow(query,username)
+	row = pr.Conn.QueryRow(query, username)
 	err = row.Scan(&hashedPassword)
-	isEqual := form.CompareHashToPassword(password,hashedPassword)
-	if !isEqual{
+	isEqual := form.CompareHashToPassword(password, hashedPassword)
+	if !isEqual {
 		log.Println(err)
 		return -1, "", "", err
 	}
@@ -97,13 +97,13 @@ func (pr *Psqlrepo) CheckReset(username string, password string) (int, string, s
 }
 
 func (pr *Psqlrepo) ValidateToken(vkey string) error {
-		squery := `UPDATE users SET is_activated = 1 WHERE confirmation_token=$1`
-		_,err := pr.Conn.Exec(squery, vkey)
-		if err != nil {
-			log.Println("Token validation failed")
-			return err
-		}
-		return nil
+	squery := `UPDATE users SET is_activated = 1 WHERE confirmation_token=$1`
+	_, err := pr.Conn.Exec(squery, vkey)
+	if err != nil {
+		log.Println("Token validation failed")
+		return err
+	}
+	return nil
 }
 
 func (pr *Psqlrepo) DeleteUser(username string) error {
@@ -118,17 +118,17 @@ func (pr *Psqlrepo) UpdateUser(user entity.User) bool {
 
 func (pr *Psqlrepo) Checkemail(email string) error {
 	query := `SELECT confirmation_token FROM users WHERE email=$1`
-	row := pr.Conn.QueryRow(query,email)
+	row := pr.Conn.QueryRow(query, email)
 	var confToken string
 	switch err := row.Scan(&confToken); err {
 	case sql.ErrNoRows:
 		err = errors.New("1") //no rows error
 		return err
 	}
-	err := form.MailResetPassword(email,confToken)
+	err := form.MailResetPassword(email, confToken)
 	if err != nil {
 		query := `UPDATE users SET password_reset=0 WHERE email=$1`
-		_,err := pr.Conn.Exec(query,email)
+		_, err := pr.Conn.Exec(query, email)
 		err = errors.New("2")
 		return err
 	}
@@ -137,17 +137,17 @@ func (pr *Psqlrepo) Checkemail(email string) error {
 
 func (pr *Psqlrepo) ConfirmReset(key string) error {
 	query := `UPDATE users SET password_reset=1 WHERE confirmation_token=$1`
-	_,err := pr.Conn.Exec(query,key)
+	_, err := pr.Conn.Exec(query, key)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func (pr *Psqlrepo) ResetPassword(Id int,password string) error {
-	log.Println("Hashed password from repo",password)
+func (pr *Psqlrepo) ResetPassword(Id int, password string) error {
+	log.Println("Hashed password from repo", password)
 	query := `UPDATE users SET password=$1,password_reset=0  WHERE user_id=$2`
-	_,err := pr.Conn.Exec(query,password,Id)
+	_, err := pr.Conn.Exec(query, password, Id)
 	if err != nil {
 		log.Println(err)
 		return err
@@ -155,25 +155,38 @@ func (pr *Psqlrepo) ResetPassword(Id int,password string) error {
 	return nil
 }
 
-func (pr *Psqlrepo) GetUser(token string) (string,string,error) {
+func (pr *Psqlrepo) GetUser(token string) (string, string, error) {
 	query := `Select username,password from users WHERE confirmation_token=$1`
 	var username string
 	var password string
-	row := pr.Conn.QueryRow(query,token)
-	switch err := row.Scan(&username,&password); err {
+	row := pr.Conn.QueryRow(query, token)
+	switch err := row.Scan(&username, &password); err {
 	case sql.ErrNoRows:
-		return username,password,err
+		return username, password, err
 	}
-	return username,password,nil
+	return username, password, nil
 }
 
-func (pr *Psqlrepo) QueFilled(username string,password string) (bool,error) {
+func (pr *Psqlrepo) GetUserId(token string) (int, error) {
+	query := `Select user_id from users WHERE confirmation_token=$1`
+	var userId int
+	row := pr.Conn.QueryRow(query, token)
+	switch err := row.Scan(&userId); err {
+	case sql.ErrNoRows:
+		return userId, err
+	}
+	return userId, nil
+}
+func (pr *Psqlrepo) QueFilled(username string, password string) (bool, error) {
 	query := `SELECT quefilled FROM users WHERE username=$1`
 	var CheckFilled int
-	row := pr.Conn.QueryRow(query,username)
-	switch err := row.Scan(&CheckFilled); err{
+	row := pr.Conn.QueryRow(query, username)
+	switch err := row.Scan(&CheckFilled); err {
 	case sql.ErrNoRows:
-		return false,err
+		return false, err
+	}
+	if CheckFilled == 0 {
+		return false, nil
 	}
 	return true, nil
 	//var hashedPassword string
@@ -186,4 +199,15 @@ func (pr *Psqlrepo) QueFilled(username string,password string) (bool,error) {
 	//	return isEqual,err
 	//}
 	//return true,nil
+}
+
+func (pr *Psqlrepo) GetUserIdbyUsername(username string) (int, error) {
+	query := `Select user_id from users WHERE username=$1`
+	var userId int
+	row := pr.Conn.QueryRow(query, username)
+	switch err := row.Scan(&userId); err {
+	case sql.ErrNoRows:
+		return userId, err
+	}
+	return userId, nil
 }

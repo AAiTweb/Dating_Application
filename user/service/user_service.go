@@ -62,45 +62,61 @@ func (us *UserService) UpdateUser(user entity.User) bool {
 	return true
 }
 
-func (us *UserService) Checkemail(email string) error  {
+func (us *UserService) Checkemail(email string) error {
 	err := us.UserInstance.Checkemail(email)
-	if err != nil{
+	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func (us *UserService) ConfirmReset(key string) error{
+func (us *UserService) ConfirmReset(key string) error {
 	err := us.UserInstance.ConfirmReset(key)
-	if err != nil{
+	if err != nil {
 		fmt.Println("Confirm error")
 		return err
 	}
 	return nil
 }
 
-func (us *UserService) ResetPassword(id int,password string) error {
-	err := us.UserInstance.ResetPassword(id,password)
-	if err != nil{
+func (us *UserService) ResetPassword(id int, password string) error {
+	err := us.UserInstance.ResetPassword(id, password)
+	if err != nil {
 		fmt.Println(err)
 		return err
 	}
 	return nil
 }
 
-func (us *UserService) GetUser(token string) (string,string,error) {
-	username,password,err := us.UserInstance.GetUser(token)
-	if err != nil{
+func (us *UserService) GetUser(token string) (string, string, error) {
+	username, password, err := us.UserInstance.GetUser(token)
+	if err != nil {
 		fmt.Println("Get user error")
-		return username,password,err
+		return username, password, err
 	}
-	return username,password,nil
+	return username, password, nil
 }
 
-func (us *UserService) QueFilled(user entity.User) (bool,error) {
-	filled,err := us.UserInstance.QueFilled(user.UserName,user.Password)
-	if err != nil{
-		return filled,err
+func (us *UserService) QueFilled(user entity.User) (bool, error) {
+	filled, err := us.UserInstance.QueFilled(user.UserName, user.Password)
+	if err != nil {
+		return filled, err
 	}
-	return filled,nil
+	return filled, nil
+}
+
+func (us *UserService) GetUserId(vkey string) (int, error) {
+	Id, err := us.UserInstance.GetUserId(vkey)
+	if err != nil {
+		return Id, err
+	}
+	return Id, nil
+}
+
+func (us *UserService) GetUserByUserName(username string) (int, error) {
+	Id, err := us.UserInstance.GetUserIdbyUsername(username)
+	if err != nil {
+		return Id, err
+	}
+	return Id, nil
 }

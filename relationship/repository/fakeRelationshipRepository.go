@@ -1,12 +1,10 @@
 package repository
 
-import (
-)
-
 type FakeRelationshipRepository struct {
 	//repository map[int]entity.Relationship
 }
-func NewFakeRelationshipRepo ()FakeRelationshipRepository{
+
+func NewFakeRelationshipRepo() FakeRelationshipRepository {
 	return FakeRelationshipRepository{}
 }
 
@@ -19,6 +17,5 @@ func (f FakeRelationshipRepository) SendRequest(sender, reciever int) int {
 }
 
 func (f FakeRelationshipRepository) AcceptRequest(sender, reciever int) int {
-	return -1;
+	return -1
 }
-
