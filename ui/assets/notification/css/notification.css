@@ -1,0 +1,39 @@
+.notificationpagelink{
+    float: right;
+    text-decoration: none;
+    font-family: cursive;
+    font-size: 15px;
+    margin: 5px;
+}
+.messagehighlight{
+    word-wrap: normal;
+    overflow-wrap: normal;
+}
+.readmoremessage{
+    text-decoration: none;
+    float: right;
+    position: relative;
+    bottom: 0;
+    margin: 10px;
+}
+.messagetime{
+    float: left;
+    position: relative;
+    bottom: 0;
+    margin: 10px;
+}
+
+.accept{
+    background-color: rgba(25, 150, 52, 0.719);
+}
+
+.accept:hover{
+    background-color: rgba(25, 150, 52, 0.897);
+}
+
+.reject{
+    background-color: rgba(255, 0, 0, 0.644);
+}
+.reject:hover{
+    background-color: rgba(230, 64, 64, 0.849);
+}

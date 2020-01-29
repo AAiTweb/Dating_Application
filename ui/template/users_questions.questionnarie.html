@@ -1,0 +1,121 @@
+{{define "questionnarie"}}
+
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <link rel="stylesheet" href="../assets/materialize/css/materialize.min.css">
+        <link rel="stylesheet" href="../assets/Questionnaire_Profile/css/questionnarie.css">
+    </head>
+    <body>
+
+    <div class="row">
+        <div class="col s12 m6 offset-m3">
+            <input type="hidden" id="hidden" name="hiddenId" value="{{.}}"/>
+            <div class="card ">
+                <div class="card-content ">
+                    <div class="card-title">
+                        <div class="row">
+                            <div class="col s4">
+                                <div class="left">
+                                    <a href="#"  class="btn waves-effect waves-red red lighten-2 prev">prev</a>
+                                </div>
+
+                            </div>
+                            <div class="col s4">
+                                <div class="center-align">
+                                    <p class="flow-text"><span class="question_number">1</span>/6</p>
+                                </div>
+                            </div>
+                            <div class="col s4">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div >
+                        <div class="row user_question">
+
+                            <div class="col s6 offset-s1">
+                                <div class="question flow-text ">
+                                    <p class="userQuestion">What is your marital status ?</p>
+                                </div>
+                                <div class="answers">
+                                    <div class="input-field">
+                                        <select class="user-select" id="own_choice">
+                                            <option value="" disabled selected>Single</option>
+                                            <option value="1">Single</option>
+                                            <option value="2">Divorced</option>
+                                            <option value="3">Married</option>
+                                        </select>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row partner_question">
+                            <div class="col s6 offset-s1">
+                                <div class="question flow-text ">
+                                    <p class="wishQuestion">What do you prefer your future partner marital status be ?</p>
+                                </div>
+                                <div class="answers">
+                                    <div class="input-field">
+                                        <select class="user-select" id="wish_choice">
+                                            <option value="" disabled selected>Single</option>
+                                            <option value="1">Single</option>
+                                            <option value="2">Divorced</option>
+                                            <option value="3">Married</option>
+                                        </select>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+                <div class="card-action">
+                    <div class="row">
+                        <div class="col s4 ">
+                            <div class="left">
+                                <a href="/user/delete" class="btn waves-effect waves-red red lighten-2 modal-close">
+                                    cancel
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col s4 offset-s4">
+                            <div class="right">
+                                <a href="#" class="btn waves-effect waves-red red lighten-2  next-question" >
+                                    Next
+                                </a>
+                            </div>
+                            <!-- <a href="" class="btn btn-waves red red-lighten"></a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../assets/materialize/jquery-3.4.1.js"></script>
+    <script src="../assets/Questionnaire_Profile/js/questionnarie.js"></script>
+    <!-- <script src="../assets/js/questionnaire_handler.js"></script> -->
+    <script src="../assets/Questionnaire_Profile/js/ajaxPost.js"></script>
+    <script src="../assets/Questionnaire_Profile/js/handler.js"></script>
+
+
+    <script src="../assets/Questionnaire_Profile/js/questionnaire_apicall.js"></script>
+
+
+    <script src="../assets/materialize/js/materialize.min.js"></script>
+    </body>
+    </html>
+
+{{end}}

@@ -1,0 +1,106 @@
+{{define "update.layout"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../assets/materialize/css/materialize.min.css">
+    <link rel="stylesheet" href="../assets/Questionnaire_Profile/css/profile.css">
+
+</head>
+<body>
+<div id="update-modal" class="modal" >
+
+    <div class="modal-content">
+        <div class="row">
+            <div class="col s2">
+                <i class="material-icons exit ">  arrow_back</i>
+
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col  s5  ">
+
+                <div class=" profile-pic row">
+                    {{with .profilePic }}
+                        <img src="../assets/images/{{.}}" class="circle" alt="">
+                    {{end}}
+                </div>
+
+            </div>
+            <div class="col s2 center-align valign-wrapper">
+                <div class="name">
+                    <p class="flow-text grey-text text-darken-2">
+                        user name
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col s12">
+                <div class="divider red-text darken-1"></div>
+            </div>
+        </div> -->
+        <!-- <div class="row update-user-name">
+            <div class="col s4 offset-s4 center-align">
+                <div class="name">
+                    <p class="flow-text grey-text text-darken-2">
+                        User Name
+                    </p>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="row">
+            <div class="col s12">
+                <form action="/user/update" method="POST" enctype="multipart/form-data">
+                    <div class="file-field input-field row">
+                        <div class="btn-flat red lighten-2 ">
+                            <span>upload photo</span>
+                            <input type="file" name="profileImg" id="profileImg"/>
+                        </div>
+
+                        <div class = "file-path-wrapper">
+                            <input class = "file-path validate" type = "text"
+                                   placeholder = "Upload file" />
+                        </div>
+                    </div>
+                    {{template "form" .}}
+
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col s3 right ">
+                                <div class="input-field">
+                                    <input type="submit" id="update-submit" class="red  lighten-2 btn btn-flat waves-effect waves-red white-text right save-change" value="save changes">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<script src="../assets/materialize/jquery-3.4.1.js"></script>
+    <script>
+        $(document).ready(function(){
+            // $('.modal').modal();
+            // $('.modal').modal('open');
+            $('#update-modal').modal();
+            $("#update-modal").modal('open');
+        });
+
+    </script>
+<script src="../assets/Questionnaire_Profile/js/profile.js"></script>
+
+<script src="../assets/materialize/js/materialize.min.js"></script>
+</body>
+</html>
+{{end}}

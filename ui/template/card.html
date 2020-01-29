@@ -1,0 +1,25 @@
+{{define "card" }}
+<div class="col m4 l2">
+    <div class="card">
+        <div class="card-image">
+            <a href="/user/FriendProfile?id={{.UserId}}">
+            <img
+                    height="200px"
+                    src="../assets/images/{{.PicturePath}}"
+            />
+            </a>
+        </div>
+        <div class="card-content">
+            <p><b><span class="uname">{{.UserName}}</span>, <span class="age">{{.Age}}</span></b></p>
+            <p><span class="city">{{.City}}</span>, <span class="country">{{.Country}}</span> <span class="right flow-text" style="padding-right:5px;color: #800020">{{.MatchPercentage}}%</span></p>
+            <div class="progress">
+                <div class="determinate" style="width: {{.MatchPercentage}}%"></div>
+            </div>
+        </div>
+        <div class="card-action">
+            <a class="secondLink bothLink" href="/matches/sendrequest?id={{.UserId}}"></a>
+        </div>
+
+    </div>
+</div>
+{{end}}

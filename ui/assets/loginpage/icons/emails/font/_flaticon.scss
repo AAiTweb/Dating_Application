@@ -1,0 +1,107 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 06/07/2017 08:24
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-001-user:before { content: "\f100"; }
+.flaticon-002-mail-4:before { content: "\f101"; }
+.flaticon-003-spam:before { content: "\f102"; }
+.flaticon-004-send:before { content: "\f103"; }
+.flaticon-005-document-2:before { content: "\f104"; }
+.flaticon-006-document-1:before { content: "\f105"; }
+.flaticon-007-contact-1:before { content: "\f106"; }
+.flaticon-008-reply:before { content: "\f107"; }
+.flaticon-009-reply-all:before { content: "\f108"; }
+.flaticon-010-paper-plane:before { content: "\f109"; }
+.flaticon-011-mail-3:before { content: "\f10a"; }
+.flaticon-012-mail-2:before { content: "\f10b"; }
+.flaticon-013-mail-1:before { content: "\f10c"; }
+.flaticon-014-mail-box:before { content: "\f10d"; }
+.flaticon-015-mail:before { content: "\f10e"; }
+.flaticon-016-inbox-3:before { content: "\f10f"; }
+.flaticon-017-inbox-2:before { content: "\f110"; }
+.flaticon-018-inbox-1:before { content: "\f111"; }
+.flaticon-019-inbox:before { content: "\f112"; }
+.flaticon-020-right:before { content: "\f113"; }
+.flaticon-021-envelope-5:before { content: "\f114"; }
+.flaticon-022-envelope-4:before { content: "\f115"; }
+.flaticon-023-envelope-3:before { content: "\f116"; }
+.flaticon-024-envelope-2:before { content: "\f117"; }
+.flaticon-025-envelope-1:before { content: "\f118"; }
+.flaticon-026-download:before { content: "\f119"; }
+.flaticon-027-document:before { content: "\f11a"; }
+.flaticon-028-envelope:before { content: "\f11b"; }
+.flaticon-029-computer:before { content: "\f11c"; }
+.flaticon-030-contact:before { content: "\f11d"; }
+.flaticon-031-attach:before { content: "\f11e"; }
+.flaticon-032-at:before { content: "\f11f"; }
+.flaticon-033-archive:before { content: "\f120"; }
+.flaticon-034-address-book:before { content: "\f121"; }
+    
+    $font-Flaticon-001-user: "\f100";
+    $font-Flaticon-002-mail-4: "\f101";
+    $font-Flaticon-003-spam: "\f102";
+    $font-Flaticon-004-send: "\f103";
+    $font-Flaticon-005-document-2: "\f104";
+    $font-Flaticon-006-document-1: "\f105";
+    $font-Flaticon-007-contact-1: "\f106";
+    $font-Flaticon-008-reply: "\f107";
+    $font-Flaticon-009-reply-all: "\f108";
+    $font-Flaticon-010-paper-plane: "\f109";
+    $font-Flaticon-011-mail-3: "\f10a";
+    $font-Flaticon-012-mail-2: "\f10b";
+    $font-Flaticon-013-mail-1: "\f10c";
+    $font-Flaticon-014-mail-box: "\f10d";
+    $font-Flaticon-015-mail: "\f10e";
+    $font-Flaticon-016-inbox-3: "\f10f";
+    $font-Flaticon-017-inbox-2: "\f110";
+    $font-Flaticon-018-inbox-1: "\f111";
+    $font-Flaticon-019-inbox: "\f112";
+    $font-Flaticon-020-right: "\f113";
+    $font-Flaticon-021-envelope-5: "\f114";
+    $font-Flaticon-022-envelope-4: "\f115";
+    $font-Flaticon-023-envelope-3: "\f116";
+    $font-Flaticon-024-envelope-2: "\f117";
+    $font-Flaticon-025-envelope-1: "\f118";
+    $font-Flaticon-026-download: "\f119";
+    $font-Flaticon-027-document: "\f11a";
+    $font-Flaticon-028-envelope: "\f11b";
+    $font-Flaticon-029-computer: "\f11c";
+    $font-Flaticon-030-contact: "\f11d";
+    $font-Flaticon-031-attach: "\f11e";
+    $font-Flaticon-032-at: "\f11f";
+    $font-Flaticon-033-archive: "\f120";
+    $font-Flaticon-034-address-book: "\f121";

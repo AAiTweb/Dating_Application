@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../assets/materialize/css/materialize.min.css"/>
+    <link href="../assets/ForgotPasscode/forgotpassword.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+<div class="top_bar"></div>
+<div class="container">
+    <div class="form">
+        <form class="resetform" action="/forgotpassword" method="post">
+            <img class="logo" src="../assets/ForgotPasscode/download.png" height="120px" width="120px">
+        <h4 class="resettext">Reset password</h4>
+            <input style="margin-left: 25%; border-top: thick #0a1e43" class="resetinput" autocomplete="off" placeholder="enter email address" required type="text"  name="reset_email">
+            <p class="error">{{.}}</p>
+            <button class="waves-effect btn">Sign up</button>
+        </form>
+    </div>
+</div>
+</body>
+
+</html>

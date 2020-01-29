@@ -1,0 +1,38 @@
+body{
+    margin: 0;
+    padding: 0;
+    align-content: center;
+    align-items: center;
+    align-self: center;
+    
+}
+
+
+.container {
+    width: 800px;
+    max-width: 100%;
+    min-height: 480px;
+    margin: auto;
+    margin-top: 10%;
+    background-image: url(../CheckEmail/background_email.png);
+    background-size:cover;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25),0 10px 10px rgba(0,0,0,0.22);
+    text-align: center;
+}
+
+.text{
+    color: #fff;
+    font-family: sans-serif,cursive;
+    font-weight: 700;
+    text-align: center;
+    display: block;
+    padding-top: 300px;
+}
+
+.error{
+    font-family: sans-serif, cursive;
+    color: darkred;
+    font-size: 14px;
+}

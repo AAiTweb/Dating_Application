@@ -1,0 +1,73 @@
+{{define "friend_profile.layout"}}
+
+    <html lang="en">
+    <head>
+
+        <link rel="stylesheet" href="../assets/materialize/css/materialize.min.css">
+        <link rel="stylesheet" href="../assets/Questionnaire_Profile/css/profile.css">
+        <link rel="stylesheet" href="../assets/materialize/fontawesome/css/all.min.css">
+        <link rel="stylesheet" href="../assets/materialize/iconfont/material-icons.css">
+        <link rel="stylesheet" href="../assets/Header/css/header_style.css">
+        <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"> -->
+    </head>
+    <body>
+    <div>
+
+        {{template "navbar" .HeadData}}
+        <div class="">
+            <div class="header">
+                <div class="row">
+
+                    <div class="col s3 pic center-align ">
+                        {{with .profilePic }}
+                            <img src="../assets/images/{{.}}" alt="" class="circle right ">
+                        {{end}}
+                    </div>
+                    {{with .profileData}}
+                    <div class="col s5 about">
+
+                        <div class="section name grey-text darken-3">
+                            <h2>{{.FirstName}}  {{.LastName}}</h2>
+                        </div>
+                        <div class="row status section">
+                            <div class="col s2">
+                                <p class="flow-text grey-text darken-3">{{.Age}}</p>
+                            </div>
+                            <div class="col s3">
+                                <p class="flow-text grey-text darken-3 ">{{.Sex}}</p>
+                            </div>
+                            <div class="col s7">
+                                <p class="flow-text grey-text darken-3">{{.Country}}   ,  {{.City}}</p>
+                            </div>
+
+
+                        </div>
+                        {{end}}
+
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+            {{template "user_profile_body.layout" .}}
+
+        </div>
+        <!-- <a href="#" class="btn" data-activates="side-out" ><i class="material-icon">Menu</i></a> -->
+
+
+    </div>
+
+    <script src="../assets/materialize/jquery-3.4.1.js"></script>
+    <script src="../assets/Questionnaire_Profile/js/profile.js"></script>
+
+    <script src="../assets/materialize/js/materialize.min.js"></script>
+
+    </body>
+    </html>
+{{end}}

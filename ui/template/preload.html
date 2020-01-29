@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../assets/materialize/css/materialize.css" rel="stylesheet"/>
+</head>
+<body >
+<input type="hidden" name="{{.}}" id="2"/>
+
+
+<div style="display: flex; justify-content: center; align-content: center; align-self: center; margin-top: 20%">
+    <div class="preloader-wrapper big active  center-align">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="../assets/materialize/jquery-3.4.1.js"></script>
+<script src="../assets/materialize/js/materialize.js"></script>
+<script>
+    $(document).ready(function(){
+        let a = $("#2").attr("name")
+        $.ajax(
+            {
+                url:"/match?id="+a,
+                success :function (data) {
+                    console.log(data)
+                    location.href = "/home"
+                }
+            }
+        )
+    })
+</script>
+
+</body>
+</html>

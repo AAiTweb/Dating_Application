@@ -1,0 +1,66 @@
+{{define "navbar"}}
+
+   <!-- <link rel="stylesheet" href="../assets/css/materialize.min.css">
+    <link rel="stylesheet" href="../assets/iconfont/material-icons.css">
+    <link rel="stylesheet" href="../assets/fontawesome/css/all.css">
+    <link rel="stylesheet" href="../assets/css/chat_style.css">
+    <link rel="stylesheet" href="../assets/css/style.css" />-->
+
+<body>
+
+<div class="navigation">
+    <ul id="slide-out" class="sidenav">
+        <li><div class="user-view">
+                <div class="background">
+                    <img src="../assets/images/burgundy.jpg">
+                </div>
+                <a href="#user"><img class="circle" src="../assets/images/{{.ProfilePicture}}"></a>
+                <a href="#name"><span class="white-text name" style="padding: 10px">{{.Name}}</span></a>
+
+
+            </div></li>
+        <li><a href="/home"><i class="material-icons" >home</i>Home</a></li>
+        <li><a href="/chat"><i class="material-icons" >chat</i>Chat</a></li>
+        <li><a href="/notification"><i class="material-icons" >notifications</i>Notifications</a></li>
+        <li><a href="/user/profile"><i class="material-icons" >person_pin</i>Profile</a></li>
+        <li><a href="/logout"><i class="material-icons" >exit_to_app</i>Logout</a></li>
+        <li><div class="divider"></div></li>
+        <!--<li><a class="subheader">Subheader</a></li>-->
+
+    </ul>
+    <a href="#" data-target="slide-out" class="sidenav-trigger"><i style="color:white!important" class="material-icons">menu</i></a>
+
+
+
+    <!--<ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a class="waves-effect" href="#!" >Third Link With Waves</a></li>
+        <li><a href="sass.html">Sass</a></li>
+        <li><a href="badges.html">Components</a></li>
+        <li><a href="collapsible.html">JavaScript</a></li>
+    </ul>-->
+
+
+</div>
+
+
+
+
+   <!-- <div class="container">
+        <a href="#" class="brand-logo "><img class="logo" src="d2.png"> </a>
+        <ul class="centre  ">
+            <li class="list-1"><a href="#">Home</a></li>
+            <li class="list-1"><a href="#">About</a></li>
+            <li class="list-1"><a href="#">Chat</a></li>
+            <li class="list-1"><a href="#">Profile</a></li>
+        </ul>
+        <ul class="right">
+            <li class=" list-2"><a href="#"><i class="material-icons ">notifications</i></a></li>
+            <li class=" list-2"><a href="#"><i class="material-icons ">settings</i></a></li>
+
+        </ul>
+    </div>-->
+
+
+
+
+{{end }}

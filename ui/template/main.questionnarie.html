@@ -1,0 +1,36 @@
+{{define "main_questionnarie.layout"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../assets/materialize/css/materialize.min.css">
+    <link rel="stylesheet" href="../assets/Questionnaire_Profile/css/questionnarie.css">
+</head>
+<body>
+    
+   
+    <a href="#user_form_modal" class="btn waves-effect waves-red modal-trigger red lighten-2">Display form</a>
+    {{template "questionnarie" .}}
+    {{template "user_form" .}}
+
+
+
+
+    
+    <script src="../assets/materialize/jquery-3.4.1.js"></script>
+    <script src="../assets/Questionnaire_Profile/js/questionnarie.js"></script>
+    <!-- <script src="../assets/js/questionnaire_handler.js"></script> -->
+    <script src="../assets/Questionnaire_Profile/js/ajaxPost.js"></script>
+    <script src="../assets/Questionnaire_Profile/js/handler.js"></script>
+  
+    
+    <script src="../assets/Questionnaire_Profile/js/questionnaire_apicall.js"></script>
+    
+
+    <script src="../assets/materialize/js/materialize.min.js"></script>
+</body>
+</html>
+{{end}}

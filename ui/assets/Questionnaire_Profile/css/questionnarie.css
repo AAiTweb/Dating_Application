@@ -1,0 +1,14 @@
+#questionnarie-modal .modal-header a{
+    
+    /* border: 1px solid black; */
+    margin: 1.3rem 0 ;
+     
+}
+#questionnarie-modal {
+    width: 50% !important;
+    max-height: 100% !important;
+}
+.card {
+    margin-top: 10rem !important;
+}
+

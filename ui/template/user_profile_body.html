@@ -1,0 +1,103 @@
+{{define "user_profile_body.layout"}}
+
+
+<div class="row body ">
+    <div class="col s12">
+        <ul class="tabs">
+            <li class="tab col s6"><a href="#about">ABOUT</a></li>
+            <li class="tab col s6"><a href="#photos">PHOTOS</a></li>
+
+        </ul> 
+    </div>
+   
+    {{with .profileData}}
+    <div id="about" class="col s12 ">
+        <div class="row tab-content">
+
+            <div class="col s5 detail ">
+                <div class="detail-header">
+                    <h5>My details</h5>
+                </div>
+                <div class="divider"></div>
+                <div class="row ">
+                    <div class="col s4 grey-text text-darken-2">
+                        <p class="">Full Name</p>
+                    </div>
+                    <div class="col s4">
+                        <p>{{.FirstName}}   {{.LastName}}</p>
+                    </div>
+
+
+                </div>
+                <div class="divider"></div>
+                <div class="row  ">
+                    <div class="col s4 grey-text text-darken-2 ">
+                        <p class="">Country</p>
+                    </div>
+                    <div class="col s4">
+                        <p>{{.Country}}</p>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+                <div class="row">
+                    <div class="col s4 grey-text text-darken-2">
+                        <p>City</p>
+                    </div>
+                    <div class="col s4">
+                        <p>{{.City}}</p>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="row">
+                    <div class="col s4 grey-text text-darken-2">
+                        <p>Age</p>
+                    </div>
+                    <div class="col s4">
+                        <p>{{.Age}}</p>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="row">
+                    <div class="col s4 grey-text text-darken-2">
+                        <p>Sex</p>
+                    </div>
+                    <div class="col s4">
+                        <p>{{.Sex}}</p>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="row">
+                    <div class="col s4 grey-text text-darken-2">
+                        <p>Bio</p>
+                    </div>
+                    <div class="col s4">
+                        <p>{{.Bio}}</p>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                
+
+
+            </div>
+        </div>
+       
+    </div>
+
+    <div id="photos" class="col s12 gallery">
+        {{range .ProfPicPath}}
+
+            <div class="col s4">
+
+                <img src="../assets/images/{{.}}" alt="">
+            </div>
+
+
+        {{end}}
+    </div>
+    {{end}}
+
+   
+</div>
+
+{{end}}
